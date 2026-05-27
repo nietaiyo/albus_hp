@@ -3,11 +3,11 @@ export default function Home() {
     <>
       <div className="intro">
         <div className="introLogo" aria-label="Albus">
-          <span>A</span>
-          <span>l</span>
-          <span>b</span>
-          <span>u</span>
-          <span>s</span>
+          <span className="introLetter introLetterA">A</span>
+          <span className="introLetter introLetterL">l</span>
+          <span className="introLetter introLetterB">b</span>
+          <span className="introLetter introLetterU">u</span>
+          <span className="introLetter introLetterS">s</span>
           <span className="introDot" aria-hidden="true">
             .
           </span>
