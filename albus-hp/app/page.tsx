@@ -14,9 +14,7 @@ export default function Home() {
         <div className="heroText">
           <p className="label">Development Team</p>
           <h1>
-            Ideas into
-            <br />
-            elegant
+            Ideas into elegant
             <br />
             digital products.
           </h1>
