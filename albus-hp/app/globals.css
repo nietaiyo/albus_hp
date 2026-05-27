@@ -321,3 +321,111 @@ h3 {
     flex-wrap: wrap;
   }
 }
+
+.intro {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: grid;
+  place-items: center;
+  background: #f8fbff;
+  animation: introOut 0.8s ease 2.5s forwards;
+}
+
+.introLogo {
+  position: relative;
+  display: inline-flex;
+  align-items: baseline;
+  font-size: clamp(64px, 14vw, 180px);
+  font-weight: 900;
+  line-height: 1;
+  color: #0f172a;
+  letter-spacing: 0;
+}
+
+.introLogo span:not(.introDot) {
+  display: inline-block;
+}
+
+.introDot {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  color: #2563eb;
+  animation: introDotJump 1.8s cubic-bezier(0.34, 1.56, 0.64, 1) 0.25s both;
+}
+
+.homeContent {
+  opacity: 0;
+  animation: homeIn 0.8s ease 2.65s forwards;
+}
+
+@keyframes introDotJump {
+  0% {
+    transform: translate(0.05em, -0.05em) scale(1);
+  }
+
+  12% {
+    transform: translate(0.35em, -1.15em) scale(1.08);
+  }
+
+  22% {
+    transform: translate(0.78em, 0.02em) scale(0.96);
+  }
+
+  34% {
+    transform: translate(1.18em, -1em) scale(1.06);
+  }
+
+  44% {
+    transform: translate(1.65em, 0.02em) scale(0.96);
+  }
+
+  56% {
+    transform: translate(2.15em, -0.9em) scale(1.05);
+  }
+
+  66% {
+    transform: translate(2.68em, 0.02em) scale(0.97);
+  }
+
+  78% {
+    transform: translate(3.15em, -0.75em) scale(1.04);
+  }
+
+  88% {
+    transform: translate(3.75em, 0.03em) scale(0.98);
+  }
+
+  100% {
+    transform: translate(3.95em, 0) scale(1);
+  }
+}
+
+@keyframes introOut {
+  to {
+    opacity: 0;
+    visibility: hidden;
+  }
+}
+
+@keyframes homeIn {
+  to {
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .intro {
+    animation: introOut 0.2s ease 0.4s forwards;
+  }
+
+  .introDot {
+    animation: none;
+    position: static;
+  }
+
+  .homeContent {
+    animation: homeIn 0.2s ease 0.45s forwards;
+  }
+}
