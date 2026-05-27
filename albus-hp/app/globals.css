@@ -33,15 +33,75 @@ a {
 }
 
 .logo {
+  position: relative;
+  display: inline-flex;
+  align-items: baseline;
   font-size: 24px;
   font-weight: 800;
   letter-spacing: 0;
   color: #0f172a;
+  line-height: 1;
 }
 
-.logo::after {
-  content: ".";
+.logo span:not(.logoDot) {
+  display: inline-block;
+}
+
+.logoDot {
+  position: absolute;
+  left: 0;
+  bottom: 0;
   color: #2563eb;
+  animation: albusDotJump 1.8s cubic-bezier(0.34, 1.56, 0.64, 1) 0.25s both;
+}
+
+@keyframes albusDotJump {
+  0% {
+    transform: translate(0.05em, -0.05em) scale(1);
+  }
+
+  12% {
+    transform: translate(0.35em, -1.15em) scale(1.08);
+  }
+
+  22% {
+    transform: translate(0.78em, 0.02em) scale(0.96);
+  }
+
+  34% {
+    transform: translate(1.18em, -1em) scale(1.06);
+  }
+
+  44% {
+    transform: translate(1.65em, 0.02em) scale(0.96);
+  }
+
+  56% {
+    transform: translate(2.15em, -0.9em) scale(1.05);
+  }
+
+  66% {
+    transform: translate(2.68em, 0.02em) scale(0.97);
+  }
+
+  78% {
+    transform: translate(3.15em, -0.75em) scale(1.04);
+  }
+
+  88% {
+    transform: translate(3.75em, 0.03em) scale(0.98);
+  }
+
+  100% {
+    transform: translate(3.95em, 0) scale(1);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .logoDot {
+    animation: none;
+    position: static;
+  }
 }
 
 .nav {

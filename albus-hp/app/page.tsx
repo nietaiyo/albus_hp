@@ -2,7 +2,16 @@ export default function Home() {
   return (
     <main className="site">
       <header className="header">
-        <div className="logo">Albus</div>
+        <div className="logo" aria-label="Albus">
+          <span>A</span>
+          <span>l</span>
+          <span>b</span>
+          <span>u</span>
+          <span>s</span>
+          <span className="logoDot" aria-hidden="true">
+            .
+          </span>
+        </div>
         <nav className="nav">
           <a href="#about">About</a>
           <a href="#works">Works</a>
