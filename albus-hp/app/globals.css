@@ -736,7 +736,8 @@ h3 {
 }
 
 .footerContainer {
-  max-width: 1120px;
+  max-width: 1600px;
+  width: 100%;
   margin: 0 auto;
   display: grid;
   grid-template-columns: 1fr 2fr;
@@ -763,8 +764,10 @@ h3 {
 
 .footerLinksGroup {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 32px;
+  grid-template-columns: repeat(3, minmax(120px, max-content));
+  gap: 48px;
+  justify-content: end;
+  justify-self: end;
 }
 
 .footerLinkCol {
@@ -791,7 +794,8 @@ h3 {
 }
 
 .footerBottom {
-  max-width: 1120px;
+  max-width: 1600px;
+  width: 100%;
   margin: 0 auto;
   padding-top: 32px;
   border-top: 1px solid #1e293b;
