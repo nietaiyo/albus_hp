@@ -20,12 +20,13 @@ export default function TextScramble({ text, speed = 40, delay = 0 }: TextScramb
       let frame = 0;
       const queue: { from: string; to: string; start: number; end: number; char?: string }[] = [];
       
-      // 最初は何も表示しない空文字状態からスタートし、徐々に確定させていく
+      // 最初は何も表示しない空文字状態からスタートし、左から右へ順番に確定させていく
       for (let i = 0; i < text.length; i++) {
         const from = '';
         const to = text[i];
-        const start = Math.floor(Math.random() * 15);
-        const end = start + Math.floor(Math.random() * 15) + 10;
+        // 文字のインデックス(i)に応じて、表示（シャッフル）開始と確定のタイミングを左から右へずらす
+        const start = i * 4;
+        const end = start + 8;
         queue.push({ from, to, start, end });
       }
 
