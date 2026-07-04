@@ -3,20 +3,6 @@ import Link from 'next/link';
 export default function Home() {
   return (
     <>
-      {/* イントロアニメーション */}
-      <div className="intro">
-        <div className="introLogo" aria-label="Albus">
-          <span className="introLetter introLetterA">A</span>
-          <span className="introLetter introLetterL">l</span>
-          <span className="introLetter introLetterB">b</span>
-          <span className="introLetter introLetterU">u</span>
-          <span className="introLetter introLetterS">s</span>
-          <span className="introDot" aria-hidden="true">
-            .
-          </span>
-        </div>
-      </div>
-
       <div className="homeContent">
         <div className="site">
           {/* ヒーローセクション */}

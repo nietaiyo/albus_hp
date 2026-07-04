@@ -48,11 +48,7 @@ a {
 }
 
 .logoDot {
-  position: absolute;
-  left: 0;
-  bottom: 0;
   color: #2563eb;
-  animation: albusDotJump 1.8s cubic-bezier(0.34, 1.56, 0.64, 1) 0.25s both;
 }
 
 @keyframes albusDotJump {
@@ -422,18 +418,11 @@ h3 {
 }
 
 .intro {
-  position: fixed;
-  inset: 0;
-  z-index: 100;
-  display: grid;
-  place-items: center;
-  background: #f8fbff;
-  animation: introOut 0.8s ease 3.6s forwards;
+  display: none;
 }
 
 .homeContent {
-  opacity: 0;
-  animation: homeIn 0.8s ease 3.75s forwards;
+  opacity: 1;
 }
 
 @keyframes letterSquash {
