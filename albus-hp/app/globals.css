@@ -16,6 +16,7 @@ body {
   font-family: Inter, "Noto Sans JP", system-ui, sans-serif;
   color: #111827;
   background: #f8fbff;
+  padding-top: 72px;
 }
 
 a {
@@ -476,8 +477,10 @@ h3 {
 
 /* --- Header Styles --- */
 .header {
-  position: sticky;
+  position: fixed;
   top: 0;
+  left: 0;
+  right: 0;
   z-index: 50;
   background: rgba(248, 251, 255, 0.85);
   backdrop-filter: blur(12px);
