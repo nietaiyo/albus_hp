@@ -63,27 +63,29 @@ export default function Home() {
         <div className="site">
           {/* ヒーローセクション */}
           <section className="hero">
-            <div className="heroText">
-              <p className="label">University Festival by Technology</p>
-              <h1>
-                <span style={{ display: 'inline-block' }}><TextScramble text="大学祭は" delay={baseDelay + 100} /></span>
-                <span style={{ display: 'inline-block' }}><TextScramble text="テクノロジーで" delay={baseDelay + 1300} /></span>
-                <span style={{ display: 'inline-block' }}><TextScramble text="進化する" delay={baseDelay + 2500} /></span>
-              </h1>
-              <p className="description">
-                Albus（アルバス）は、大学祭を発展させるため、大学祭実行委員会向けのサービスを開発しています。
-              </p>
-              <div className="actions">
-                <Link className="primaryButton" href="/projects">
-                  制作物を見る
-                </Link>
-                <Link className="secondaryButton" href="/about">
-                  チームについて
-                </Link>
+            <div className="heroContainerWide">
+              <div className="heroText">
+                <p className="label">University Festival by Technology</p>
+                <h1>
+                  <span style={{ display: 'inline-block' }}><TextScramble text="大学祭は" delay={baseDelay + 100} /></span>
+                  <span style={{ display: 'inline-block' }}><TextScramble text="テクノロジーで" delay={baseDelay + 1300} /></span>
+                  <span style={{ display: 'inline-block' }}><TextScramble text="進化する" delay={baseDelay + 2500} /></span>
+                </h1>
+                <p className="description">
+                  Albus（アルバス）は、大学祭を発展させるため、大学祭実行委員会向けのサービスを開発しています。
+                </p>
+                <div className="actions">
+                  <Link className="primaryButton" href="/projects">
+                    制作物を見る
+                  </Link>
+                  <Link className="secondaryButton" href="/about">
+                    チームについて
+                  </Link>
+                </div>
               </div>
-            </div>
 
-            <CodeConsole />
+              <CodeConsole />
+            </div>
           </section>
 
           {/* 私たちの想い / 挨拶 */}
