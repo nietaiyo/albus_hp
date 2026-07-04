@@ -112,11 +112,13 @@ a {
 
 .hero {
   max-width: 1120px;
-  margin: 72px auto 96px;
+  margin: 0 auto;
+  min-height: calc(100vh - 140px);
   display: grid;
   grid-template-columns: 1.1fr 0.9fr;
   gap: 56px;
   align-items: center;
+  box-sizing: border-box;
 }
 
 .label {
@@ -300,7 +302,9 @@ h3 {
 
   .hero {
     grid-template-columns: 1fr;
-    margin-top: 48px;
+    margin: 40px auto;
+    min-height: calc(100vh - 140px);
+    gap: 32px;
   }
 
   .cards {

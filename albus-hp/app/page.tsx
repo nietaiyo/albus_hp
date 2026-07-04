@@ -2,17 +2,20 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
+import TextScramble from './components/TextScramble';
 
 export default function Home() {
   const [showIntro, setShowIntro] = useState(false);
+  const [isFirstAccess, setIsFirstAccess] = useState(false);
 
   useEffect(() => {
     // セッション中に一度だけ表示する制御
     const hasSeenIntro = sessionStorage.getItem('hasSeenAlbusIntro');
     if (!hasSeenIntro) {
       setShowIntro(true);
+      setIsFirstAccess(true);
       sessionStorage.setItem('hasSeenAlbusIntro', 'true');
-      
+
       // アニメーション完了（3.2秒 + フェードアウト0.4秒）した後にDOMから削除
       const timer = setTimeout(() => {
         setShowIntro(false);
@@ -20,6 +23,8 @@ export default function Home() {
       return () => clearTimeout(timer);
     }
   }, []);
+
+  const baseDelay = isFirstAccess ? 3600 : 0;
 
   return (
     <>
@@ -35,13 +40,14 @@ export default function Home() {
           {/* ヒーローセクション */}
           <section className="hero">
             <div className="heroText">
-              <p className="label">Osaka Metropolitan University</p>
+              <p className="label">University Festival by Technology</p>
               <h1>
-                <span style={{ display: 'inline-block' }}>アイデアをカタチにして、</span>
-                <span style={{ display: 'inline-block' }}>大学祭をもっと楽しく。</span>
+                <span style={{ display: 'inline-block' }}><TextScramble text="大学祭は" delay={baseDelay + 100} /></span>
+                <span style={{ display: 'inline-block' }}><TextScramble text="テクノロジーで" delay={baseDelay + 1300} /></span>
+                <span style={{ display: 'inline-block' }}><TextScramble text="進化する" delay={baseDelay + 2500} /></span>
               </h1>
               <p className="description">
-                Albus（アルバス）は、大阪公立大学の大学祭「白鷺祭」をより楽しむためのWebアプリやサービスを開発している、有志の学生ものづくりチームです。
+                Albus（アルバス）は、大学祭を発展させるため、大学祭実行委員会向けのサービスを開発しています。
               </p>
               <div className="actions">
                 <Link className="primaryButton" href="/projects">
