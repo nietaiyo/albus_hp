@@ -1,8 +1,35 @@
+'use client';
+
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
 
 export default function Home() {
+  const [showIntro, setShowIntro] = useState(false);
+
+  useEffect(() => {
+    // セッション中に一度だけ表示する制御
+    const hasSeenIntro = sessionStorage.getItem('hasSeenAlbusIntro');
+    if (!hasSeenIntro) {
+      setShowIntro(true);
+      sessionStorage.setItem('hasSeenAlbusIntro', 'true');
+      
+      // アニメーション完了（3.2秒 + フェードアウト0.4秒）した後にDOMから削除
+      const timer = setTimeout(() => {
+        setShowIntro(false);
+      }, 3600);
+      return () => clearTimeout(timer);
+    }
+  }, []);
+
   return (
     <>
+      {showIntro && (
+        <div className="introOverlay">
+          <div className="introLogo">
+            Albus<span className="logoDot">.</span>
+          </div>
+        </div>
+      )}
       <div className="homeContent">
         <div className="site">
           {/* ヒーローセクション */}

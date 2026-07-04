@@ -317,156 +317,77 @@ h3 {
   }
 }
 
-.introLogo {
-  position: relative;
-  display: inline-flex;
-  align-items: baseline;
-  font-size: clamp(64px, 14vw, 180px);
-  font-weight: 900;
-  line-height: 1;
-  color: #0f172a;
-  letter-spacing: 0;
-}
-
-.introLetter {
-  display: inline-block;
-  transform-origin: center 82%;
-}
-
-.introLetterA {
-  animation: letterSquash 0.32s ease 0.78s both;
-}
-
-.introLetterL {
-  animation: letterSquash 0.32s ease 1.22s both;
-}
-
-.introLetterB {
-  animation: letterSquash 0.32s ease 1.66s both;
-}
-
-.introLetterU {
-  animation: letterSquash 0.32s ease 2.1s both;
-}
-
-.introLetterS {
-  animation: letterSquash 0.32s ease 2.54s both;
-}
-
-.introDot {
-  position: absolute;
+.introOverlay {
+  position: fixed;
+  top: 0;
   left: 0;
-  bottom: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: #ffffff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  animation: introOverlayOut 0.4s cubic-bezier(0.25, 1, 0.5, 1) 3.2s forwards;
+}
+
+.introLogo {
+  font-family: Inter, "Noto Sans JP", sans-serif;
+  font-size: clamp(80px, 18vw, 180px);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: #0f172a;
+  opacity: 0;
+  display: flex;
+  align-items: baseline;
+  animation: 
+    introLogoFadeIn 1.2s cubic-bezier(0.25, 1, 0.5, 1) 0.3s forwards,
+    introLogoZoom 2.9s cubic-bezier(0.1, 0.8, 0.3, 1) 0.3s forwards;
+}
+
+.introLogo .logoDot {
   color: #2563eb;
-  transform-origin: center bottom;
-  animation: introDotBounce 3s linear 0.25s both;
 }
 
-@keyframes introDotBounce {
+@keyframes introLogoFadeIn {
   0% {
-    transform: translate(0.16em, -0.1em) scale(1);
+    opacity: 0;
+    filter: blur(8px);
   }
-
-  7% {
-    transform: translate(0.28em, -1.55em) scale(1.05);
-  }
-
-  17% {
-    transform: translate(0.5em, -0.82em) scale(1.1, 0.84);
-  }
-
-  24% {
-    transform: translate(0.76em, -1.58em) scale(1.04);
-  }
-
-  34% {
-    transform: translate(1.02em, -0.82em) scale(1.1, 0.84);
-  }
-
-  41% {
-    transform: translate(1.3em, -1.58em) scale(1.04);
-  }
-
-  51% {
-    transform: translate(1.62em, -0.82em) scale(1.1, 0.84);
-  }
-
-  58% {
-    transform: translate(1.92em, -1.53em) scale(1.04);
-  }
-
-  68% {
-    transform: translate(2.22em, -0.82em) scale(1.1, 0.84);
-  }
-
-  75% {
-    transform: translate(2.52em, -1.48em) scale(1.03);
-  }
-
-  84% {
-    transform: translate(2.84em, -0.82em) scale(1.08, 0.86);
-  }
-
-  92% {
-    transform: translate(3.18em, -1.16em) scale(1.02);
-  }
-
   100% {
-    transform: translate(3.44em, 0) scale(1);
+    opacity: 1;
+    filter: blur(0);
   }
 }
 
-.intro {
-  display: none;
-}
-
-.homeContent {
-  opacity: 1;
-}
-
-@keyframes letterSquash {
+@keyframes introLogoZoom {
   0% {
-    transform: scale(1);
+    transform: scale(0.95);
+    letter-spacing: -0.02em;
   }
-
-  38% {
-    transform: scale(1.08, 0.82) translateY(0.08em);
-  }
-
-  68% {
-    transform: scale(0.96, 1.08) translateY(-0.03em);
-  }
-
   100% {
-    transform: scale(1);
+    transform: scale(1.08);
+    letter-spacing: 0.05em;
   }
 }
 
-@keyframes introOut {
-  to {
+@keyframes introOverlayOut {
+  0% {
+    opacity: 1;
+    visibility: visible;
+  }
+  100% {
     opacity: 0;
     visibility: hidden;
   }
 }
 
-@keyframes homeIn {
-  to {
-    opacity: 1;
-  }
-}
-
 @media (prefers-reduced-motion: reduce) {
-  .intro {
-    animation: introOut 0.2s ease 0.4s forwards;
+  .introOverlay {
+    animation: introOverlayOut 0.2s ease 0.4s forwards;
   }
-
-  .introDot {
-    animation: none;
-    position: static;
-  }
-
-  .homeContent {
-    animation: homeIn 0.2s ease 0.45s forwards;
+  .introLogo {
+    animation: introLogoFadeIn 0.2s ease 0.1s forwards;
   }
 }
 
