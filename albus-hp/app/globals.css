@@ -23,14 +23,7 @@ a {
   padding: 28px;
 }
 
-.header {
-  max-width: 1120px;
-  margin: 0 auto;
-  height: 72px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
+
 
 .logo {
   position: relative;
@@ -488,13 +481,13 @@ h3 {
 }
 
 .headerContainer {
-  max-width: 1120px;
+  max-width: 100%;
   margin: 0 auto;
   height: 72px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 20px;
+  padding: 0 40px;
 }
 
 .logoLink {
@@ -695,6 +688,10 @@ h3 {
 
 /* --- Responsive Adjustments --- */
 @media (max-width: 768px) {
+  .headerContainer {
+    padding: 0 20px;
+  }
+
   .desktopNav {
     display: none;
   }
