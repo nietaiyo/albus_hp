@@ -8,13 +8,13 @@ export default function CodeConsole() {
 
   const fullText = [
     'const team = new Albus({',
-    '  location: "大阪公立大学",',
-    '  purpose: "大学祭をもっと面白くする"',
+    '  location: "大学祭実行委員会",',
+    '  purpose: "大学祭を発展させる"',
     '});',
     '',
     'await team.initialize();',
     'console.log(team.getMessage());',
-    '// >> 「白鷺祭をもっと面白くしたい」'
+    '// >> 「大学祭はテクノロジーで進化する」'
   ];
 
   useEffect(() => {
