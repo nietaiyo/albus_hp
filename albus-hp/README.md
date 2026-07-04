@@ -36,5 +36,5 @@ The easiest way to deploy your Next.js app is to use the [Vercel Platform](https
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
 
 ## デザインカスタマイズ
-- **フローティングヘッダー**: 画面上部から少し離し、角を丸くして浮遊感を持たせたモダンなデザイン（kohaku-toyama.comを参考）に変更しています。
+- **フローティングヘッダー**: 画面上部から少し離し、角を丸くして浮遊感を持たせたモダンなデザイン（kohaku-toyama.comを参考）に変更しています。グラスモーフィズム（ガラス質感）を適用し、背後のコンテンツが美しく透けるようになっています。
 
