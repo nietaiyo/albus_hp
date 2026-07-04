@@ -2,6 +2,11 @@
   box-sizing: border-box;
 }
 
+html, body {
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
 html {
   scroll-behavior: smooth;
 }
@@ -583,11 +588,13 @@ h3 {
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: right 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: right 0.4s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.4s ease;
+  visibility: hidden;
 }
 
 .mobileMenu.open {
   right: 0;
+  visibility: visible;
 }
 
 .mobileNav {
