@@ -2,7 +2,8 @@
   box-sizing: border-box;
 }
 
-html, body {
+html,
+body {
   max-width: 100%;
   overflow-x: hidden;
 }
@@ -16,7 +17,7 @@ body {
   font-family: Inter, "Noto Sans JP", system-ui, sans-serif;
   color: #111827;
   background-color: #f8fbff;
-  background-image: 
+  background-image:
     linear-gradient(rgba(37, 99, 235, 0.045) 1px, transparent 1px),
     linear-gradient(90deg, rgba(37, 99, 235, 0.045) 1px, transparent 1px);
   background-size: 40px 40px;
@@ -115,7 +116,8 @@ a {
 }
 
 .hero {
-  max-width: 1120px;
+  max-width: 1600px;
+  width: 92%;
   margin: 0 auto;
   min-height: calc(100vh - 140px);
   display: grid;
@@ -134,11 +136,14 @@ a {
 }
 
 h1 {
-  margin: 0;
-  font-size: clamp(32px, 7vw, 72px);
-  line-height: 1.1;
+  margin: 0 0 24px;
+  font-size: clamp(48px, 7.5vw, 100px);
+  line-height: 1.15;
   letter-spacing: -0.02em;
   color: #0f172a;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
 }
 
 h2 {
@@ -225,9 +230,18 @@ h3 {
   height: 10px;
   border-radius: 50%;
 }
-.consoleDot.red { background: #ff5f56; }
-.consoleDot.yellow { background: #ffbd2e; }
-.consoleDot.green { background: #27c93f; }
+
+.consoleDot.red {
+  background: #ff5f56;
+}
+
+.consoleDot.yellow {
+  background: #ffbd2e;
+}
+
+.consoleDot.green {
+  background: #27c93f;
+}
 
 .consoleTitle {
   font-size: 11px;
@@ -287,8 +301,15 @@ h3 {
 }
 
 @keyframes consoleCursorBlink {
-  from, to { background-color: transparent }
-  50% { background-color: #2563eb }
+
+  from,
+  to {
+    background-color: transparent
+  }
+
+  50% {
+    background-color: #2563eb
+  }
 }
 
 /* --- Mouse Spotlight --- */
@@ -303,6 +324,7 @@ h3 {
   opacity: 0;
   transition: opacity 0.6s ease;
 }
+
 .mouseSpotlight.visible {
   opacity: 1;
 }
@@ -312,6 +334,7 @@ h3 {
   opacity: 0;
   transform: translateY(30px);
 }
+
 .holoFadeIn.active {
   animation: holoAppear 0.8s cubic-bezier(0.25, 1, 0.5, 1) forwards;
 }
@@ -322,20 +345,24 @@ h3 {
     transform: translateY(30px) skewX(0deg);
     filter: brightness(2) contrast(1.5) blur(2px);
   }
+
   15% {
     opacity: 0.8;
     transform: translateY(15px) skewX(8deg);
     filter: brightness(1.3) blur(0);
   }
+
   30% {
     opacity: 0.4;
     transform: translateY(10px) skewX(-10deg);
     filter: brightness(1.8) contrast(1.2);
   }
+
   45% {
     opacity: 0.9;
     transform: translateY(5px) skewX(3deg);
   }
+
   100% {
     opacity: 1;
     transform: translateY(0) skewX(0deg);
@@ -344,7 +371,8 @@ h3 {
 }
 
 /* --- Glow Hover Effects --- */
-.primaryButton, .secondaryButton {
+.primaryButton,
+.secondaryButton {
   position: relative;
   transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
 }
@@ -362,7 +390,8 @@ h3 {
 }
 
 .section {
-  max-width: 1120px;
+  max-width: 1600px;
+  width: 92%;
   margin: 0 auto 72px;
 }
 
@@ -372,7 +401,8 @@ h3 {
 }
 
 .cards {
-  max-width: 1120px;
+  max-width: 1600px;
+  width: 92%;
   margin: 0 auto 96px;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -400,7 +430,8 @@ h3 {
 }
 
 .contact {
-  max-width: 1120px;
+  max-width: 1600px;
+  width: 92%;
   margin: 0 auto;
   padding: 42px;
   border-radius: 8px;
@@ -469,7 +500,7 @@ h3 {
   opacity: 0;
   display: flex;
   align-items: baseline;
-  animation: 
+  animation:
     introLogoFadeIn 1.2s cubic-bezier(0.25, 1, 0.5, 1) 0.3s forwards,
     introLogoZoom 2.9s cubic-bezier(0.1, 0.8, 0.3, 1) 0.3s forwards;
 }
@@ -483,6 +514,7 @@ h3 {
     opacity: 0;
     filter: blur(8px);
   }
+
   100% {
     opacity: 1;
     filter: blur(0);
@@ -494,6 +526,7 @@ h3 {
     transform: scale(0.95);
     letter-spacing: -0.02em;
   }
+
   100% {
     transform: scale(1.08);
     letter-spacing: 0.05em;
@@ -505,6 +538,7 @@ h3 {
     opacity: 1;
     visibility: visible;
   }
+
   100% {
     opacity: 0;
     visibility: hidden;
@@ -515,6 +549,7 @@ h3 {
   .introOverlay {
     animation: introOverlayOut 0.2s ease 0.4s forwards;
   }
+
   .introLogo {
     animation: introLogoFadeIn 0.2s ease 0.1s forwards;
   }
@@ -531,15 +566,15 @@ h3 {
   top: 16px;
   left: 50%;
   transform: translateX(-50%);
-  width: calc(100% - 32px);
-  max-width: 1120px;
+  width: calc(100% - 48px);
+  max-width: 1600px;
   z-index: 50;
   background: rgba(255, 255, 255, 0.35);
   backdrop-filter: blur(16px) saturate(180%);
   -webkit-backdrop-filter: blur(16px) saturate(180%);
   border: 1px solid rgba(255, 255, 255, 0.4);
   border-radius: 999px;
-  box-shadow: 
+  box-shadow:
     0 8px 32px rgba(15, 23, 42, 0.05),
     inset 0 1px 0 rgba(255, 255, 255, 0.6);
   transition: all 0.3s ease;
