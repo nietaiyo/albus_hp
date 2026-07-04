@@ -16,7 +16,7 @@ export default function Projects() {
           <p className="label">Main Project</p>
           <h1 style={{ fontSize: '36px', marginBottom: '16px' }}>白鷺祭用語集 (Glossary)</h1>
           <p className="sectionText" style={{ color: '#4b5563', fontSize: '16px', lineHeight: '1.8' }}>
-            「白鷺祭用語集」は、大阪公立大学の伝統ある学園祭「白鷺祭」にまつわる独自の用語、模擬店の裏事情、歴史、そしてキャンパス内の専門用語を網羅したWebアプリケーションです。
+            「白鷺祭用語集」は、大阪公立大学の伝統ある大学祭「白鷺祭」にまつわる独自の用語、模擬店の裏事情、歴史、そしてキャンパス内の専門用語を網羅したWebアプリケーションです。
             初めて来場される方も、普段通っている学生も、白鷺祭を10倍楽しめるディープな情報を発信しています。
           </p>
 
@@ -83,7 +83,7 @@ export default function Projects() {
           <p className="label">Next Project</p>
           <h2 style={{ fontSize: '28px', marginBottom: '16px' }}>【予告】模擬店リアルタイム混雑チェッカー</h2>
           <p className="sectionText" style={{ color: '#4b5563', fontSize: '15px' }}>
-            「どの模擬店がどれくらい並んでいるのか分からない…」そんな悩みを解消するため、学園祭当日に各出店の待ち時間や混雑状況をリアルタイムで投稿・確認できるマップ型ウェブアプリを企画中です。
+            「どの模擬店がどれくらい並んでいるのか分からない…」そんな悩みを解消するため、大学祭当日に各出店の待ち時間や混雑状況をリアルタイムで投稿・確認できるマップ型ウェブアプリを企画中です。
           </p>
           
           {/* 進捗ロードマップ */}

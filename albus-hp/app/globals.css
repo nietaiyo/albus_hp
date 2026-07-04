@@ -129,9 +129,9 @@ a {
 
 h1 {
   margin: 0;
-  font-size: clamp(48px, 7vw, 88px);
-  line-height: 0.95;
-  letter-spacing: 0;
+  font-size: clamp(32px, 7vw, 72px);
+  line-height: 1.1;
+  letter-spacing: -0.02em;
   color: #0f172a;
 }
 

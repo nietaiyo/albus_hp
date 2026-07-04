@@ -15,7 +15,7 @@ export default function About() {
     {
       name: 'ジロウ (Jiro)',
       role: 'Backend & Infrastructure Engineer',
-      bio: 'データベース設計とインフラ周りを担当。学園祭当日の大量アクセスでも落ちない、堅牢でリアルタイムな裏側を支えています。',
+      bio: 'データベース設計とインフラ周りを担当。大学祭当日の大量アクセスでも落ちない、堅牢でリアルタイムな裏側を支えています。',
       skills: ['Firebase', 'Node.js', 'GCP', 'NoSQL'],
     },
   ];
@@ -24,7 +24,7 @@ export default function About() {
     {
       name: 'Next.js / React',
       category: 'Frontend',
-      reason: '学園祭の現場でサクサクと瞬時に動くスピード感と、SEO・パフォーマンスの最大化を実現するために採用しています。',
+      reason: '大学祭の現場でサクサクと瞬時に動くスピード感と、SEO・パフォーマンスの最大化を実現するために採用しています。',
     },
     {
       name: 'Firebase',

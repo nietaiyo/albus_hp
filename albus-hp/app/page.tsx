@@ -10,12 +10,11 @@ export default function Home() {
             <div className="heroText">
               <p className="label">Osaka Metropolitan University</p>
               <h1>
-                アイデアをカタチにして、
-                <br />
-                学園祭をもっと楽しく。
+                <span style={{ display: 'inline-block' }}>アイデアをカタチにして、</span>
+                <span style={{ display: 'inline-block' }}>大学祭をもっと楽しく。</span>
               </h1>
               <p className="description">
-                Albus（アルバス）は、大阪公立大学の学園祭「白鷺祭」をより楽しむためのWebアプリやサービスを開発している、有志の学生ものづくりチームです。
+                Albus（アルバス）は、大阪公立大学の大学祭「白鷺祭」をより楽しむためのWebアプリやサービスを開発している、有志の学生ものづくりチームです。
               </p>
               <div className="actions">
                 <Link className="primaryButton" href="/projects">
