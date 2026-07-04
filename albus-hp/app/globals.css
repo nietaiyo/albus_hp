@@ -481,3 +481,246 @@ h3 {
     animation: homeIn 0.2s ease 0.45s forwards;
   }
 }
+
+/* --- Layout Wrapper --- */
+.flex-grow {
+  flex-grow: 1;
+}
+
+/* --- Header Styles --- */
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: rgba(248, 251, 255, 0.85);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(219, 234, 254, 0.5);
+  width: 100%;
+}
+
+.headerContainer {
+  max-width: 1120px;
+  margin: 0 auto;
+  height: 72px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 20px;
+}
+
+.logoLink {
+  text-decoration: none;
+}
+
+.desktopNav {
+  display: flex;
+  gap: 32px;
+}
+
+.navLink {
+  font-size: 14px;
+  font-weight: 500;
+  color: #4b5563;
+  position: relative;
+  padding: 6px 0;
+  transition: color 0.25s ease;
+}
+
+.navLink:hover {
+  color: #2563eb;
+}
+
+.navLink::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background-color: #2563eb;
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.navLink:hover::after,
+.navLink.active::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+.navLink.active {
+  color: #2563eb;
+  font-weight: 700;
+}
+
+/* --- Hamburger Button --- */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 24px;
+  height: 18px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  z-index: 60;
+}
+
+.hamburger .bar {
+  width: 100%;
+  height: 2px;
+  background-color: #1f2937;
+  border-radius: 4px;
+  transition: all 0.3s ease;
+}
+
+.hamburger.open .bar:nth-child(1) {
+  transform: translateY(8px) rotate(45deg);
+}
+
+.hamburger.open .bar:nth-child(2) {
+  opacity: 0;
+}
+
+.hamburger.open .bar:nth-child(3) {
+  transform: translateY(-8px) rotate(-45deg);
+}
+
+/* --- Mobile Menu --- */
+.mobileMenu {
+  position: fixed;
+  top: 0;
+  right: -100%;
+  width: 100%;
+  height: 100vh;
+  background-color: rgba(248, 251, 255, 0.98);
+  backdrop-filter: blur(16px);
+  z-index: 55;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: right 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.mobileMenu.open {
+  right: 0;
+}
+
+.mobileNav {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 32px;
+}
+
+.mobileNavLink {
+  font-size: 24px;
+  font-weight: 600;
+  color: #1f2937;
+  text-decoration: none;
+  transition: color 0.25s ease;
+}
+
+.mobileNavLink:hover,
+.mobileNavLink.active {
+  color: #2563eb;
+}
+
+/* --- Footer Styles --- */
+.footer {
+  background-color: #0f172a;
+  color: #94a3b8;
+  padding: 64px 20px 32px;
+  border-top: 1px solid #1e293b;
+}
+
+.footerContainer {
+  max-width: 1120px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 64px;
+  margin-bottom: 48px;
+}
+
+.footerBrand {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.footerBrand .logo {
+  color: #ffffff;
+}
+
+.footerSlogan {
+  font-size: 14px;
+  line-height: 1.6;
+  color: #94a3b8;
+  margin: 0;
+}
+
+.footerLinksGroup {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 32px;
+}
+
+.footerLinkCol {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.footerLinkCol h4 {
+  color: #f1f5f9;
+  font-size: 14px;
+  font-weight: 600;
+  margin: 0 0 8px 0;
+}
+
+.footerLinkCol a {
+  font-size: 14px;
+  color: #94a3b8;
+  transition: color 0.2s ease;
+}
+
+.footerLinkCol a:hover {
+  color: #ffffff;
+}
+
+.footerBottom {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding-top: 32px;
+  border-top: 1px solid #1e293b;
+  text-align: center;
+  font-size: 13px;
+}
+
+.footerBottom p {
+  margin: 0;
+}
+
+/* --- Responsive Adjustments --- */
+@media (max-width: 768px) {
+  .desktopNav {
+    display: none;
+  }
+
+  .hamburger {
+    display: flex;
+  }
+
+  .footerContainer {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+
+  .footerLinksGroup {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+}
