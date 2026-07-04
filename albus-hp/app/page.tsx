@@ -3,6 +3,8 @@
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import TextScramble from './components/TextScramble';
+import MouseSpotlight from './components/MouseSpotlight';
+import CodeConsole from './components/CodeConsole';
 
 export default function Home() {
   const [showIntro, setShowIntro] = useState(false);
@@ -24,10 +26,32 @@ export default function Home() {
     }
   }, []);
 
+  // スクロール時のホログラムフェードイン監視
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('active');
+          }
+        });
+      },
+      { threshold: 0.1 }
+    );
+
+    const elements = document.querySelectorAll('.holoFadeIn');
+    elements.forEach((el) => observer.observe(el));
+
+    return () => {
+      elements.forEach((el) => observer.unobserve(el));
+    };
+  }, []);
+
   const baseDelay = isFirstAccess ? 3600 : 0;
 
   return (
     <>
+      <MouseSpotlight />
       {showIntro && (
         <div className="introOverlay">
           <div className="introLogo">
@@ -59,25 +83,11 @@ export default function Home() {
               </div>
             </div>
 
-            <div className="heroPanel">
-              <div className="panelTop">
-                <span />
-                <span />
-                <span />
-              </div>
-              <div className="codeCard" style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', padding: '24px', textAlign: 'center' }}>
-                <div style={{ fontSize: '18px', fontWeight: 'bold', color: '#1e3a8a', marginBottom: '12px' }}>
-                  「白鷺祭をもっと面白くしたい」
-                </div>
-                <div style={{ fontSize: '14px', color: '#4b5563', lineHeight: '1.6', maxWidth: '300px' }}>
-                  そんな想いから生まれた有志チームです。デザインから開発まで、自分たちの手で作り上げています。
-                </div>
-              </div>
-            </div>
+            <CodeConsole />
           </section>
 
           {/* 私たちの想い / 挨拶 */}
-          <section id="about" className="section" style={{ borderTop: '1px solid #e2e8f0', paddingTop: '56px' }}>
+          <section id="about" className="section holoFadeIn" style={{ borderTop: '1px solid #e2e8f0', paddingTop: '56px' }}>
             <p className="label">Greeting</p>
             <h2>白く、優しく、まっすぐに。</h2>
             <p className="sectionText">
@@ -89,7 +99,7 @@ export default function Home() {
           </section>
 
           {/* サイトの活用方法 */}
-          <section className="section" style={{ marginBottom: '56px' }}>
+          <section className="section holoFadeIn" style={{ marginBottom: '56px' }}>
             <p className="label">How to use</p>
             <h2>このサイトの活用方法</h2>
             <div className="cards" style={{ marginTop: '32px' }}>
@@ -123,7 +133,7 @@ export default function Home() {
           </section>
 
           {/* コンタクトへの誘い */}
-          <section className="contact" style={{ marginBottom: '56px' }}>
+          <section className="contact holoFadeIn" style={{ marginBottom: '56px' }}>
             <div>
               <p className="label" style={{ color: '#93c5fd' }}>Join us / Talk to us</p>
               <h2>お気軽にお問い合わせください。</h2>

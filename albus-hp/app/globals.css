@@ -15,7 +15,11 @@ body {
   margin: 0;
   font-family: Inter, "Noto Sans JP", system-ui, sans-serif;
   color: #111827;
-  background: #f8fbff;
+  background-color: #f8fbff;
+  background-image: 
+    linear-gradient(rgba(37, 99, 235, 0.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(37, 99, 235, 0.025) 1px, transparent 1px);
+  background-size: 40px 40px;
   padding-top: 72px;
 }
 
@@ -192,50 +196,169 @@ h3 {
   background: white;
 }
 
-.heroPanel {
-  border: 1px solid #dbeafe;
-  border-radius: 8px;
-  background: white;
-  box-shadow: 0 24px 70px rgba(15, 23, 42, 0.08);
+/* --- Code Console (ヒーローセクション右側) --- */
+.codeConsole {
+  border: 1px solid rgba(37, 99, 235, 0.15);
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.75);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: 0 20px 50px rgba(15, 23, 42, 0.04);
   overflow: hidden;
+  font-family: "SFMono-Regular", Consolas, Menlo, monospace;
+  width: 100%;
+  transition: all 0.3s ease;
 }
 
-.panelTop {
-  height: 44px;
+.consoleHeader {
+  height: 40px;
   display: flex;
   align-items: center;
-  gap: 8px;
-  padding: 0 18px;
-  border-bottom: 1px solid #e5e7eb;
+  gap: 6px;
+  padding: 0 16px;
+  border-bottom: 1px solid rgba(229, 231, 235, 0.5);
+  background: rgba(248, 251, 255, 0.6);
 }
 
-.panelTop span {
+.consoleDot {
   width: 10px;
   height: 10px;
-  border-radius: 999px;
-  background: #93c5fd;
+  border-radius: 50%;
+}
+.consoleDot.red { background: #ff5f56; }
+.consoleDot.yellow { background: #ffbd2e; }
+.consoleDot.green { background: #27c93f; }
+
+.consoleTitle {
+  font-size: 11px;
+  color: #94a3b8;
+  margin-left: 8px;
+  font-weight: 600;
+  letter-spacing: 0.05em;
 }
 
-.codeCard {
-  padding: 34px;
-  min-height: 300px;
-  display: grid;
-  align-content: center;
-  gap: 16px;
-  font-family: "SFMono-Regular", Consolas, monospace;
-  color: #1e3a8a;
-  background:
-    linear-gradient(#eff6ff 1px, transparent 1px),
-    linear-gradient(90deg, #eff6ff 1px, transparent 1px);
-  background-size: 28px 28px;
+.consoleBody {
+  padding: 24px;
+  min-height: 280px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  background: rgba(255, 255, 255, 0.2);
 }
 
-.codeCard p {
-  margin: 0;
-  padding: 14px 16px;
-  border-radius: 8px;
-  background: rgba(255, 255, 255, 0.86);
-  border: 1px solid #dbeafe;
+.consoleLine {
+  display: flex;
+  line-height: 1.6;
+  font-size: 13px;
+  margin-bottom: 4px;
+}
+
+.lineNum {
+  width: 24px;
+  color: #94a3b8;
+  opacity: 0.5;
+  user-select: none;
+  font-size: 11px;
+  text-align: right;
+  margin-right: 16px;
+  font-family: inherit;
+}
+
+.lineContent {
+  color: #334155;
+  white-space: pre-wrap;
+  font-weight: 500;
+}
+
+.consoleCursor {
+  display: inline-block;
+  width: 8px;
+  height: 15px;
+  background-color: #2563eb;
+  margin-left: 2px;
+  vertical-align: middle;
+  animation: consoleCursorBlink 0.8s step-end infinite;
+}
+
+.outputLine .lineContent {
+  color: #2563eb;
+  font-weight: 700;
+  text-shadow: 0 0 10px rgba(37, 99, 235, 0.15);
+}
+
+@keyframes consoleCursorBlink {
+  from, to { background-color: transparent }
+  50% { background-color: #2563eb }
+}
+
+/* --- Mouse Spotlight --- */
+.mouseSpotlight {
+  position: fixed;
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle, rgba(37, 99, 235, 0.05) 0%, rgba(37, 99, 235, 0) 70%);
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  z-index: -1;
+  opacity: 0;
+  transition: opacity 0.6s ease;
+}
+.mouseSpotlight.visible {
+  opacity: 1;
+}
+
+/* --- Hologram Fade In (スクロールアニメーション) --- */
+.holoFadeIn {
+  opacity: 0;
+  transform: translateY(30px);
+}
+.holoFadeIn.active {
+  animation: holoAppear 0.8s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+}
+
+@keyframes holoAppear {
+  0% {
+    opacity: 0;
+    transform: translateY(30px) skewX(0deg);
+    filter: brightness(2) contrast(1.5) blur(2px);
+  }
+  15% {
+    opacity: 0.8;
+    transform: translateY(15px) skewX(8deg);
+    filter: brightness(1.3) blur(0);
+  }
+  30% {
+    opacity: 0.4;
+    transform: translateY(10px) skewX(-10deg);
+    filter: brightness(1.8) contrast(1.2);
+  }
+  45% {
+    opacity: 0.9;
+    transform: translateY(5px) skewX(3deg);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) skewX(0deg);
+    filter: brightness(1) contrast(1);
+  }
+}
+
+/* --- Glow Hover Effects --- */
+.primaryButton, .secondaryButton {
+  position: relative;
+  transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.primaryButton:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 24px rgba(37, 99, 235, 0.3), 0 0 20px rgba(37, 99, 235, 0.4);
+}
+
+.secondaryButton:hover {
+  transform: translateY(-3px);
+  border-color: #2563eb;
+  background-color: rgba(37, 99, 235, 0.02);
+  box-shadow: 0 8px 20px rgba(37, 99, 235, 0.08), 0 0 12px rgba(37, 99, 235, 0.15);
 }
 
 .section {
@@ -258,15 +381,17 @@ h3 {
 
 .card {
   padding: 28px;
-  border-radius: 8px;
-  background: white;
-  border: 1px solid #e2e8f0;
-  transition: transform 0.2s ease, border-color 0.2s ease;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(226, 232, 240, 0.8);
+  transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
 }
 
 .card:hover {
-  transform: translateY(-4px);
-  border-color: #93c5fd;
+  transform: translateY(-6px);
+  border-color: rgba(37, 99, 235, 0.4);
+  box-shadow: 0 15px 30px rgba(15, 23, 42, 0.04), 0 0 15px rgba(37, 99, 235, 0.08);
 }
 
 .card span {
