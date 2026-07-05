@@ -14,8 +14,8 @@ export default function Footer() {
             <span className="logoDot" aria-hidden="true">.</span>
           </div>
           <p className="footerSlogan">
-            白鷺祭のためのWebアプリを開発する、<br />
-            ものづくりが大好きな有志学生チームです。
+            大学祭のためのサービスを開発する、<br />
+            大学祭が大好きな情報系学生チームです。
           </p>
         </div>
 
