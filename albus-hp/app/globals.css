@@ -22,6 +22,7 @@ body {
     linear-gradient(90deg, rgba(37, 99, 235, 0.045) 1px, transparent 1px);
   background-size: 40px 40px;
   padding-top: 72px;
+  position: relative;
 }
 
 a {
