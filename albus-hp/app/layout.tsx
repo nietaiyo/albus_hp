@@ -15,8 +15,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Albus公式HP - 白鷺祭アプリ開発チーム",
-  description: "Albus（アルバス）は、白鷺祭（大阪公立大学大学祭）をより便利で楽しくするためのWebアプリケーションやサービスを開発している、有志の学生ものづくりチームです。",
+  title: "Albus公式HP",
+  description: "Albus（アルバス）は、大学祭をより発展させるサービスを開発している、有志の学生チームです。",
 };
 
 export default function RootLayout({
