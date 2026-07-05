@@ -3,7 +3,6 @@
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import TextScramble from './components/TextScramble';
-import MouseSpotlight from './components/MouseSpotlight';
 import CodeConsole from './components/CodeConsole';
 
 export default function Home() {
@@ -51,7 +50,6 @@ export default function Home() {
 
   return (
     <>
-      <MouseSpotlight />
       {showIntro && (
         <div className="introOverlay">
           <div className="introLogo">
