@@ -400,6 +400,22 @@ h3 {
   box-shadow: 0 8px 20px rgba(37, 99, 235, 0.08), 0 0 12px rgba(37, 99, 235, 0.15);
 }
 
+/* ヒーローセクション内のアクションボタン調整 */
+.hero .primaryButton {
+  color: #1e40af;
+  border: 1px solid #bfdbfe;
+  background: white;
+  box-shadow: none;
+}
+
+.hero .primaryButton:hover,
+.hero .secondaryButton:hover {
+  background: #2563eb;
+  color: white;
+  border-color: #2563eb;
+  box-shadow: 0 12px 24px rgba(37, 99, 235, 0.3), 0 0 20px rgba(37, 99, 235, 0.4);
+}
+
 .section {
   max-width: 1600px;
   width: 92%;
