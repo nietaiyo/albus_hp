@@ -58,7 +58,7 @@ export default function About() {
         {/* メンバー紹介 */}
         <section style={{ marginBottom: '64px', borderTop: '1px solid #e2e8f0', paddingTop: '48px' }}>
           <p className="label">Team Members</p>
-          <h2 style={{ fontSize: '28px', marginBottom: '32px' }}>創るメンバーたち</h2>
+          <h2 style={{ fontSize: '28px', marginBottom: '32px' }}>開発メンバー</h2>
           <div style={{ display: 'flex', flexDirection: 'column', gap: '32px' }}>
             {members.map((member, idx) => (
               <div
