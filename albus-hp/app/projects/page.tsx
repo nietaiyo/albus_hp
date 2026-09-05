@@ -1,12 +1,4 @@
-import Link from 'next/link';
-
 export default function Projects() {
-  const steps = [
-    { num: '01', title: '検索窓に入力する', desc: '知りたい単語や模擬店の名前などを、あいまい検索できます。' },
-    { num: '02', title: 'カテゴリで絞り込む', desc: '「歴史」「グルメ」「場所」など、気になるジャンルから探せます。' },
-    { num: '03', title: 'ディープな情報を楽しむ', desc: 'ただの用語解説ではなく、学生チームならではのちょっとした裏話やおすすめ情報も掲載しています。' },
-  ];
-
   return (
     <div className="site">
       <div style={{ maxWidth: "900px", margin: "48px auto" }}>

@@ -3,7 +3,7 @@
 import { useState } from 'react';
 
 export default function Contact() {
-  const [activeTab, setActiveTab] = useState<'inquiry' | 'request'>('inquiry');
+  const [activeTab] = useState<'inquiry' | 'request'>('inquiry');
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
 
