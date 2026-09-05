@@ -28,46 +28,8 @@ export default function Contact() {
         <h1 style={{ fontSize: '36px', marginBottom: '24px' }}>お問い合わせ</h1>
         <p className="sectionText" style={{ color: '#4b5563', marginBottom: '32px' }}>
           Albusへのご意見やご感想、コラボレーションのご提案などは以下のフォームよりお送りください。
+          提供済みのサービスに関するお問い合わせや修正依頼は各サービスのお問い合わせフォームをご利用ください。
         </p>
-
-        {/* タブ切り替え */}
-        <div style={{ display: 'flex', borderBottom: '2px solid #e2e8f0', marginBottom: '32px' }}>
-          <button
-            onClick={() => { setActiveTab('inquiry'); resetForm(); }}
-            style={{
-              flex: 1,
-              padding: '12px',
-              background: 'transparent',
-              border: 'none',
-              borderBottom: activeTab === 'inquiry' ? '2px solid #2563eb' : 'none',
-              color: activeTab === 'inquiry' ? '#2563eb' : '#64748b',
-              fontWeight: activeTab === 'inquiry' ? 'bold' : 'normal',
-              cursor: 'pointer',
-              fontSize: '15px',
-              outline: 'none',
-            }}
-          >
-            一般のお問い合わせ
-          </button>
-          <button
-            id="request"
-            onClick={() => { setActiveTab('request'); resetForm(); }}
-            style={{
-              flex: 1,
-              padding: '12px',
-              background: 'transparent',
-              border: 'none',
-              borderBottom: activeTab === 'request' ? '2px solid #2563eb' : 'none',
-              color: activeTab === 'request' ? '#2563eb' : '#64748b',
-              fontWeight: activeTab === 'request' ? 'bold' : 'normal',
-              cursor: 'pointer',
-              fontSize: '15px',
-              outline: 'none',
-            }}
-          >
-            用語追加・機能要望
-          </button>
-        </div>
 
         {submitted ? (
           <div
