@@ -3,17 +3,23 @@
 import { useState } from "react";
 import type { ChangeEvent, FormEvent} from "react";
 
-type FormState = {
+interface FormData {
   name: string;
   email: string;
   message: string;
+}
+
+const initialFormData: FormData = {
+  name: "",
+  email: "",
+  message: "",
 }
 
 export default function Contact() {
   const [submitted, setSubmitted] = useState(false);
   const [loading] = useState(false);
 
-  const [ formData, setFormData ] = useState<FormState>({
+  const [ formData, setFormData ] = useState<FormData>({
     name: '',
     email: '',
     message: ''
@@ -40,9 +46,10 @@ export default function Contact() {
     })
 
     if (response.ok) {
-      alert("メールを送信しました！");
+      alert("メールを送信しました");
+      setFormData(initialFormData)
     } else {
-      alert("送信に失敗しました。");
+      alert("送信に失敗しました\n時間をおいて再試行してください");
     }
   };
 
