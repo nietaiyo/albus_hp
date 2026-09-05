@@ -27,7 +27,7 @@ export default function Footer() {
 
           <div className="footerLinkCol">
             {/* <h4>リンク</h4> */}
-            {/* githubは整理後に公開 */}
+{/* GitHubは整理後に公開 */}
             {/* <a href="https://github.com/albus-sys" target="_blank" rel="noopener noreferrer">GitHub</a> */}
             {/* Twitterはアカウント作成後に公開 */}
             {/* <a href="https://x.com" target="_blank" rel="noopener noreferrer">X (Twitter)</a> */}
