@@ -11,9 +11,7 @@ export default function Footer() {
             <span>b</span>
             <span>u</span>
             <span>s</span>
-            <span className="logoDot" aria-hidden="true">
-              .
-            </span>
+<span className="logoDot" aria-hidden="true">.</span>
           </div>
           <p className="footerSlogan">大学祭はテクノロジーで進化する</p>
         </div>
