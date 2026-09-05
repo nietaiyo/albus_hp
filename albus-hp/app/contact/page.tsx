@@ -2,23 +2,53 @@
 
 import { useState } from 'react';
 
+type FormState = {
+  name: string;
+  email: string;
+  message: string;
+}
+
 export default function Contact() {
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
 
-  // 送信処理（擬似APIリクエスト）
-  const handleSubmit = (e: React.FormEvent) => {
+  const [ formData, setFormData ] = useState<FormState>({
+    name: '',
+    email: '',
+    message: ''
+  })
+
+  const handleChange = (
+    e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({
+      ...prev,
+      [name]: value,
+    })) 
+  }
+
+  // 送信処理
+  const handleSubmit = async (e: formEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setLoading(true);
-    setTimeout(() => {
-      setLoading(false);
-      setSubmitted(true);
-    }, 1000);
+
+    const response = await fetch("/api/send-email", {
+        method: 'POST',
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData)
+    })
+
+    if (response.ok) {
+      alert("メールを送信しました！");
+    } else {
+      alert("送信に失敗しました。");
+    }
   };
 
   const resetForm = () => {
     setSubmitted(false);
   };
+  
 
   return (
     <div className="site">
@@ -64,6 +94,9 @@ export default function Contact() {
                   type="text"
                   id="name"
                   required
+                  name="name"
+                  value={formData.name}
+                  onChange={handleChange}
                   placeholder="山田 太郎"
                   style={{ padding: '10px 14px', borderRadius: '6px', border: '1px solid #d1d5db', fontSize: '14px', outline: 'none' }}
                 />
@@ -75,6 +108,9 @@ export default function Contact() {
                   type="email"
                   id="email"
                   required
+                  name="email"
+                  value={formData.email}
+                  onChange={handleChange}
                   placeholder="example@edu.osakafu-u.ac.jp"
                   style={{ padding: '10px 14px', borderRadius: '6px', border: '1px solid #d1d5db', fontSize: '14px', outline: 'none' }}
                 />
@@ -85,6 +121,9 @@ export default function Contact() {
                 <textarea
                   id="message"
                   required
+                  name="message"
+                  value={formData.message}
+                  onChange={handleChange}
                   rows={6}
                   placeholder="お問い合わせ内容をご記入ください。"
                   style={{ padding: '10px 14px', borderRadius: '6px', border: '1px solid #d1d5db', fontSize: '14px', outline: 'none', resize: 'vertical' }}
