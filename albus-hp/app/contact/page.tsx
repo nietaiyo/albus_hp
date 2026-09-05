@@ -1,6 +1,7 @@
 'use client';
 
-import { useState } from 'react';
+import { useState } from "react";
+import type { ChangeEvent, FormEvent} from "react";
 
 type FormState = {
   name: string;
@@ -10,7 +11,7 @@ type FormState = {
 
 export default function Contact() {
   const [submitted, setSubmitted] = useState(false);
-  const [loading, setLoading] = useState(false);
+  const [loading] = useState(false);
 
   const [ formData, setFormData ] = useState<FormState>({
     name: '',
@@ -29,7 +30,7 @@ export default function Contact() {
   }
 
   // 送信処理
-  const handleSubmit = async (e: formEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     const response = await fetch("/api/send-email", {
