@@ -65,12 +65,21 @@ export default function Home() {
               <div className="heroText">
                 <p className="label">University Festival by Technology</p>
                 <h1>
-                  <span style={{ display: 'inline-block' }}><TextScramble text="大学祭は" delay={baseDelay + 100} /></span>
-                  <span style={{ display: 'inline-block' }}><TextScramble text="テクノロジーで" delay={baseDelay + 1300} /></span>
-                  <span style={{ display: 'inline-block' }}><TextScramble text="進化する" delay={baseDelay + 2500} /></span>
+                  <span style={{ display: "inline-block" }}>
+                    <TextScramble text="大学祭は" delay={baseDelay + 100} />
+                  </span>
+                  <span style={{ display: "inline-block" }}>
+                    <TextScramble
+                      text="テクノロジーで"
+                      delay={baseDelay + 1300}
+                    />
+                  </span>
+                  <span style={{ display: "inline-block" }}>
+                    <TextScramble text="進化する" delay={baseDelay + 2500} />
+                  </span>
                 </h1>
                 <p className="description">
-                  Albus（アルバス）は、大学祭を発展させるため、大学祭実行委員会向けのサービスを開発しています。
+                  Albus. は大学祭実行委員会向けのサービスを開発しています
                 </p>
                 <div className="actions">
                   <Link className="primaryButton" href="/projects">
@@ -87,59 +96,41 @@ export default function Home() {
           </section>
 
           {/* 私たちの想い / 挨拶 */}
-          <section id="about" className="section holoFadeIn" style={{ borderTop: '1px solid #e2e8f0', paddingTop: '56px' }}>
+          <section
+            id="about"
+            className="section holoFadeIn"
+            style={{ borderTop: "1px solid #e2e8f0", paddingTop: "56px" }}
+          >
             <p className="label">Greeting</p>
-            <h2>白く、優しく、まっすぐに。</h2>
+            <h2>各大学祭に寄り添ったサービスを</h2>
             <p className="sectionText">
-              チーム名「Albus」はラテン語で「白」を意味します。
-              何にも染まっていないキャンバスに、メンバーそれぞれの個性と情熱を描き、
-              来場者や学生の皆さんが「本当に欲しかったもの」を形にします。
-              技術の押し売りではなく、使う人の目線に立った温かみのあるプロダクトをお届けします。
+              各大学祭が抱える規模や来場者層、運営上の課題は決して一様ではありません。<br/>
+              ラテン語で「白」を指す「Albus」の名のとおり、私たちは汎用的で誰でも作り使えるサービスではなく、それぞれの実情に応じたサービスを構築します。<br/>
+              私たちはメンバー全員が大学祭実行委員会出身です。今までに培った経験や知見を活かし、学祭当日中のサポートだけでなく、年間を通じた運営効率化に寄与するソリューションをご提供します。
             </p>
           </section>
 
-          {/* サイトの活用方法 */}
-          <section className="section holoFadeIn" style={{ marginBottom: '56px' }}>
-            <p className="label">How to use</p>
-            <h2>このサイトの活用方法</h2>
-            <div className="cards" style={{ marginTop: '32px' }}>
-              <article className="card">
-                <span>01</span>
-                <h3>用語集をひらく</h3>
-                <p>メイン制作物である「白鷺祭用語集」の簡単な使い方を紹介しています。白鷺祭のディープな魅力を知るためのお供にどうぞ。</p>
-                <Link href="/projects" style={{ color: '#2563eb', fontWeight: 'bold', fontSize: '14px', display: 'inline-block', marginTop: '12px' }}>
-                  詳しく見る &rarr;
-                </Link>
-              </article>
-
-              <article className="card">
-                <span>02</span>
-                <h3>開発中のアプリをのぞく</h3>
-                <p>「こんなアプリがあったらいいな」を形にするため、Albusメンバーが現在構想・開発中の次期アプリの進捗状況を公開しています。</p>
-                <Link href="/projects#future" style={{ color: '#2563eb', fontWeight: 'bold', fontSize: '14px', display: 'inline-block', marginTop: '12px' }}>
-                  開発予告へ &rarr;
-                </Link>
-              </article>
-
-              <article className="card">
-                <span>03</span>
-                <h3>要望やアイデアを送る</h3>
-                <p>「この用語を追加してほしい！」「こんな機能がほしい！」など、皆さんからの声を募る専用フォームを用意しています。</p>
-                <Link href="/contact#request" style={{ color: '#2563eb', fontWeight: 'bold', fontSize: '14px', display: 'inline-block', marginTop: '12px' }}>
-                  フォームを開く &rarr;
-                </Link>
-              </article>
-            </div>
-          </section>
-
           {/* コンタクトへの誘い */}
-          <section className="contact holoFadeIn" style={{ marginBottom: '56px' }}>
+          <section
+            className="contact holoFadeIn"
+            style={{ marginBottom: "56px" }}
+          >
             <div>
-              <p className="label" style={{ color: '#93c5fd' }}>Join us / Talk to us</p>
+              <p className="label" style={{ color: "#93c5fd" }}>
+                Join us / Talk to us
+              </p>
               <h2>お気軽にお問い合わせください。</h2>
             </div>
-            <Link className="primaryButton" href="/contact" style={{ background: '#ffffff', color: '#2563eb', boxShadow: 'none' }}>
-              お問い合わせフォーム
+            <Link
+              className="primaryButton"
+              href="/contact"
+              style={{
+                background: "#ffffff",
+                color: "#2563eb",
+                boxShadow: "none",
+              }}
+            >
+              お問い合わせ
             </Link>
           </section>
         </div>
