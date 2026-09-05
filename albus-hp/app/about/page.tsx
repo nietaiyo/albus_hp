@@ -32,24 +32,6 @@ export default function About() {
     },
   ];
 
-  // const techStack = [
-  //   {
-  //     name: 'Next.js / React',
-  //     category: 'Frontend',
-  //     reason: '大学祭の現場でサクサクと瞬時に動くスピード感と、SEO・パフォーマンスの最大化を実現するために採用しています。',
-  //   },
-  //   {
-  //     name: 'Firebase',
-  //     category: 'Backend & Hosting',
-  //     reason: 'ユーザー投票や用語追加など、リアルタイムなデータの同期を最もスピーディーに、かつ安全に実現するために選定しました。',
-  //   },
-  //   {
-  //     name: 'Vanilla CSS',
-  //     category: 'Styling',
-  //     reason: 'フレームワークの流行に左右されず、Albus独自の繊細なアニメーションと軽量なコーディングを実現するために、細部まで手書きで設計しています。',
-  //   },
-  // ];
-
   // Todo: 仲間募集フォームを作る
 
   return (
