@@ -3,7 +3,6 @@
 import { useState } from 'react';
 
 export default function Contact() {
-  const [activeTab, setActiveTab] = useState<'inquiry' | 'request'>('inquiry');
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
 
@@ -28,46 +27,8 @@ export default function Contact() {
         <h1 style={{ fontSize: '36px', marginBottom: '24px' }}>お問い合わせ</h1>
         <p className="sectionText" style={{ color: '#4b5563', marginBottom: '32px' }}>
           Albusへのご意見やご感想、コラボレーションのご提案などは以下のフォームよりお送りください。
+          提供済みのサービスに関するお問い合わせや修正依頼は各サービスのお問い合わせフォームをご利用ください。
         </p>
-
-        {/* タブ切り替え */}
-        <div style={{ display: 'flex', borderBottom: '2px solid #e2e8f0', marginBottom: '32px' }}>
-          <button
-            onClick={() => { setActiveTab('inquiry'); resetForm(); }}
-            style={{
-              flex: 1,
-              padding: '12px',
-              background: 'transparent',
-              border: 'none',
-              borderBottom: activeTab === 'inquiry' ? '2px solid #2563eb' : 'none',
-              color: activeTab === 'inquiry' ? '#2563eb' : '#64748b',
-              fontWeight: activeTab === 'inquiry' ? 'bold' : 'normal',
-              cursor: 'pointer',
-              fontSize: '15px',
-              outline: 'none',
-            }}
-          >
-            一般のお問い合わせ
-          </button>
-          <button
-            id="request"
-            onClick={() => { setActiveTab('request'); resetForm(); }}
-            style={{
-              flex: 1,
-              padding: '12px',
-              background: 'transparent',
-              border: 'none',
-              borderBottom: activeTab === 'request' ? '2px solid #2563eb' : 'none',
-              color: activeTab === 'request' ? '#2563eb' : '#64748b',
-              fontWeight: activeTab === 'request' ? 'bold' : 'normal',
-              cursor: 'pointer',
-              fontSize: '15px',
-              outline: 'none',
-            }}
-          >
-            用語追加・機能要望
-          </button>
-        </div>
 
         {submitted ? (
           <div
@@ -96,82 +57,40 @@ export default function Contact() {
           </div>
         ) : (
           <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
-            {activeTab === 'inquiry' ? (
-              // 一般のお問い合わせフォーム
-              <>
-                <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
-                  <label htmlFor="name" style={{ fontSize: '14px', fontWeight: 'bold', color: '#374151' }}>お名前</label>
-                  <input
-                    type="text"
-                    id="name"
-                    required
-                    placeholder="山田 太郎"
-                    style={{ padding: '10px 14px', borderRadius: '6px', border: '1px solid #d1d5db', fontSize: '14px', outline: 'none' }}
-                  />
-                </div>
+            <>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
+                <label htmlFor="name" style={{ fontSize: '14px', fontWeight: 'bold', color: '#374151' }}>お名前</label>
+                <input
+                  type="text"
+                  id="name"
+                  required
+                  placeholder="山田 太郎"
+                  style={{ padding: '10px 14px', borderRadius: '6px', border: '1px solid #d1d5db', fontSize: '14px', outline: 'none' }}
+                />
+              </div>
 
-                <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
-                  <label htmlFor="email" style={{ fontSize: '14px', fontWeight: 'bold', color: '#374151' }}>メールアドレス</label>
-                  <input
-                    type="email"
-                    id="email"
-                    required
-                    placeholder="example@edu.osakafu-u.ac.jp"
-                    style={{ padding: '10px 14px', borderRadius: '6px', border: '1px solid #d1d5db', fontSize: '14px', outline: 'none' }}
-                  />
-                </div>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
+                <label htmlFor="email" style={{ fontSize: '14px', fontWeight: 'bold', color: '#374151' }}>メールアドレス</label>
+                <input
+                  type="email"
+                  id="email"
+                  required
+                  placeholder="example@edu.osakafu-u.ac.jp"
+                  style={{ padding: '10px 14px', borderRadius: '6px', border: '1px solid #d1d5db', fontSize: '14px', outline: 'none' }}
+                />
+              </div>
 
-                <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
-                  <label htmlFor="message" style={{ fontSize: '14px', fontWeight: 'bold', color: '#374151' }}>お問い合わせ内容</label>
-                  <textarea
-                    id="message"
-                    required
-                    rows={6}
-                    placeholder="お問い合わせ内容をご記入ください。"
-                    style={{ padding: '10px 14px', borderRadius: '6px', border: '1px solid #d1d5db', fontSize: '14px', outline: 'none', resize: 'vertical' }}
-                  />
-                </div>
-              </>
-            ) : (
-              // 用語追加依頼・機能要望フォーム
-              <>
-                <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
-                  <label htmlFor="reqType" style={{ fontSize: '14px', fontWeight: 'bold', color: '#374151' }}>ご要望のタイプ</label>
-                  <select
-                    id="reqType"
-                    required
-                    style={{ padding: '10px 14px', borderRadius: '6px', border: '1px solid #d1d5db', fontSize: '14px', outline: 'none' }}
-                  >
-                    <option value="word">用語追加のリクエスト</option>
-                    <option value="feature">アプリ機能の要望</option>
-                    <option value="bug">バグ・不具合の報告</option>
-                    <option value="other">その他</option>
-                  </select>
-                </div>
-
-                <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
-                  <label htmlFor="title" style={{ fontSize: '14px', fontWeight: 'bold', color: '#374151' }}>件名 / 追加したい用語</label>
-                  <input
-                    type="text"
-                    id="title"
-                    required
-                    placeholder="例: 用語「モズナ」を追加してほしい"
-                    style={{ padding: '10px 14px', borderRadius: '6px', border: '1px solid #d1d5db', fontSize: '14px', outline: 'none' }}
-                  />
-                </div>
-
-                <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
-                  <label htmlFor="detail" style={{ fontSize: '14px', fontWeight: 'bold', color: '#374151' }}>詳細内容</label>
-                  <textarea
-                    id="detail"
-                    required
-                    rows={6}
-                    placeholder="追加したい理由や、機能の具体的なイメージをご記入ください。"
-                    style={{ padding: '10px 14px', borderRadius: '6px', border: '1px solid #d1d5db', fontSize: '14px', outline: 'none', resize: 'vertical' }}
-                  />
-                </div>
-              </>
-            )}
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
+                <label htmlFor="message" style={{ fontSize: '14px', fontWeight: 'bold', color: '#374151' }}>お問い合わせ内容</label>
+                <textarea
+                  id="message"
+                  required
+                  rows={6}
+                  placeholder="お問い合わせ内容をご記入ください。"
+                  style={{ padding: '10px 14px', borderRadius: '6px', border: '1px solid #d1d5db', fontSize: '14px', outline: 'none', resize: 'vertical' }}
+                />
+              </div>
+            </>
 
             <button
               type="submit"
