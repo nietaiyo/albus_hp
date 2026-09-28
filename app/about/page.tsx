@@ -25,7 +25,7 @@ export default function About() {
       // skills: ['Firebase', 'Node.js', 'GCP', 'NoSQL'],
     },
     {
-      name: "Jin",
+      name: "JIN",
       // role: 'Backend & Infrastructure Engineer',
       bio: "白鷺祭企画部部長",
       // skills: ['Firebase', 'Node.js', 'GCP', 'NoSQL'],
@@ -55,8 +55,8 @@ export default function About() {
             className="sectionText"
             style={{ fontSize: "16px", lineHeight: "1.8", color: "#4b5563" }}
           >
-            Albus. は、共に大学祭を作り上げてきたメンバーによって結成された、学祭実行委員会OBによるクリエイティブチームです。<br/>
-            自分たちが所属していた大学祭実行委員会をテクノロジーの力でサポートしたい。そんな強い重いから私たちの活動は始まりました。<br/><br/>
+            Albus. は、共に大学祭を作り上げてきたメンバーによって結成された、学祭実行委員会OBによるクリエイティブチームです。<br />
+            自分たちが所属していた大学祭実行委員会をテクノロジーの力でサポートしたい。そんな強い重いから私たちの活動は始まりました。<br /><br />
             グループ名である albus（アルバス）は、ラテン語で「白」を意味します。
             まだデジタル化の基盤が整っていない真っ白な状態から寄り添い、現場の課題にどこまでも向き合うこと。
             そして、大学祭実行委員会の可能性をともに広げていくパートナーであり続けること。それが私たちの目標です。
