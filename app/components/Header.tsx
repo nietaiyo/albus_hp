@@ -3,6 +3,15 @@
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import Logo from './Logo';
+
+const navItems = [
+  { name: 'Home', path: '/' },
+  { name: 'About', path: '/about' },
+  { name: 'Projects', path: '/projects' },
+  { name: 'News', path: '/news' },
+  { name: 'Contact', path: '/contact' },
+];
 
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
@@ -24,27 +33,12 @@ export default function Header() {
     };
   }, [isOpen]);
 
-  const navItems = [
-    { name: 'Home', path: '/' },
-    { name: 'About', path: '/about' },
-    { name: 'Projects', path: '/projects' },
-    { name: 'News', path: '/news' },
-    { name: 'Contact', path: '/contact' },
-  ];
-
   return (
     <>
       <header className="header">
         <div className="headerContainer">
           <Link href="/" className="logoLink">
-            <div className="logo" aria-label="Albus">
-              <span>A</span>
-              <span>l</span>
-              <span>b</span>
-              <span>u</span>
-              <span>s</span>
-              <span className="logoDot" aria-hidden="true">.</span>
-            </div>
+            <Logo />
           </Link>
 
           {/* デスクトップナビゲーション */}

@@ -108,11 +108,7 @@ export default function Home() {
           </section>
 
           {/* 私たちの想い / 挨拶 */}
-          <section
-            id="about"
-            className="section holoFadeIn"
-            style={{ borderTop: "1px solid #e2e8f0", paddingTop: "56px" }}
-          >
+          <section id="about" className="section greeting holoFadeIn">
             <p className="label">Greeting</p>
             <h2>各大学祭に寄り添ったサービスを</h2>
             <p className="sectionText">
@@ -123,25 +119,12 @@ export default function Home() {
           </section>
 
           {/* コンタクトへの誘い */}
-          <section
-            className="contact holoFadeIn"
-            style={{ marginBottom: "56px" }}
-          >
+          <section className="contact holoFadeIn">
             <div>
-              <p className="label" style={{ color: "#93c5fd" }}>
-                Join us / Talk to us
-              </p>
+              <p className="label">Join us / Talk to us</p>
               <h2>お気軽にお問い合わせください。</h2>
             </div>
-            <Link
-              className="primaryButton"
-              href="/contact"
-              style={{
-                background: "#ffffff",
-                color: "#2563eb",
-                boxShadow: "none",
-              }}
-            >
+            <Link className="primaryButton" href="/contact">
               お問い合わせ
             </Link>
           </section>
