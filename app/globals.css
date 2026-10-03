@@ -14,7 +14,13 @@ html {
 
 body {
   margin: 0;
-  font-family: Inter, "Noto Sans JP", system-ui, sans-serif;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  /* 英数字は next/font で読み込んだ Geist、和文は OS 標準のゴシックで揃える */
+  font-family: var(--font-geist-sans), "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Noto Sans JP", "Yu Gothic", Meiryo, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
   color: #111827;
   background-color: #f8fbff;
   background-image:
@@ -144,7 +150,8 @@ a {
 
 h1 {
   margin: 0 0 24px;
-  font-size: clamp(48px, 7.5vw, 100px);
+  /* 最長行「テクノロジーで」(7文字) が2カラムの左列に収まる大きさ */
+  font-size: clamp(36px, 6.2vw, 96px);
   line-height: 1.15;
   letter-spacing: -0.02em;
   color: #0f172a;
@@ -163,6 +170,23 @@ h2 {
 h3 {
   margin: 18px 0 10px;
   font-size: 22px;
+}
+
+/* --- Text Scramble (ヒーロー見出し) --- */
+.scramble {
+  position: relative;
+  display: block;
+}
+
+.scrambleHidden {
+  opacity: 0;
+}
+
+.scrambleOverlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  white-space: nowrap;
 }
 
 .description,
@@ -217,7 +241,7 @@ h3 {
   backdrop-filter: blur(12px);
   box-shadow: 0 20px 50px rgba(15, 23, 42, 0.04);
   overflow: hidden;
-  font-family: "SFMono-Regular", Consolas, Menlo, monospace;
+  font-family: var(--font-geist-mono), "SFMono-Regular", Consolas, Menlo, monospace;
   width: 100%;
   transition: all 0.3s ease;
 }
@@ -252,7 +276,7 @@ h3 {
 
 .consoleTitle {
   font-size: 11px;
-  color: #94a3b8;
+  color: #64748b;
   margin-left: 8px;
   font-weight: 600;
   letter-spacing: 0.05em;
@@ -276,6 +300,7 @@ h3 {
 
 .lineNum {
   width: 24px;
+  flex-shrink: 0;
   color: #94a3b8;
   opacity: 0.5;
   -webkit-user-select: none;
@@ -302,6 +327,12 @@ h3 {
   animation: consoleCursorBlink 0.8s step-end infinite;
 }
 
+/* 未入力部分：場所だけ確保して見せない */
+.consoleGhost,
+.consoleLinePending .lineNum {
+  visibility: hidden;
+}
+
 .outputLine .lineContent {
   color: #2563eb;
   font-weight: 700;
@@ -309,7 +340,7 @@ h3 {
 }
 
 .codeKeyGreen {
-  color: #10b981;
+  color: #047857;
   font-weight: 600;
 }
 
@@ -402,22 +433,6 @@ h3 {
   box-shadow: 0 8px 20px rgba(37, 99, 235, 0.08), 0 0 12px rgba(37, 99, 235, 0.15);
 }
 
-/* ヒーローセクション内のアクションボタン調整 */
-.hero .primaryButton {
-  color: #1e40af;
-  border: 1px solid #bfdbfe;
-  background: white;
-  box-shadow: none;
-}
-
-.hero .primaryButton:hover,
-.hero .secondaryButton:hover {
-  background: #2563eb;
-  color: white;
-  border-color: #2563eb;
-  box-shadow: 0 12px 24px rgba(37, 99, 235, 0.3), 0 0 20px rgba(37, 99, 235, 0.4);
-}
-
 .section {
   max-width: 1600px;
   width: 92%;
@@ -495,6 +510,11 @@ h3 {
   .heroContainerWide {
     grid-template-columns: 1fr;
     gap: 32px;
+  }
+
+  /* 1カラム時：最長行がスマホ幅 (320px〜) でも改行されない大きさ */
+  h1 {
+    font-size: clamp(32px, 9vw, 64px);
   }
 
   .cards {
@@ -579,7 +599,22 @@ h3 {
   }
 }
 
+html.introSeen .introOverlay {
+  display: none;
+}
+
 @media (prefers-reduced-motion: reduce) {
+  .holoFadeIn,
+  .holoFadeIn.active {
+    opacity: 1;
+    transform: none;
+    animation: none;
+  }
+
+  .consoleCursor {
+    animation: none;
+  }
+
   .introOverlay {
     animation: introOverlayOut 0.2s ease 0.4s forwards;
   }
@@ -714,7 +749,8 @@ h3 {
   background-color: rgba(248, 251, 255, 0.98);
   -webkit-backdrop-filter: blur(16px);
   backdrop-filter: blur(16px);
-  z-index: 55;
+  /* ヘッダー (z-index: 50) の下に敷き、閉じるボタンを押せるようにする */
+  z-index: 45;
   display: flex;
   align-items: center;
   justify-content: center;

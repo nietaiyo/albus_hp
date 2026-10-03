@@ -14,6 +14,9 @@ export default function MouseSpotlight() {
   const [cells, setCells] = useState<GridCell[]>([]);
 
   useEffect(() => {
+    // 動きを減らす設定のときはエフェクト自体を出さない
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
     let lastGridX = -1;
     let lastGridY = -1;
 
