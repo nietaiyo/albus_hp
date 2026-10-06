@@ -36,25 +36,16 @@ export default function About() {
 
   return (
     <div className="site">
-      <div style={{ maxWidth: "800px", margin: "48px auto" }}>
+      <div className="pageContainer">
         {/* ビジョン */}
-        <section style={{ marginBottom: "64px" }}>
+        <section className="aboutSection">
           <p className="label">Vision</p>
-          <h1
-            style={{
-              fontSize: "36px",
-              marginBottom: "24px",
-              lineHeight: "1.3",
-            }}
-          >
+          <h1 className="pageTitle aboutTitle">
             テクノロジーで、
             <br />
             大学祭をさらなる高みへ。
           </h1>
-          <p
-            className="sectionText"
-            style={{ fontSize: "16px", lineHeight: "1.8", color: "#4b5563" }}
-          >
+          <p className="sectionText pageText">
             Albus. は、共に大学祭を作り上げてきたメンバーによって結成された、学祭実行委員会OBによるクリエイティブチームです。<br />
             自分たちが所属していた大学祭実行委員会をテクノロジーの力でサポートしたい。そんな強い重いから私たちの活動は始まりました。<br /><br />
             グループ名である albus（アルバス）は、ラテン語で「白」を意味します。
@@ -64,60 +55,19 @@ export default function About() {
         </section>
 
         {/* メンバー紹介 */}
-        <section
-          style={{
-            marginBottom: "64px",
-            borderTop: "1px solid #e2e8f0",
-            paddingTop: "48px",
-          }}
-        >
+        <section className="aboutSection pageSectionDivided">
           <p className="label">Team Members</p>
-          <h2 style={{ fontSize: "28px", marginBottom: "32px" }}>
-            メンバー
-          </h2>
-          <div
-            style={{ display: "flex", flexDirection: "column", gap: "32px" }}
-          >
+          <h2 className="pageHeading aboutMembersHeading">メンバー</h2>
+          <div className="cardList">
             {members.map((member, idx) => (
-              <div
-                key={idx}
-                style={{
-                  background: "#ffffff",
-                  border: "1px solid #e2e8f0",
-                  borderRadius: "12px",
-                  padding: "24px",
-                  display: "flex",
-                  flexDirection: "column",
-                  gap: "12px",
-                  boxShadow: "0 4px 6px -1px rgba(0, 0, 0, 0.05)",
-                }}
-              >
-                <div
-                  style={{
-                    display: "flex",
-                    justifyContent: "space-between",
-                    alignItems: "baseline",
-                    flexWrap: "wrap",
-                    gap: "8px",
-                  }}
-                >
-                  <h3 style={{ margin: 0, fontSize: "20px", color: "#0f172a" }}>
-                    {member.name}
-                  </h3>
+              <div key={idx} className="panel memberCard">
+                <div className="memberCardHeader">
+                  <h3 className="memberName">{member.name}</h3>
                   {/* <span style={{ fontSize: '13px', fontWeight: 'bold', color: '#2563eb', background: '#eff6ff', padding: '4px 10px', borderRadius: '999px' }}>
                     {member.role}
                   </span> */}
                 </div>
-                <p
-                  style={{
-                    margin: 0,
-                    fontSize: "15px",
-                    color: "#4b5563",
-                    lineHeight: "1.6",
-                  }}
-                >
-                  {member.bio}
-                </p>
+                <p className="memberBio">{member.bio}</p>
                 {/* <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap', marginTop: '4px' }}>
                   {member.skills.map((skill, sIdx) => (
                     <span key={sIdx} style={{ fontSize: '12px', color: '#64748b', background: '#f1f5f9', padding: '2px 8px', borderRadius: '4px' }}>

@@ -2,6 +2,15 @@
 
 import { useState } from 'react';
 
+function FormField({ id, label, children }: { id: string; label: string; children: React.ReactNode }) {
+  return (
+    <div className="formField">
+      <label htmlFor={id} className="formLabel">{label}</label>
+      {children}
+    </div>
+  );
+}
+
 export default function Contact() {
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -16,93 +25,55 @@ export default function Contact() {
     }, 1000);
   };
 
-  const resetForm = () => {
-    setSubmitted(false);
-  };
-
   return (
     <div className="site">
-      <div style={{ maxWidth: '600px', margin: '48px auto' }}>
+      <div className="pageContainer pageContainerNarrow">
         <p className="label">Contact us</p>
-        <h1 style={{ fontSize: '36px', marginBottom: '24px' }}>お問い合わせ</h1>
-        <p className="sectionText" style={{ color: '#4b5563', marginBottom: '32px' }}>
+        <h1 className="pageTitle">お問い合わせ</h1>
+        <p className="sectionText pageText contactLead">
           Albusへのご意見やご感想、コラボレーションのご提案などは以下のフォームよりお送りください。
           提供済みのサービスに関するお問い合わせや修正依頼は各サービスのお問い合わせフォームをご利用ください。
         </p>
 
         {submitted ? (
-          <div
-            style={{
-              background: '#eff6ff',
-              border: '1px solid #bfdbfe',
-              borderRadius: '12px',
-              padding: '32px',
-              textAlign: 'center',
-              boxShadow: '0 4px 12px rgba(37, 99, 235, 0.05)',
-            }}
-          >
-            <div style={{ fontSize: '48px', marginBottom: '16px' }}>🎉</div>
-            <h3 style={{ color: '#1e3a8a', fontSize: '20px', margin: '0 0 8px 0' }}>送信が完了しました！</h3>
-            <p style={{ color: '#4b5563', fontSize: '14px', lineHeight: '1.6', margin: '0 0 24px 0' }}>
+          <div className="contactDone">
+            <div className="contactDoneIcon">🎉</div>
+            <h3 className="contactDoneTitle">送信が完了しました！</h3>
+            <p className="contactDoneText">
               メッセージをお送りいただきありがとうございます。<br />
               内容を確認のうえ、必要に応じてメンバーよりご連絡いたします。
             </p>
-            <button
-              onClick={resetForm}
-              className="secondaryButton"
-              style={{ padding: '0 24px' }}
-            >
+            <button onClick={() => setSubmitted(false)} className="secondaryButton contactResetButton">
               もう一度送る
             </button>
           </div>
         ) : (
-          <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
-            <>
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
-                <label htmlFor="name" style={{ fontSize: '14px', fontWeight: 'bold', color: '#374151' }}>お名前</label>
-                <input
-                  type="text"
-                  id="name"
-                  required
-                  placeholder="山田 太郎"
-                  style={{ padding: '10px 14px', borderRadius: '6px', border: '1px solid #d1d5db', fontSize: '14px', outline: 'none' }}
-                />
-              </div>
+          <form onSubmit={handleSubmit} className="contactForm">
+            <FormField id="name" label="お名前">
+              <input type="text" id="name" required placeholder="山田 太郎" className="formControl" />
+            </FormField>
 
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
-                <label htmlFor="email" style={{ fontSize: '14px', fontWeight: 'bold', color: '#374151' }}>メールアドレス</label>
-                <input
-                  type="email"
-                  id="email"
-                  required
-                  placeholder="example@edu.osakafu-u.ac.jp"
-                  style={{ padding: '10px 14px', borderRadius: '6px', border: '1px solid #d1d5db', fontSize: '14px', outline: 'none' }}
-                />
-              </div>
+            <FormField id="email" label="メールアドレス">
+              <input
+                type="email"
+                id="email"
+                required
+                placeholder="example@edu.osakafu-u.ac.jp"
+                className="formControl"
+              />
+            </FormField>
 
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
-                <label htmlFor="message" style={{ fontSize: '14px', fontWeight: 'bold', color: '#374151' }}>お問い合わせ内容</label>
-                <textarea
-                  id="message"
-                  required
-                  rows={6}
-                  placeholder="お問い合わせ内容をご記入ください。"
-                  style={{ padding: '10px 14px', borderRadius: '6px', border: '1px solid #d1d5db', fontSize: '14px', outline: 'none', resize: 'vertical' }}
-                />
-              </div>
-            </>
+            <FormField id="message" label="お問い合わせ内容">
+              <textarea
+                id="message"
+                required
+                rows={6}
+                placeholder="お問い合わせ内容をご記入ください。"
+                className="formControl"
+              />
+            </FormField>
 
-            <button
-              type="submit"
-              disabled={loading}
-              className="primaryButton"
-              style={{
-                width: '100%',
-                marginTop: '12px',
-                cursor: loading ? 'not-allowed' : 'pointer',
-                opacity: loading ? 0.7 : 1,
-              }}
-            >
+            <button type="submit" disabled={loading} className="primaryButton contactSubmit">
               {loading ? '送信中...' : '送信する'}
             </button>
           </form>

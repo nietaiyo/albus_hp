@@ -1,28 +1,51 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useLayoutEffect } from 'react';
 import Link from 'next/link';
 import TextScramble from './components/TextScramble';
 import CodeConsole from './components/CodeConsole';
 
+const INTRO_KEY = 'hasSeenAlbusIntro';
+
 export default function Home() {
-  const [showIntro, setShowIntro] = useState(false);
-  const [isFirstAccess, setIsFirstAccess] = useState(false);
+  // イントロはサーバー描画時点から出しておき、表示済みなら layout の
+  // インラインスクリプトが付ける html.introSeen で描画前に隠す（一瞬ページが見えるのを防ぐ）
+  const [showIntro, setShowIntro] = useState(true);
+  // ヒーローのアニメーションを開始してよいか（イントロ終了後）
+  const [heroStart, setHeroStart] = useState(false);
 
-  useEffect(() => {
-    // セッション中に一度だけ表示する制御
-    const hasSeenIntro = sessionStorage.getItem('hasSeenAlbusIntro');
-    if (!hasSeenIntro) {
-      setShowIntro(true);
-      setIsFirstAccess(true);
-      sessionStorage.setItem('hasSeenAlbusIntro', 'true');
+  // 描画前に判定し、表示済みのときにイントロが一瞬出るのを防ぐ
+  useLayoutEffect(() => {
+    const finish = () => {
+      document.documentElement.classList.add('introSeen');
+      setShowIntro(false);
+      setHeroStart(true);
+    };
 
-      // アニメーション完了（3.2秒 + フェードアウト0.4秒）した後にDOMから削除
-      const timer = setTimeout(() => {
-        setShowIntro(false);
-      }, 3600);
-      return () => clearTimeout(timer);
+    // アニメーション完了（3.2秒 + フェードアウト0.4秒）した後にDOMから削除
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const duration = reduceMotion ? 600 : 3600;
+
+    // セッション中に一度だけ表示する。開始時刻を保存しておくことで、
+    // 開発モードの effect 二重実行でもイントロが途中で消えないようにする
+    let startedAt = Date.now();
+    try {
+      const saved = Number(sessionStorage.getItem(INTRO_KEY));
+      if (saved > 0) startedAt = saved;
+      else sessionStorage.setItem(INTRO_KEY, String(startedAt));
+    } catch {
+      // ストレージが使えない環境では毎回イントロを出す
     }
+
+    const remaining = duration - (Date.now() - startedAt);
+    // introSeen が既にある＝ layout のスクリプトでイントロを隠し済み（イントロ途中での再読み込みを含む）
+    if (remaining <= 0 || document.documentElement.classList.contains('introSeen')) {
+      finish();
+      return;
+    }
+
+    const timer = setTimeout(finish, remaining);
+    return () => clearTimeout(timer);
   }, []);
 
   // スクロール時のホログラムフェードイン監視
@@ -46,8 +69,6 @@ export default function Home() {
     };
   }, []);
 
-  const baseDelay = isFirstAccess ? 3600 : 0;
-
   return (
     <>
       {showIntro && (
@@ -65,18 +86,9 @@ export default function Home() {
               <div className="heroText">
                 <p className="label">University Festival by Technology</p>
                 <h1>
-                  <span style={{ display: "inline-block" }}>
-                    <TextScramble text="大学祭は" delay={baseDelay + 100} />
-                  </span>
-                  <span style={{ display: "inline-block" }}>
-                    <TextScramble
-                      text="テクノロジーで"
-                      delay={baseDelay + 1300}
-                    />
-                  </span>
-                  <span style={{ display: "inline-block" }}>
-                    <TextScramble text="進化する" delay={baseDelay + 2500} />
-                  </span>
+                  <TextScramble text="大学祭は" start={heroStart} delay={100} />
+                  <TextScramble text="テクノロジーで" start={heroStart} delay={700} />
+                  <TextScramble text="進化する" start={heroStart} delay={1300} />
                 </h1>
                 <p className="description">
                   Albus. は大学祭実行委員会向けのサービスを開発しています
@@ -91,16 +103,12 @@ export default function Home() {
                 </div>
               </div>
 
-              <CodeConsole />
+              <CodeConsole start={heroStart} />
             </div>
           </section>
 
           {/* 私たちの想い / 挨拶 */}
-          <section
-            id="about"
-            className="section holoFadeIn"
-            style={{ borderTop: "1px solid #e2e8f0", paddingTop: "56px" }}
-          >
+          <section id="about" className="section greeting holoFadeIn">
             <p className="label">Greeting</p>
             <h2>各大学祭に寄り添ったサービスを</h2>
             <p className="sectionText">
@@ -111,25 +119,12 @@ export default function Home() {
           </section>
 
           {/* コンタクトへの誘い */}
-          <section
-            className="contact holoFadeIn"
-            style={{ marginBottom: "56px" }}
-          >
+          <section className="contact holoFadeIn">
             <div>
-              <p className="label" style={{ color: "#93c5fd" }}>
-                Join us / Talk to us
-              </p>
+              <p className="label">Join us / Talk to us</p>
               <h2>お気軽にお問い合わせください。</h2>
             </div>
-            <Link
-              className="primaryButton"
-              href="/contact"
-              style={{
-                background: "#ffffff",
-                color: "#2563eb",
-                boxShadow: "none",
-              }}
-            >
+            <Link className="primaryButton" href="/contact">
               お問い合わせ
             </Link>
           </section>

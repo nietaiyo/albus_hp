@@ -2,6 +2,12 @@
 
 import { useEffect, useState } from 'react';
 
+// 背景グリッド1マスの大きさ（globals.css の body background-size と合わせる）
+const GRID_SIZE = 40;
+
+// 直近に被ったマスほど濃く（インデックス 0 が最古、4 が最新）
+const CELL_OPACITIES = [0.02, 0.04, 0.07, 0.11, 0.18];
+
 interface GridCell {
   x: number;
   y: number;
@@ -14,6 +20,9 @@ export default function MouseSpotlight() {
   const [cells, setCells] = useState<GridCell[]>([]);
 
   useEffect(() => {
+    // 動きを減らす設定のときはエフェクト自体を出さない
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
     let lastGridX = -1;
     let lastGridY = -1;
 
@@ -23,8 +32,8 @@ export default function MouseSpotlight() {
       setIsVisible(true);
 
       // グリッドセルの位置計算 (Document基準。スクロール量を含む)
-      const gridX = Math.floor(e.pageX / 40);
-      const gridY = Math.floor(e.pageY / 40);
+      const gridX = Math.floor(e.pageX / GRID_SIZE);
+      const gridY = Math.floor(e.pageY / GRID_SIZE);
 
       // 境界値チェック
       if (gridX < 0 || gridY < 0) return;
@@ -35,15 +44,15 @@ export default function MouseSpotlight() {
         lastGridY = gridY;
 
         const newCell: GridCell = {
-          x: gridX * 40,
-          y: gridY * 40,
+          x: gridX * GRID_SIZE,
+          y: gridY * GRID_SIZE,
           key: `${gridX}-${gridY}-${Math.random()}`
         };
 
         setCells((prev) => {
           const next = [...prev, newCell];
-          // 6マス目に入ったときに1マス目を消し、常に最大5マスにする
-          if (next.length > 5) {
+          // 新しいマスに入ったら最古のマスを消し、常に最大 CELL_OPACITIES.length マスにする
+          if (next.length > CELL_OPACITIES.length) {
             next.shift();
           }
           return next;
@@ -78,37 +87,18 @@ export default function MouseSpotlight() {
       )}
 
       {/* マウスが被ったグリッドセルのハイライト */}
-      <div
-        style={{
-          position: 'absolute',
-          top: 0,
-          left: 0,
-          width: '100%',
-          height: '100%',
-          pointerEvents: 'none',
-          zIndex: -1,
-          overflow: 'hidden',
-        }}
-      >
+      <div className="spotlightGrid">
         {cells.map((cell, idx) => {
-          // 直近に被ったやつが一番濃く（opacityが大きく）、一番古いやつは消えかけにする
-          // インデックス 0 (最古) -> opacity 0.02
-          // インデックス 4 (最新) -> opacity 0.18
-          const opacities = [0.02, 0.04, 0.07, 0.11, 0.18];
-          const opacityIndex = idx + (5 - cells.length);
-          const opacity = opacities[opacityIndex] || 0.02;
+          const opacity = CELL_OPACITIES[idx + (CELL_OPACITIES.length - cells.length)];
 
           return (
             <div
               key={cell.key}
+              className="spotlightCell"
               style={{
-                position: 'absolute',
                 left: `${cell.x}px`,
                 top: `${cell.y}px`,
-                width: '40px',
-                height: '40px',
                 backgroundColor: `rgba(37, 99, 235, ${opacity})`,
-                transition: 'background-color 0.3s ease, opacity 0.3s ease',
               }}
             />
           );
