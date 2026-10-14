@@ -1,12 +1,7 @@
 import type { Metadata } from 'next';
 
-// 本番URL。NEXT_PUBLIC_SITE_URL（独自ドメイン）を優先し、未設定なら Vercel の本番ドメインを使う
-export const SITE_URL = (
-  process.env.NEXT_PUBLIC_SITE_URL ??
-  (process.env.VERCEL_PROJECT_PRODUCTION_URL
-    ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`
-    : 'http://localhost:3000')
-).replace(/\/$/, '');
+// 本番URL（canonical・sitemap・OGP の基準）。ドメインを変えるときは NEXT_PUBLIC_SITE_URL で上書きできる
+export const SITE_URL = (process.env.NEXT_PUBLIC_SITE_URL ?? 'https://albus-tech.org').replace(/\/$/, '');
 
 export const SITE_NAME = 'Albus.';
 
