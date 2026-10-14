@@ -1,3 +1,12 @@
+import { pageMetadata } from '../lib/site';
+
+export const metadata = pageMetadata({
+  title: 'プロジェクト',
+  description:
+    'Albus. が開発する大学祭向けサービスの一覧。白鷺祭の用語・マップを網羅した「白鷺祭用語集」や、開発中の落とし物サイトを紹介します。',
+  path: '/projects',
+});
+
 export default function Projects() {
   return (
     <div className="site">

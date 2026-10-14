@@ -1,3 +1,12 @@
+import { pageMetadata } from '../lib/site';
+
+export const metadata = pageMetadata({
+  title: '私たちについて',
+  description:
+    'Albus.（アルバス）は、大学祭実行委員会OBによるクリエイティブチームです。テクノロジーで大学祭をさらなる高みへ。ビジョンとメンバーを紹介します。',
+  path: '/about',
+});
+
 export default function About() {
   const members = [
     {
