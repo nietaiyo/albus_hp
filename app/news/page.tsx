@@ -1,3 +1,12 @@
+import { pageMetadata } from '../lib/site';
+
+export const metadata = pageMetadata({
+  title: '活動報告',
+  description:
+    'Albus. の活動報告・お知らせ。サービスのリリース情報や活動の様子をお届けします。',
+  path: '/news',
+});
+
 // カテゴリごとのバッジ色（未定義のカテゴリは紫）
 const categoryClass: Record<string, string> = {
   Update: 'newsBadgeUpdate',
