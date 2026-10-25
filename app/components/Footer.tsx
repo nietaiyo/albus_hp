@@ -1,18 +1,12 @@
 import Link from 'next/link';
+import Logo from './Logo';
 
 export default function Footer() {
   return (
     <footer className="footer">
       <div className="footerContainer">
         <div className="footerBrand">
-          <div className="logo" aria-label="Albus">
-            <span>A</span>
-            <span>l</span>
-            <span>b</span>
-            <span>u</span>
-            <span>s</span>
-            <span className="logoDot" aria-hidden="true">.</span>
-          </div>
+          <Logo />
           <p className="footerSlogan">
             大学祭はテクノロジーで進化する
           </p>
