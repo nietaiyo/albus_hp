@@ -989,7 +989,8 @@ html[data-theme='dark'] .themeIconMoon {
 .footer {
   background-color: var(--footer-bg);
   color: #94a3b8;
-  padding: 64px 20px 32px;
+  /* 左右の余白は本文（.site）とそろえる */
+  padding: 64px 28px 32px;
   border-top: 1px solid #1e293b;
 }
 
