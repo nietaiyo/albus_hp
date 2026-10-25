@@ -5,14 +5,17 @@ export const SITE_URL = (process.env.NEXT_PUBLIC_SITE_URL ?? 'https://albus-tech
 
 export const SITE_NAME = 'Albus.';
 
-export const DEFAULT_TITLE = 'Albus.（アルバス）| 大学祭の運営に、新しいあたりまえを。';
+// メインキャッチコピー（構造化データの slogan にも使う）
+export const SITE_SLOGAN = '大学祭の運営に、新しいあたりまえを。';
+
+export const DEFAULT_TITLE = `Albus.（アルバス）| ${SITE_SLOGAN}`;
 
 // SNS・検索結果で共有されるときの画像（public/Albus-OGP.png）
 export const OG_IMAGE = {
   url: '/Albus-OGP.png',
   width: 1672,
   height: 941,
-  alt: 'Albus. 大学祭の運営に、新しいあたりまえを。',
+  alt: `Albus. ${SITE_SLOGAN}`,
 };
 
 export const SITE_DESCRIPTION =
