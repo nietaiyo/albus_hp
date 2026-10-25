@@ -1,6 +1,12 @@
 'use client';
 
 import { useState } from 'react';
+// 臨時対応(yuiki.dev誘導)：フォームが直ったらこの import を削除する
+import TemporaryContactNotice from '../components/TemporaryContactNotice';
+
+// 臨時対応(yuiki.dev誘導)：メールが届かない間はフォームを隠し、yuiki.dev へ案内する。
+// フォームが直ったら、この定数と下の分岐を削除する
+const SHOW_TEMPORARY_CONTACT_NOTICE = true;
 
 function FormField({ id, label, children }: { id: string; label: string; children: React.ReactNode }) {
   return (
@@ -52,7 +58,10 @@ export default function Contact() {
           提供済みのサービスに関するお問い合わせや修正依頼は各サービスのお問い合わせフォームをご利用ください。
         </p>
 
-        {submitted ? (
+        {/* 臨時対応(yuiki.dev誘導)：フォームが直ったら、この分岐ごと削除して下の表示だけ残す */}
+        {SHOW_TEMPORARY_CONTACT_NOTICE ? (
+          <TemporaryContactNotice />
+        ) : submitted ? (
           <div className="contactDone">
             <div className="contactDoneIcon">🎉</div>
             <h3 className="contactDoneTitle">送信が完了しました！</h3>

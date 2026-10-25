@@ -1262,6 +1262,31 @@ textarea.formControl {
   padding: 0 24px;
 }
 
+/* 臨時対応(yuiki.dev誘導)：TemporaryContactNotice 用。フォームが直ったらこのブロックごと削除する */
+.temporaryContactNotice {
+  padding: 32px;
+  border: 1px solid var(--notice-border);
+  border-radius: 12px;
+  background: var(--notice-bg);
+  box-shadow: var(--notice-shadow);
+  text-align: center;
+}
+
+.temporaryContactNoticeTitle {
+  margin: 0 0 8px;
+  color: var(--notice-title);
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.temporaryContactNoticeText {
+  margin: 0 0 24px;
+  color: var(--color-text-body);
+  font-size: 14px;
+  line-height: 1.7;
+}
+/* 臨時対応(yuiki.dev誘導) ここまで */
+
 /* --- Responsive Adjustments --- */
 @media (max-width: 768px) {
   .headerContainer {
