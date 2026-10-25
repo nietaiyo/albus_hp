@@ -57,15 +57,16 @@ export default function Projects() {
   return (
     <div className="site">
       <div className="pageContainer pageContainerWide">
-        <p className="label">Projects</p>
-        <h1 className="pageTitle">プロジェクト</h1>
-        <p className="sectionText pageText projectLead">
-          現場で感じてきた不便や手間を出発点に、実行委員と来場者の双方が使いやすいサービスをつくっています。
+        <p className="label reveal">Projects</p>
+        <h1 className="pageTitle reveal">プロジェクト</h1>
+        <p className="sectionText pageText projectLead reveal">
+          <span className="phrase">現場で感じてきた不便や手間を出発点に、</span>
+          <span className="phrase">実行委員と来場者の双方が使いやすいサービスをつくっています。</span>
         </p>
 
         <div className="projectGrid">
           {projects.map((project) => (
-            <article key={project.title} className="panel projectCard">
+            <article key={project.title} className="panel projectCard reveal">
               <div className="projectMeta">
                 <span className={`projectStatus projectStatus-${project.status}`}>
                   {statusLabel[project.status]}
@@ -89,7 +90,7 @@ export default function Projects() {
             </article>
           ))}
 
-          <div className="projectCard projectCardNext">
+          <div className="projectCard projectCardNext reveal">
             <p className="label">Next</p>
             <h2 className="projectCardTitle">
               次のプロジェクトを<wbr />準備中です

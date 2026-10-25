@@ -51,78 +51,80 @@ export default function Contact() {
   return (
     <div className="site">
       <div className="pageContainer pageContainerNarrow">
-        <p className="label">Contact us</p>
-        <h1 className="pageTitle">お問い合わせ</h1>
-        <p className="sectionText pageText contactLead">
+        <p className="label reveal">Contact us</p>
+        <h1 className="pageTitle reveal">お問い合わせ</h1>
+        <p className="sectionText pageText contactLead reveal">
           {'大学祭の運営で困っていることや気になっていることがあれば、お気軽にご相談ください。「まだ具体的に決まっていない」という段階でも大丈夫です。提供中のサービスの不具合や修正のご依頼は、各サービスのお問い合わせ窓口をご利用ください。'}
         </p>
 
-        {/* 臨時対応(yuiki.dev誘導)：フォームが直ったら、この分岐ごと削除して下の表示だけ残す */}
-        {SHOW_TEMPORARY_CONTACT_NOTICE ? (
-          <TemporaryContactNotice />
-        ) : submitted ? (
-          <div className="contactDone">
-            <div className="contactDoneIcon">🎉</div>
-            <h3 className="contactDoneTitle">送信が完了しました</h3>
-            <p className="contactDoneText">
-              ご連絡いただきありがとうございます。<br />
-              内容を確認のうえ、メンバーからご連絡いたします。
-            </p>
-            <button onClick={() => setSubmitted(false)} className="secondaryButton contactResetButton">
-              もう一度送る
-            </button>
-          </div>
-        ) : (
-          <form onSubmit={handleSubmit} className="contactForm">
-            <FormField id="name" label="お名前">
-              <input
-                type="text"
-                id="name"
-                name="name"
-                required
-                maxLength={100}
-                autoComplete="name"
-                placeholder="山田 太郎"
-                className="formControl"
-              />
-            </FormField>
-
-            <FormField id="email" label="メールアドレス">
-              <input
-                type="email"
-                id="email"
-                name="email"
-                required
-                maxLength={254}
-                autoComplete="email"
-                placeholder="example@example.com"
-                className="formControl"
-              />
-            </FormField>
-
-            <FormField id="message" label="お問い合わせ内容">
-              <textarea
-                id="message"
-                name="message"
-                required
-                maxLength={5000}
-                rows={6}
-                placeholder="ご相談内容をご自由にお書きください。"
-                className="formControl"
-              />
-            </FormField>
-
-            <button type="submit" disabled={loading} className="primaryButton contactSubmit">
-              {loading ? '送信中...' : '送信する'}
-            </button>
-
-            {error && (
-              <p role="alert" className="contactError">
-                {error}
+        <div className="reveal">
+          {/* 臨時対応(yuiki.dev誘導)：フォームが直ったら、この分岐ごと削除して下の表示だけ残す */}
+          {SHOW_TEMPORARY_CONTACT_NOTICE ? (
+            <TemporaryContactNotice />
+          ) : submitted ? (
+            <div className="contactDone">
+              <div className="contactDoneIcon">🎉</div>
+              <h3 className="contactDoneTitle">送信が完了しました</h3>
+              <p className="contactDoneText">
+                ご連絡いただきありがとうございます。<br />
+                内容を確認のうえ、メンバーからご連絡いたします。
               </p>
-            )}
-          </form>
-        )}
+              <button onClick={() => setSubmitted(false)} className="secondaryButton contactResetButton">
+                もう一度送る
+              </button>
+            </div>
+          ) : (
+            <form onSubmit={handleSubmit} className="contactForm">
+              <FormField id="name" label="お名前">
+                <input
+                  type="text"
+                  id="name"
+                  name="name"
+                  required
+                  maxLength={100}
+                  autoComplete="name"
+                  placeholder="山田 太郎"
+                  className="formControl"
+                />
+              </FormField>
+
+              <FormField id="email" label="メールアドレス">
+                <input
+                  type="email"
+                  id="email"
+                  name="email"
+                  required
+                  maxLength={254}
+                  autoComplete="email"
+                  placeholder="example@example.com"
+                  className="formControl"
+                />
+              </FormField>
+
+              <FormField id="message" label="お問い合わせ内容">
+                <textarea
+                  id="message"
+                  name="message"
+                  required
+                  maxLength={5000}
+                  rows={6}
+                  placeholder="ご相談内容をご自由にお書きください。"
+                  className="formControl"
+                />
+              </FormField>
+
+              <button type="submit" disabled={loading} className="primaryButton contactSubmit">
+                {loading ? '送信中...' : '送信する'}
+              </button>
+
+              {error && (
+                <p role="alert" className="contactError">
+                  {error}
+                </p>
+              )}
+            </form>
+          )}
+        </div>
       </div>
     </div>
   );

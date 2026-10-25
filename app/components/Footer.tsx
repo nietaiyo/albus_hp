@@ -18,6 +18,7 @@ export default function Footer() {
             <Link href="/about">チームについて</Link>
             <Link href="/projects">プロジェクト</Link>
             <Link href="/news">活動報告</Link>
+            <Link href="/recruit">メンバー募集</Link>
             <Link href="/contact">お問い合わせ</Link>
           </div>
 

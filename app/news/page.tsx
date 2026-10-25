@@ -39,12 +39,12 @@ export default function News() {
   return (
     <div className="site">
       <div className="pageContainer">
-        <p className="label">News</p>
-        <h1 className="pageTitle newsTitle">活動報告</h1>
+        <p className="label reveal">News</p>
+        <h1 className="pageTitle newsTitle reveal">活動報告</h1>
 
         <div className="cardList">
           {newsList.map((item, idx) => (
-            <article key={idx} className="panel newsCard">
+            <article key={idx} className="panel newsCard reveal">
               <div className="newsMeta">
                 <span className="newsDate">{item.date}</span>
                 <span className={`newsBadge ${categoryClass[item.category] ?? ''}`}>

@@ -22,7 +22,8 @@
   --secondary-text: #1e40af;
   --secondary-border: #bfdbfe;
   --secondary-bg: #ffffff;
-  --secondary-hover-bg: rgba(37, 99, 235, 0.02);
+  /* 背景のマウス追従エフェクトが透けないよう、ホバー時も不透明な色にする */
+  --secondary-hover-bg: #eff6ff;
 
   /* コードコンソール */
   --console-border: rgba(37, 99, 235, 0.15);
@@ -104,7 +105,7 @@ html[data-theme='dark'] {
   --secondary-text: #bfdbfe;
   --secondary-border: #1e3a8a;
   --secondary-bg: #0f172a;
-  --secondary-hover-bg: rgba(96, 165, 250, 0.08);
+  --secondary-hover-bg: #13213d;
 
   --console-border: rgba(96, 165, 250, 0.2);
   --console-bg: rgba(15, 23, 42, 0.75);
@@ -290,6 +291,12 @@ h3 {
   top: 0;
   left: 0;
   white-space: nowrap;
+}
+
+/* 文の途中で改行させたくないかたまりを囲む。1 行に入りきらないときは、かたまりごと次の行に送る
+   （かたまり自体が画面幅より長いときは、その中で折り返す） */
+.phrase {
+  display: inline-block;
 }
 
 .description,
@@ -509,6 +516,45 @@ h3 {
   width: 40px;
   height: 40px;
   transition: background-color 0.3s ease, opacity 0.3s ease;
+}
+
+/* --- Page Transition（ページ遷移） ---
+   app/template.tsx の <ViewTransition> が付けるクラス。前のページは素早く消し、次のページは少し下から浮かび上がらせる */
+::view-transition-old(.pageExit) {
+  animation: 160ms ease-in both pageExit;
+}
+
+::view-transition-new(.pageEnter) {
+  animation: 360ms cubic-bezier(0.25, 1, 0.5, 1) 120ms both pageEnter;
+}
+
+@keyframes pageExit {
+  to {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+}
+
+@keyframes pageEnter {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+}
+
+/* --- Reveal（下層ページの文章・カードのフェードイン） ---
+   .reveal を付けた要素が画面に入ると、ScrollReveal が .isVisible を付ける */
+.reveal {
+  opacity: 0;
+  transform: translateY(16px);
+  transition:
+    opacity 0.6s ease,
+    transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.reveal.isVisible {
+  opacity: 1;
+  transform: none;
 }
 
 /* --- Hologram Fade In (スクロールアニメーション) --- */
@@ -743,6 +789,19 @@ html.introSeen .introOverlay {
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+
+  ::view-transition-old(*),
+  ::view-transition-new(*),
+  ::view-transition-group(*) {
+    animation-duration: 0s !important;
+    animation-delay: 0s !important;
+  }
+
   .holoFadeIn,
   .holoFadeIn.active {
     opacity: 1;
@@ -1156,6 +1215,8 @@ html[data-theme='dark'] .themeIconMoon {
 
 /* Projects */
 .projectLead {
+  /* 本文の最大幅（720px）を外し、入りきる幅では 1 行で表示する */
+  max-width: none;
   margin: 0 0 48px;
   /* 最後の行に数文字だけ残るような改行を避け、対応ブラウザでは文節単位で折り返す */
   text-wrap: pretty;
@@ -1348,6 +1409,79 @@ html[data-theme='dark'] .themeIconMoon {
   font-size: 14px;
   color: var(--color-text-body);
   line-height: 1.6;
+}
+
+/* Recruit */
+.recruitSection {
+  margin-bottom: 64px;
+}
+
+.recruitGrid {
+  display: grid;
+  gap: 16px;
+}
+
+.recruitCard {
+  padding: 24px;
+}
+
+.recruitCardTitle {
+  margin: 0 0 8px;
+  color: var(--color-heading);
+  font-size: 17px;
+  line-height: 1.5;
+  word-break: auto-phrase;
+}
+
+.recruitCardText {
+  margin: 0;
+  color: var(--color-text-body);
+  font-size: 14px;
+  line-height: 1.7;
+  word-break: auto-phrase;
+}
+
+.recruitList {
+  margin: 0;
+}
+
+.recruitList li {
+  font-size: 15px;
+}
+
+/* 連絡先への誘導 */
+.recruitCta {
+  margin-bottom: 32px;
+  padding: 32px;
+  border: 1px solid var(--notice-border);
+  border-radius: 12px;
+  background: var(--notice-bg);
+  box-shadow: var(--notice-shadow);
+}
+
+.recruitCtaTitle {
+  margin: 0 0 12px;
+  color: var(--notice-title);
+  font-size: clamp(19px, 5.6vw, 28px);
+  line-height: 1.4;
+}
+
+.recruitCtaText {
+  margin: 0 0 24px;
+  color: var(--color-text-body);
+  font-size: 15px;
+  line-height: 1.8;
+  word-break: auto-phrase;
+}
+
+.aboutJoinText {
+  margin: 0 0 24px;
+}
+
+@media (max-width: 820px) {
+  .recruitCta {
+    padding: 24px 20px;
+  }
 }
 
 /* 404 */
