@@ -7,25 +7,25 @@ const fullText = [
   'import { Albus } from "albus-tech";',
   '',
   'const team = new Albus({',
-  '  location: "大学祭実行委員会",',
-  '  purpose: "大学祭を発展させる",',
+  '  members: "大学祭実行委員会の出身者",',
+  '  focus: "現場の手間を減らす",',
   '  stack: ["Next.js", "TypeScript"]',
   '});',
   '',
-  'await team.initialize();',
+  'await team.listen("実行委員会の声");',
   '',
-  'const app = team.deploy("Glossary");',
+  'const app = team.build("Glossary");',
   'const message = app.startMessage();',
   '',
   'console.log(message);',
-  '// >> 「大学祭はテクノロジーで進化する」'
+  '// >> 「大学祭の運営に、新しいあたりまえを。」'
 ];
 
 const totalChars = fullText.reduce((sum, line) => sum + line.length, 0);
 
 // 簡易シンタックスハイライト（キーを緑にする）
 const renderLineContent = (line: string) => {
-  const keys = ['location', 'purpose', 'stack'];
+  const keys = ['members', 'focus', 'stack'];
   for (const key of keys) {
     if (line.includes(`${key}:`)) {
       const parts = line.split(`${key}:`);

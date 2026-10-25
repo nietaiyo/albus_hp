@@ -84,18 +84,18 @@ export default function HomeContent() {
           <section className="hero">
             <div className="heroContainerWide">
               <div className="heroText">
-                <p className="label">University Festival by Technology</p>
+                <p className="label">For University Festivals</p>
                 <h1>
-                  <TextScramble text="大学祭は" start={heroStart} delay={100} />
-                  <TextScramble text="テクノロジーで" start={heroStart} delay={700} />
-                  <TextScramble text="進化する" start={heroStart} delay={1300} />
+                  <TextScramble text="大学祭の運営に、" start={heroStart} delay={100} />
+                  <TextScramble text="新しいあたりまえを。" start={heroStart} delay={700} />
                 </h1>
+                <p className="heroSubcopy">テクノロジーで、もっと便利に、もっと自由に。</p>
                 <p className="description">
-                  Albus. は大学祭実行委員会向けのサービスを開発しています
+                  Albus. は、大学祭実行委員会の出身者によるチームです。現場で感じてきた不便や手間を、それぞれの大学祭に合ったWebサービスで解消します。
                 </p>
                 <div className="actions">
                   <Link className="primaryButton" href="/projects">
-                    制作物を見る
+                    プロジェクトを見る
                   </Link>
                   <Link className="secondaryButton" href="/about">
                     チームについて
@@ -109,20 +109,19 @@ export default function HomeContent() {
 
           {/* 私たちの想い / 挨拶 */}
           <section id="about" className="section greeting holoFadeIn">
-            <p className="label">Greeting</p>
+            <p className="label">Our Approach</p>
             <h2>各大学祭に寄り添ったサービスを</h2>
             <p className="sectionText">
-              各大学祭が抱える規模や来場者層、運営上の課題は決して一様ではありません。<br/>
-              ラテン語で「白」を指す「Albus」の名のとおり、私たちは汎用的で誰でも作り使えるサービスではなく、それぞれの実情に応じたサービスを構築します。<br/>
-              私たちはメンバー全員が大学祭実行委員会出身です。今までに培った経験や知見を活かし、大学祭当日のサポートだけでなく、年間を通じた運営効率化に寄与するソリューションをご提供します。
+              大学祭は、規模も来場者層も、実行委員会の体制もそれぞれ違います。だから私たちは、どこでも同じように使う汎用的な仕組みではなく、その大学祭の事情に合ったサービスをつくります。<br/>
+              メンバーは全員、大学祭実行委員会の出身です。人の手で回してきた準備や当日の対応の大変さを知っているからこそ、大学祭当日だけでなく、一年を通した運営を支えます。
             </p>
           </section>
 
           {/* コンタクトへの誘い */}
           <section className="contact holoFadeIn">
             <div>
-              <p className="label">Join us / Talk to us</p>
-              <h2>お気軽にお問い合わせください。</h2>
+              <p className="label">Talk to us</p>
+              <h2>運営の困りごと、<wbr />お聞かせください。</h2>
             </div>
             <Link className="primaryButton" href="/contact">
               お問い合わせ
