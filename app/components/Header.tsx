@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import Logo from './Logo';
+import ThemeToggle from './ThemeToggle';
 
 const navItems = [
   { name: 'Home', path: '/' },
@@ -41,34 +42,38 @@ export default function Header() {
             <Logo />
           </Link>
 
-          {/* デスクトップナビゲーション */}
-          <nav className="desktopNav">
-            {navItems.map((item) => {
-              const isActive = pathname === item.path;
-              return (
-                <Link
-                  key={item.path}
-                  href={item.path}
-                  className={`navLink ${isActive ? 'active' : ''}`}
-                >
-                  {item.name}
-                </Link>
-              );
-            })}
-          </nav>
+          <div className="headerActions">
+            {/* デスクトップナビゲーション */}
+            <nav className="desktopNav">
+              {navItems.map((item) => {
+                const isActive = pathname === item.path;
+                return (
+                  <Link
+                    key={item.path}
+                    href={item.path}
+                    className={`navLink ${isActive ? 'active' : ''}`}
+                  >
+                    {item.name}
+                  </Link>
+                );
+              })}
+            </nav>
 
-          {/* モバイルハンバーガーボタン */}
-          <button
-            className={`hamburger ${isOpen ? 'open' : ''}`}
-            onClick={() => setIsOpen(!isOpen)}
-            aria-label="メニューを開閉"
-            aria-expanded={isOpen}
-            aria-controls="mobileMenu"
-          >
-            <span className="bar"></span>
-            <span className="bar"></span>
-            <span className="bar"></span>
-          </button>
+            <ThemeToggle />
+
+            {/* モバイルハンバーガーボタン */}
+            <button
+              className={`hamburger ${isOpen ? 'open' : ''}`}
+              onClick={() => setIsOpen(!isOpen)}
+              aria-label="メニューを開閉"
+              aria-expanded={isOpen}
+              aria-controls="mobileMenu"
+            >
+              <span className="bar"></span>
+              <span className="bar"></span>
+              <span className="bar"></span>
+            </button>
+          </div>
         </div>
       </header>
 

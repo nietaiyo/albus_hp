@@ -4,6 +4,7 @@ import "./globals.css";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import MouseSpotlight from "./components/MouseSpotlight";
+import ThemeScript from "./components/ThemeScript";
 import { DEFAULT_TITLE, SITE_DESCRIPTION, SITE_NAME, SITE_URL } from "./lib/site";
 
 const geistSans = Geist({
@@ -76,6 +77,7 @@ export default function RootLayout({
       suppressHydrationWarning
     >
       <head>
+        <ThemeScript />
         <script dangerouslySetInnerHTML={{ __html: introScript }} />
       </head>
       <body>
