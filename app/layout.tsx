@@ -64,6 +64,9 @@ const jsonLd = {
 // 描画前に実行し、このセッションでイントロ表示済みなら html.introSeen を付けて隠す
 const introScript = `try{if(sessionStorage.getItem('hasSeenAlbusIntro'))document.documentElement.classList.add('introSeen')}catch(e){}`;
 
+// 描画前にテーマを決めてちらつきを防ぐ。保存済みの選択を優先し、未選択なら OS の設定に合わせる
+const themeScript = `try{var t=localStorage.getItem('theme');if(t!=='light'&&t!=='dark')t=matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';document.documentElement.dataset.theme=t}catch(e){document.documentElement.dataset.theme='light'}`;
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -76,6 +79,7 @@ export default function RootLayout({
       suppressHydrationWarning
     >
       <head>
+        <script dangerouslySetInnerHTML={{ __html: themeScript }} />
         <script dangerouslySetInnerHTML={{ __html: introScript }} />
       </head>
       <body>

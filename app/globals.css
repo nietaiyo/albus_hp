@@ -592,9 +592,59 @@ html.introSeen .introOverlay {
   text-decoration: none;
 }
 
+.headerActions {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+}
+
 .desktopNav {
   display: flex;
   gap: 32px;
+}
+
+/* --- Theme Toggle --- */
+.themeToggle {
+  position: relative;
+  flex-shrink: 0;
+  width: 52px;
+  height: 28px;
+  padding: 0;
+  border: 1px solid #bfdbfe;
+  border-radius: 999px;
+  background: #eff6ff;
+  cursor: pointer;
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+.themeToggle:focus-visible {
+  outline: 2px solid #2563eb;
+  outline-offset: 2px;
+}
+
+.themeToggleKnob {
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 22px;
+  height: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: #ffffff;
+  color: #f59e0b;
+  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.2);
+  transition: transform 0.3s cubic-bezier(0.25, 1, 0.5, 1), background-color 0.3s ease, color 0.3s ease;
+}
+
+.themeToggleKnob svg {
+  width: 14px;
+  height: 14px;
+}
+
+.themeIconMoon {
+  display: none;
 }
 
 .navLink {
@@ -1034,6 +1084,10 @@ textarea.formControl {
     display: none;
   }
 
+  .headerActions {
+    gap: 20px;
+  }
+
   .hamburger {
     display: flex;
   }
@@ -1047,4 +1101,208 @@ textarea.formControl {
     grid-template-columns: 1fr;
     gap: 24px;
   }
+}
+
+/* --- Dark Mode ---
+   html[data-theme] は layout のインラインスクリプトと ThemeToggle が設定する */
+html[data-theme='dark'] {
+  color-scheme: dark;
+}
+
+html[data-theme='dark'] body {
+  color: #e2e8f0;
+  background-color: #0b1120;
+  background-image:
+    linear-gradient(rgba(96, 165, 250, 0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(96, 165, 250, 0.06) 1px, transparent 1px);
+}
+
+html[data-theme='dark'] .logo,
+html[data-theme='dark'] h1,
+html[data-theme='dark'] .introLogo,
+html[data-theme='dark'] .memberName,
+html[data-theme='dark'] .newsItemTitle {
+  color: #f1f5f9;
+}
+
+html[data-theme='dark'] .logoDot,
+html[data-theme='dark'] .introLogo .logoDot,
+html[data-theme='dark'] .label {
+  color: #60a5fa;
+}
+
+html[data-theme='dark'] .description,
+html[data-theme='dark'] .sectionText,
+html[data-theme='dark'] .pageText,
+html[data-theme='dark'] .memberBio,
+html[data-theme='dark'] .newsItemText,
+html[data-theme='dark'] .newsDate,
+html[data-theme='dark'] .contactDoneText {
+  color: #94a3b8;
+}
+
+html[data-theme='dark'] .secondaryButton {
+  color: #bfdbfe;
+  border-color: #1e3a8a;
+  background: #0f172a;
+}
+
+html[data-theme='dark'] .secondaryButton:hover {
+  border-color: #60a5fa;
+  background-color: rgba(96, 165, 250, 0.08);
+}
+
+/* Code Console */
+html[data-theme='dark'] .codeConsole {
+  border-color: rgba(96, 165, 250, 0.2);
+  background: rgba(15, 23, 42, 0.75);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+}
+
+html[data-theme='dark'] .consoleHeader {
+  border-bottom-color: rgba(51, 65, 85, 0.6);
+  background: rgba(30, 41, 59, 0.6);
+}
+
+html[data-theme='dark'] .consoleTitle {
+  color: #94a3b8;
+}
+
+html[data-theme='dark'] .consoleBody {
+  background: rgba(15, 23, 42, 0.2);
+}
+
+html[data-theme='dark'] .lineContent {
+  color: #cbd5e1;
+}
+
+html[data-theme='dark'] .outputLine .lineContent {
+  color: #60a5fa;
+  text-shadow: 0 0 10px rgba(96, 165, 250, 0.3);
+}
+
+html[data-theme='dark'] .codeKeyGreen {
+  color: #34d399;
+}
+
+/* Top Page */
+html[data-theme='dark'] .greeting,
+html[data-theme='dark'] .pageSectionDivided {
+  border-top-color: #1e293b;
+}
+
+/* 濃紺の帯は背景に埋もれるので一段明るくして枠を付ける */
+html[data-theme='dark'] .contact {
+  background: #131d33;
+  border: 1px solid #1e293b;
+}
+
+html[data-theme='dark'] .introOverlay {
+  background-color: #0b1120;
+}
+
+/* Header */
+html[data-theme='dark'] .header {
+  background: rgba(15, 23, 42, 0.45);
+  border-color: rgba(148, 163, 184, 0.12);
+  box-shadow:
+    0 8px 32px rgba(0, 0, 0, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+
+html[data-theme='dark'] .navLink {
+  color: #cbd5e1;
+}
+
+html[data-theme='dark'] .navLink:hover,
+html[data-theme='dark'] .navLink.active,
+html[data-theme='dark'] .mobileNavLink:hover,
+html[data-theme='dark'] .mobileNavLink.active {
+  color: #60a5fa;
+}
+
+html[data-theme='dark'] .navLink::after {
+  background-color: #60a5fa;
+}
+
+html[data-theme='dark'] .hamburger .bar {
+  background-color: #e2e8f0;
+}
+
+html[data-theme='dark'] .mobileMenu {
+  background-color: rgba(11, 17, 32, 0.98);
+}
+
+html[data-theme='dark'] .mobileNavLink {
+  color: #e2e8f0;
+}
+
+html[data-theme='dark'] .themeToggle {
+  border-color: #334155;
+  background: #1e293b;
+}
+
+html[data-theme='dark'] .themeToggle:focus-visible {
+  outline-color: #60a5fa;
+}
+
+html[data-theme='dark'] .themeToggleKnob {
+  transform: translateX(24px);
+  background: #334155;
+  color: #93c5fd;
+}
+
+html[data-theme='dark'] .themeIconSun {
+  display: none;
+}
+
+html[data-theme='dark'] .themeIconMoon {
+  display: block;
+}
+
+/* Footer */
+html[data-theme='dark'] .footer {
+  background-color: #070b16;
+}
+
+/* Sub Pages */
+html[data-theme='dark'] .panel {
+  background: #111827;
+  border-color: #1e293b;
+  box-shadow: none;
+}
+
+html[data-theme='dark'] .newsBadge {
+  color: #c4b5fd;
+  background: rgba(124, 58, 237, 0.15);
+}
+
+html[data-theme='dark'] .newsBadgeUpdate {
+  color: #4ade80;
+  background: rgba(22, 163, 74, 0.15);
+}
+
+html[data-theme='dark'] .newsBadgeActivity {
+  color: #93c5fd;
+  background: rgba(37, 99, 235, 0.15);
+}
+
+html[data-theme='dark'] .formLabel {
+  color: #cbd5e1;
+}
+
+html[data-theme='dark'] .formControl {
+  color: #e2e8f0;
+  background: #0f172a;
+  border-color: #334155;
+}
+
+html[data-theme='dark'] .contactDone {
+  background: rgba(37, 99, 235, 0.1);
+  border-color: #1e3a8a;
+  box-shadow: none;
+}
+
+html[data-theme='dark'] .contactDoneTitle {
+  color: #bfdbfe;
 }
