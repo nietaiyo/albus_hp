@@ -13,7 +13,7 @@ export const DEFAULT_TITLE = `Albus.（アルバス）| ${SITE_SLOGAN}`;
 // SNS・検索結果で共有されるときの画像（public/Albus-OGP.png）
 export const OG_IMAGE = {
   url: '/Albus-OGP.png',
-  width: 1672,
+  width: 1671,
   height: 941,
   alt: `Albus. ${SITE_SLOGAN}`,
 };
@@ -27,6 +27,7 @@ export const PAGES = [
   { path: '/about', changeFrequency: 'monthly', priority: 0.8 },
   { path: '/projects', changeFrequency: 'monthly', priority: 0.8 },
   { path: '/news', changeFrequency: 'weekly', priority: 0.7 },
+  { path: '/recruit', changeFrequency: 'monthly', priority: 0.6 },
   { path: '/contact', changeFrequency: 'yearly', priority: 0.5 },
 ] as const;
 

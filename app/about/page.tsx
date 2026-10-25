@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import { pageMetadata } from '../lib/site';
 
 export const metadata = pageMetadata({
@@ -41,20 +42,18 @@ export default function About() {
     },
   ];
 
-  // Todo: 仲間募集フォームを作る
-
   return (
     <div className="site">
       <div className="pageContainer">
         {/* ビジョン */}
         <section className="aboutSection">
-          <p className="label">Vision</p>
-          <h1 className="pageTitle aboutTitle">
+          <p className="label reveal">Vision</p>
+          <h1 className="pageTitle aboutTitle reveal">
             大学祭の現場を、
             <br />
             すぐそばで支える。
           </h1>
-          <p className="sectionText pageText">
+          <p className="sectionText pageText reveal">
             {'Albus. は、大学祭実行委員会で運営に携わってきたメンバーが集まったチームです。自分たちが過ごしてきた実行委員会の活動を、もっと動きやすくしたい。その思いから活動を始めました。'}
             <br /><br />
             {'大学祭の運営には、毎年の引き継ぎや委員どうしの情報共有、当日の問い合わせ対応など、人の手に頼ってきた仕事が数多くあります。一方で、規模も体制も大学祭ごとに異なり、同じ仕組みがどこでも通用するわけではありません。だからこそ私たちは、それぞれの大学祭の事情に耳を傾け、その現場に合ったサービスを一緒に考えます。'}
@@ -65,11 +64,11 @@ export default function About() {
 
         {/* メンバー紹介 */}
         <section className="aboutSection pageSectionDivided">
-          <p className="label">Team Members</p>
-          <h2 className="pageHeading aboutMembersHeading">メンバー</h2>
+          <p className="label reveal">Team Members</p>
+          <h2 className="pageHeading aboutMembersHeading reveal">メンバー</h2>
           <div className="cardList">
             {members.map((member, idx) => (
-              <div key={idx} className="panel memberCard">
+              <div key={idx} className="panel memberCard reveal">
                 <div className="memberCardHeader">
                   <h3 className="memberName">{member.name}</h3>
                   {/* <span style={{ fontSize: '13px', fontWeight: 'bold', color: '#2563eb', background: '#eff6ff', padding: '4px 10px', borderRadius: '999px' }}>
@@ -86,6 +85,20 @@ export default function About() {
                 </div> */}
               </div>
             ))}
+          </div>
+        </section>
+
+        {/* メンバー募集への誘導 */}
+        <section className="aboutSection pageSectionDivided">
+          <p className="label reveal">Join us</p>
+          <h2 className="pageHeading reveal">一緒に活動しませんか</h2>
+          <p className="sectionText pageText aboutJoinText reveal">
+            {'Albus. では、大学祭の運営をもっと良くしたいと考える仲間を募集しています。'}
+          </p>
+          <div className="reveal">
+            <Link href="/recruit" className="secondaryButton">
+              メンバー募集を見る
+            </Link>
           </div>
         </section>
       </div>

@@ -10,15 +10,15 @@ export default function NotFound() {
   return (
     <div className="site">
       <div className="pageContainer notFound">
-        <p className="notFoundCode" aria-hidden="true">
+        <p className="notFoundCode reveal" aria-hidden="true">
           404
         </p>
-        <p className="label">Page Not Found</p>
-        <h1 className="pageTitle">ページが見つかりません</h1>
-        <p className="sectionText pageText">
+        <p className="label reveal">Page Not Found</p>
+        <h1 className="pageTitle reveal">ページが見つかりません</h1>
+        <p className="sectionText pageText reveal">
           お探しのページは、移動または削除された可能性があります。URLに誤りがないか、あわせてご確認ください。
         </p>
-        <div className="actions">
+        <div className="actions reveal">
           <Link className="primaryButton" href="/">
             トップページへ
           </Link>
