@@ -35,9 +35,26 @@ export default function Header() {
     };
   }, [isOpen]);
 
+  // PC 幅に広げたときは、開いたままのメニューを閉じる（PC ではメニューを表示しないため）
+  useEffect(() => {
+    const desktop = window.matchMedia('(min-width: 769px)');
+    const onChange = (e: MediaQueryListEvent) => {
+      if (e.matches) setIsOpen(false);
+    };
+    desktop.addEventListener('change', onChange);
+    return () => desktop.removeEventListener('change', onChange);
+  }, []);
+
   return (
     <>
-      <header className="header">
+      {/* メニュー表示中に背景をぼかして暗くする。タップすると閉じる */}
+      <div
+        className={`menuScrim ${isOpen ? 'open' : ''}`}
+        onClick={() => setIsOpen(false)}
+        aria-hidden="true"
+      />
+
+      <header className={`header ${isOpen ? 'menuOpen' : ''}`}>
         <div className="headerContainer">
           <Link href="/" className="logoLink">
             <Logo />
@@ -76,27 +93,31 @@ export default function Header() {
             </button>
           </div>
         </div>
-      </header>
 
-      {/* モバイルナビゲーションメニュー
-          header は transform / backdrop-filter で fixed の基準になってしまうため、外側に置く */}
-      <div id="mobileMenu" className={`mobileMenu ${isOpen ? 'open' : ''}`}>
-        <nav className="mobileNav">
-          {navItems.map((item) => {
-            const isActive = pathname === item.path;
-            return (
-              <Link
-                key={item.path}
-                href={item.path}
-                className={`mobileNavLink ${isActive ? 'active' : ''}`}
-                onClick={() => setIsOpen(false)}
-              >
-                {item.name}
-              </Link>
-            );
-          })}
-        </nav>
-      </div>
+        {/* モバイルメニュー：ヘッダーのバーがそのまま下に伸び、その中に項目を並べる（スタイルは globals.css の Mobile Menu） */}
+        <div id="mobileMenu" className="mobileMenu" inert={!isOpen}>
+          <div className="mobileMenuClip">
+            <nav className="mobileNav" aria-label="メインメニュー">
+              {navItems.map((item, idx) => {
+                const isActive = pathname === item.path;
+                return (
+                  <Link
+                    key={item.path}
+                    href={item.path}
+                    className={`mobileNavLink ${isActive ? 'active' : ''}`}
+                    aria-current={isActive ? 'page' : undefined}
+                    // 項目を上から順番に表示するための並び順（CSS の --i で遅延を計算する）
+                    style={{ '--i': idx } as React.CSSProperties}
+                    onClick={() => setIsOpen(false)}
+                  >
+                    {item.name}
+                  </Link>
+                );
+              })}
+            </nav>
+          </div>
+        </div>
+      </header>
     </>
   );
 }
