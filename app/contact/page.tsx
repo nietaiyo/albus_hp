@@ -14,15 +14,32 @@ function FormField({ id, label, children }: { id: string; label: string; childre
 export default function Contact() {
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
 
-  // 送信処理（擬似APIリクエスト）
-  const handleSubmit = (e: React.FormEvent) => {
+  // 送信処理：/api/send-email（Resend）経由でメールを送る
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    const form = new FormData(e.currentTarget);
     setLoading(true);
-    setTimeout(() => {
-      setLoading(false);
+    setError('');
+
+    try {
+      const response = await fetch('/api/send-email', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name: form.get('name'),
+          email: form.get('email'),
+          message: form.get('message'),
+        }),
+      });
+      if (!response.ok) throw new Error();
       setSubmitted(true);
-    }, 1000);
+    } catch {
+      setError('送信に失敗しました。時間をおいて再度お試しください。');
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -50,15 +67,27 @@ export default function Contact() {
         ) : (
           <form onSubmit={handleSubmit} className="contactForm">
             <FormField id="name" label="お名前">
-              <input type="text" id="name" required placeholder="山田 太郎" className="formControl" />
+              <input
+                type="text"
+                id="name"
+                name="name"
+                required
+                maxLength={100}
+                autoComplete="name"
+                placeholder="山田 太郎"
+                className="formControl"
+              />
             </FormField>
 
             <FormField id="email" label="メールアドレス">
               <input
                 type="email"
                 id="email"
+                name="email"
                 required
-                placeholder="example@edu.osakafu-u.ac.jp"
+                maxLength={254}
+                autoComplete="email"
+                placeholder="example@example.com"
                 className="formControl"
               />
             </FormField>
@@ -66,7 +95,9 @@ export default function Contact() {
             <FormField id="message" label="お問い合わせ内容">
               <textarea
                 id="message"
+                name="message"
                 required
+                maxLength={5000}
                 rows={6}
                 placeholder="お問い合わせ内容をご記入ください。"
                 className="formControl"
@@ -76,6 +107,12 @@ export default function Contact() {
             <button type="submit" disabled={loading} className="primaryButton contactSubmit">
               {loading ? '送信中...' : '送信する'}
             </button>
+
+            {error && (
+              <p role="alert" className="contactError">
+                {error}
+              </p>
+            )}
           </form>
         )}
       </div>
