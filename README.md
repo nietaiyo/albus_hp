@@ -48,6 +48,7 @@ app/
   about/                私たちについて（チームの想い・メンバー）
   projects/             プロジェクト一覧（タイル形式）
   news/                 活動報告
+  recruit/              メンバー募集（フォームは置かず、連絡先へ案内）
   contact/              お問い合わせ（page はクライアントコンポーネントのため、メタ情報は layout.tsx）
   not-found.tsx         存在しない URL のときの 404 ページ（検索結果には載らない）
   api/send-email/       お問い合わせの送信 API（Resend → Discord 通知）
@@ -82,7 +83,7 @@ public/
 
 ## 臨時対応中のもの
 
-- **お問い合わせフォーム**: メールの受信先設定が整うまで、フォームを隠して yuiki.dev の「Contact」へ案内しています。元に戻すときは `臨時対応(yuiki.dev誘導)` で検索し、該当箇所（`app/components/TemporaryContactNotice.tsx`、`app/contact/page.tsx` の定数と分岐、`app/globals.css` のブロック）を削除してください。
+- **お問い合わせフォーム**: メールの受信先設定が整うまで、フォームを隠して yuiki.dev の「Contact」へ案内しています。メンバー募集ページの連絡先も同じく yuiki.dev です（URL は `TemporaryContactNotice.tsx` の `TEMPORARY_CONTACT_URL` を共有）。元に戻すときは `臨時対応(yuiki.dev誘導)` で検索し、該当箇所（`app/components/TemporaryContactNotice.tsx`、`app/contact/page.tsx` の定数と分岐、`app/globals.css` のブロック）を削除したうえで、`app/recruit/page.tsx` の連絡先ボタンを `/contact` へのリンクに置き換えてください。
 
 ## デザインと演出
 

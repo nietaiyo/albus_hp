@@ -1,6 +1,7 @@
 // 臨時対応(yuiki.dev誘導)：お問い合わせフォームからメールが届かない間だけ表示する案内。
 // フォームが直ったら、このファイルごと削除する（削除箇所は「臨時対応(yuiki.dev誘導)」で検索）
-const TEMPORARY_CONTACT_URL = 'https://yuiki.dev';
+// メンバー募集ページ（app/recruit/page.tsx）もこの URL を連絡先にしている
+export const TEMPORARY_CONTACT_URL = 'https://yuiki.dev';
 
 export default function TemporaryContactNotice() {
   return (

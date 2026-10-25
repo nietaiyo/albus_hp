@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import { pageMetadata } from '../lib/site';
 
 export const metadata = pageMetadata({
@@ -40,8 +41,6 @@ export default function About() {
       // skills: ['Firebase', 'Node.js', 'GCP', 'NoSQL'],
     },
   ];
-
-  // Todo: 仲間募集フォームを作る
 
   return (
     <div className="site">
@@ -87,6 +86,18 @@ export default function About() {
               </div>
             ))}
           </div>
+        </section>
+
+        {/* メンバー募集への誘導 */}
+        <section className="aboutSection pageSectionDivided">
+          <p className="label">Join us</p>
+          <h2 className="pageHeading">一緒に活動しませんか</h2>
+          <p className="sectionText pageText aboutJoinText">
+            {'Albus. では、大学祭の運営をもっと良くしたいと考える仲間を募集しています。'}
+          </p>
+          <Link href="/recruit" className="secondaryButton">
+            メンバー募集を見る
+          </Link>
         </section>
       </div>
     </div>

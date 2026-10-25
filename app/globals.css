@@ -1356,6 +1356,79 @@ html[data-theme='dark'] .themeIconMoon {
   line-height: 1.6;
 }
 
+/* Recruit */
+.recruitSection {
+  margin-bottom: 64px;
+}
+
+.recruitGrid {
+  display: grid;
+  gap: 16px;
+}
+
+.recruitCard {
+  padding: 24px;
+}
+
+.recruitCardTitle {
+  margin: 0 0 8px;
+  color: var(--color-heading);
+  font-size: 17px;
+  line-height: 1.5;
+  word-break: auto-phrase;
+}
+
+.recruitCardText {
+  margin: 0;
+  color: var(--color-text-body);
+  font-size: 14px;
+  line-height: 1.7;
+  word-break: auto-phrase;
+}
+
+.recruitList {
+  margin: 0;
+}
+
+.recruitList li {
+  font-size: 15px;
+}
+
+/* 連絡先への誘導 */
+.recruitCta {
+  margin-bottom: 32px;
+  padding: 32px;
+  border: 1px solid var(--notice-border);
+  border-radius: 12px;
+  background: var(--notice-bg);
+  box-shadow: var(--notice-shadow);
+}
+
+.recruitCtaTitle {
+  margin: 0 0 12px;
+  color: var(--notice-title);
+  font-size: clamp(19px, 5.6vw, 28px);
+  line-height: 1.4;
+}
+
+.recruitCtaText {
+  margin: 0 0 24px;
+  color: var(--color-text-body);
+  font-size: 15px;
+  line-height: 1.8;
+  word-break: auto-phrase;
+}
+
+.aboutJoinText {
+  margin: 0 0 24px;
+}
+
+@media (max-width: 820px) {
+  .recruitCta {
+    padding: 24px 20px;
+  }
+}
+
 /* 404 */
 .notFound {
   padding-block: 32px;
