@@ -12,6 +12,7 @@
   --color-text-muted: #64748b;
   --color-accent: #2563eb;
   --color-border: #e2e8f0;
+  --color-border-strong: #cbd5e1;
 
   /* カード・パネル */
   --surface-bg: #ffffff;
@@ -65,6 +66,10 @@
   --badge-activity-text: #2563eb;
   --badge-activity-bg: #eff6ff;
 
+  /* 技術タグ */
+  --tag-text: #334155;
+  --tag-bg: #f1f5f9;
+
   /* フォーム・送信完了表示 */
   --form-label: #374151;
   --form-text: #111827;
@@ -91,6 +96,7 @@ html[data-theme='dark'] {
   --color-text-muted: #94a3b8;
   --color-accent: #60a5fa;
   --color-border: #1e293b;
+  --color-border-strong: #334155;
 
   --surface-bg: #111827;
   --surface-shadow: none;
@@ -136,6 +142,9 @@ html[data-theme='dark'] {
   --badge-update-bg: rgba(22, 163, 74, 0.15);
   --badge-activity-text: #93c5fd;
   --badge-activity-bg: rgba(37, 99, 235, 0.15);
+
+  --tag-text: #cbd5e1;
+  --tag-bg: #1e293b;
 
   --form-label: #cbd5e1;
   --form-text: #e2e8f0;
@@ -1020,7 +1029,7 @@ html[data-theme='dark'] .themeIconMoon {
 }
 
 .pageContainerWide {
-  max-width: 900px;
+  max-width: 1080px;
 }
 
 .pageContainerNarrow {
@@ -1100,16 +1109,137 @@ html[data-theme='dark'] .themeIconMoon {
 }
 
 /* Projects */
-.projectSection {
-  margin-bottom: 80px;
+.projectLead {
+  margin: 0 0 48px;
 }
 
-.projectTitle {
+.projectGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 24px;
+}
+
+.projectCard {
+  display: flex;
+  flex-direction: column;
+  padding: 32px;
+}
+
+.projectMeta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
   margin-bottom: 16px;
 }
 
-.projectNote {
+.projectStatus {
+  padding: 3px 10px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.projectStatus-live {
+  color: var(--badge-update-text);
+  background: var(--badge-update-bg);
+}
+
+.projectStatus-building {
+  color: var(--badge-activity-text);
+  background: var(--badge-activity-bg);
+}
+
+.projectAudience {
+  color: var(--color-text-muted);
+  font-size: 13px;
+}
+
+.projectCardTitle {
+  margin: 0 0 12px;
+  color: var(--color-heading);
+  font-size: 24px;
+  line-height: 1.4;
+}
+
+.projectSummary {
+  margin: 0 0 20px;
+  color: var(--color-text-body);
   font-size: 15px;
+  line-height: 1.8;
+}
+
+.projectFeatures {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin: 0 0 24px;
+  padding: 0;
+  list-style: none;
+}
+
+.projectFeatures li {
+  position: relative;
+  padding-left: 20px;
+  color: var(--color-text-body);
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.projectFeatures li::before {
+  content: '';
+  position: absolute;
+  top: 0.6em;
+  left: 4px;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--color-accent);
+}
+
+/* タグはカードの下端にそろえる */
+.projectTags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: auto 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.projectTag {
+  padding: 4px 10px;
+  border-radius: 6px;
+  color: var(--tag-text);
+  background: var(--tag-bg);
+  font-family: var(--font-geist-mono), "SFMono-Regular", Consolas, Menlo, monospace;
+  font-size: 12px;
+}
+
+/* 次のプロジェクト：点線枠で「準備中」を表す。2列ぶんの幅を使う */
+.projectCardNext {
+  grid-column: 1 / -1;
+  align-items: flex-start;
+  border: 1px dashed var(--color-border-strong);
+  border-radius: 12px;
+}
+
+.projectCardNext .projectSummary {
+  max-width: 640px;
+}
+
+.projectNextButton {
+  margin-top: 4px;
+}
+
+@media (max-width: 820px) {
+  .projectGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .projectCard {
+    padding: 24px;
+  }
 }
 
 /* News */
