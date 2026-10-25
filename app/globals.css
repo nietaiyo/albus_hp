@@ -1111,6 +1111,9 @@ html[data-theme='dark'] .themeIconMoon {
 /* Projects */
 .projectLead {
   margin: 0 0 48px;
+  /* 最後の行に数文字だけ残るような改行を避け、対応ブラウザでは文節単位で折り返す */
+  text-wrap: pretty;
+  word-break: auto-phrase;
 }
 
 .projectGrid {
@@ -1157,6 +1160,9 @@ html[data-theme='dark'] .themeIconMoon {
 
 .projectCardTitle {
   margin: 0 0 12px;
+  /* 単語の途中で折り返さず、<wbr> の位置で改行する */
+  word-break: keep-all;
+  overflow-wrap: anywhere;
   color: var(--color-heading);
   font-size: 24px;
   line-height: 1.4;
@@ -1167,6 +1173,9 @@ html[data-theme='dark'] .themeIconMoon {
   color: var(--color-text-body);
   font-size: 15px;
   line-height: 1.8;
+  text-wrap: pretty;
+  /* 対応ブラウザ（Chrome 119+）では文節単位で折り返す */
+  word-break: auto-phrase;
 }
 
 .projectFeatures {
@@ -1181,6 +1190,7 @@ html[data-theme='dark'] .themeIconMoon {
 .projectFeatures li {
   position: relative;
   padding-left: 20px;
+  word-break: auto-phrase;
   color: var(--color-text-body);
   font-size: 14px;
   line-height: 1.6;
@@ -1222,10 +1232,6 @@ html[data-theme='dark'] .themeIconMoon {
   align-items: flex-start;
   border: 1px dashed var(--color-border-strong);
   border-radius: 12px;
-}
-
-.projectCardNext .projectSummary {
-  max-width: 640px;
 }
 
 .projectNextButton {

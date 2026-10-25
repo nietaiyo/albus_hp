@@ -91,7 +91,9 @@ export default function Projects() {
 
           <div className="projectCard projectCardNext">
             <p className="label">Next</p>
-            <h2 className="projectCardTitle">次のプロジェクトを準備中です</h2>
+            <h2 className="projectCardTitle">
+              次のプロジェクトを<wbr />準備中です
+            </h2>
             <p className="projectSummary">
               大学祭の運営で困っていることや、「こんなサービスがあれば」というアイデアをお聞かせください。
             </p>
