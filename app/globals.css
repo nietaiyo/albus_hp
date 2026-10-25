@@ -517,6 +517,45 @@ h3 {
   transition: background-color 0.3s ease, opacity 0.3s ease;
 }
 
+/* --- Page Transition（ページ遷移） ---
+   app/template.tsx の <ViewTransition> が付けるクラス。前のページは素早く消し、次のページは少し下から浮かび上がらせる */
+::view-transition-old(.pageExit) {
+  animation: 160ms ease-in both pageExit;
+}
+
+::view-transition-new(.pageEnter) {
+  animation: 360ms cubic-bezier(0.25, 1, 0.5, 1) 120ms both pageEnter;
+}
+
+@keyframes pageExit {
+  to {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+}
+
+@keyframes pageEnter {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+}
+
+/* --- Reveal（下層ページの文章・カードのフェードイン） ---
+   .reveal を付けた要素が画面に入ると、ScrollReveal が .isVisible を付ける */
+.reveal {
+  opacity: 0;
+  transform: translateY(16px);
+  transition:
+    opacity 0.6s ease,
+    transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.reveal.isVisible {
+  opacity: 1;
+  transform: none;
+}
+
 /* --- Hologram Fade In (スクロールアニメーション) --- */
 .holoFadeIn {
   opacity: 0;
@@ -749,6 +788,19 @@ html.introSeen .introOverlay {
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+
+  ::view-transition-old(*),
+  ::view-transition-new(*),
+  ::view-transition-group(*) {
+    animation-duration: 0s !important;
+    animation-delay: 0s !important;
+  }
+
   .holoFadeIn,
   .holoFadeIn.active {
     opacity: 1;

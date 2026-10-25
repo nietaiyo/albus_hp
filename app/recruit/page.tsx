@@ -36,19 +36,19 @@ export default function Recruit() {
     <div className="site">
       <div className="pageContainer">
         <section className="recruitSection">
-          <p className="label">Join us</p>
-          <h1 className="pageTitle">メンバー募集</h1>
-          <p className="sectionText pageText">
+          <p className="label reveal">Join us</p>
+          <h1 className="pageTitle reveal">メンバー募集</h1>
+          <p className="sectionText pageText reveal">
             {'Albus. では、大学祭の運営をもっと良くしたいと考える仲間を募集しています。現場で感じてきた不便や手間を、一緒にサービスで解消していきませんか。'}
           </p>
         </section>
 
         <section className="recruitSection pageSectionDivided">
-          <p className="label">What you can do</p>
-          <h2 className="pageHeading">Albus. で関われること</h2>
+          <p className="label reveal">What you can do</p>
+          <h2 className="pageHeading reveal">Albus. で関われること</h2>
           <div className="recruitGrid">
             {activities.map((activity) => (
-              <div key={activity.title} className="panel recruitCard">
+              <div key={activity.title} className="panel recruitCard reveal">
                 <h3 className="recruitCardTitle">{activity.title}</h3>
                 <p className="recruitCardText">{activity.text}</p>
               </div>
@@ -57,16 +57,16 @@ export default function Recruit() {
         </section>
 
         <section className="recruitSection pageSectionDivided">
-          <p className="label">Who we&apos;re looking for</p>
-          <h2 className="pageHeading">こんな方と活動したいです</h2>
-          <ul className="projectFeatures recruitList">
+          <p className="label reveal">Who we&apos;re looking for</p>
+          <h2 className="pageHeading reveal">こんな方と活動したいです</h2>
+          <ul className="projectFeatures recruitList reveal">
             {wanted.map((item) => (
               <li key={item}>{item}</li>
             ))}
           </ul>
         </section>
 
-        <section className="recruitCta">
+        <section className="recruitCta reveal">
           <p className="label">Contact</p>
           <h2 className="recruitCtaTitle">
             <span className="phrase">まずは、</span>

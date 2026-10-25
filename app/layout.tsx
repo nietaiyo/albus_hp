@@ -86,6 +86,10 @@ export default function RootLayout({
       <head>
         <ThemeScript />
         <script dangerouslySetInnerHTML={{ __html: introScript }} />
+        {/* JavaScript が動かない環境ではフェードインできないため、最初から表示しておく */}
+        <noscript>
+          <style>{`.reveal{opacity:1;transform:none}`}</style>
+        </noscript>
       </head>
       <body>
         <script
