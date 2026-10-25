@@ -7,8 +7,13 @@ export const SITE_NAME = 'Albus.';
 
 export const DEFAULT_TITLE = 'Albus.（アルバス）公式サイト | 大学祭をテクノロジーで支える学生チーム';
 
-// app/opengraph-image.tsx で生成する共有用画像
-const OG_IMAGE = '/opengraph-image';
+// SNS・検索結果で共有されるときの画像（public/Albus-OGP.png）
+export const OG_IMAGE = {
+  url: '/Albus-OGP.png',
+  width: 1672,
+  height: 941,
+  alt: 'Albus.',
+};
 
 export const SITE_DESCRIPTION =
   'Albus（アルバス）は、大学祭をより発展させるサービスを開発している、学祭実行委員会OBによる有志の学生チームです。白鷺祭用語集などのWebサービスを開発しています。';

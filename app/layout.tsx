@@ -4,7 +4,8 @@ import "./globals.css";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import MouseSpotlight from "./components/MouseSpotlight";
-import { DEFAULT_TITLE, SITE_DESCRIPTION, SITE_NAME, SITE_URL } from "./lib/site";
+import ThemeScript from "./components/ThemeScript";
+import { DEFAULT_TITLE, OG_IMAGE, SITE_DESCRIPTION, SITE_NAME, SITE_URL } from "./lib/site";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -24,13 +25,19 @@ export const metadata: Metadata = {
   },
   description: SITE_DESCRIPTION,
   applicationName: SITE_NAME,
+  // public/favicon.png をタブ・ブックマーク・ホーム画面のアイコンに使う
+  icons: {
+    icon: "/favicon.png",
+    apple: "/favicon.png",
+  },
   openGraph: {
     type: "website",
     locale: "ja_JP",
     siteName: SITE_NAME,
     description: SITE_DESCRIPTION,
+    images: OG_IMAGE,
   },
-  twitter: { card: "summary_large_image" },
+  twitter: { card: "summary_large_image", images: OG_IMAGE },
   // Search Console の「HTML タグ」認証。content の値を環境変数に設定する
   verification: {
     google: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION,
@@ -76,6 +83,7 @@ export default function RootLayout({
       suppressHydrationWarning
     >
       <head>
+        <ThemeScript />
         <script dangerouslySetInnerHTML={{ __html: introScript }} />
       </head>
       <body>
