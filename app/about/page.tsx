@@ -13,31 +13,31 @@ export default function About() {
     {
       name: "スミス",
       // role: 'Backend & Infrastructure Engineer',
-      bio: "白鷺祭情報部装飾担当",
+      bio: "元白鷺祭情報部装飾担当",
       // skills: ['Figma', 'UI Design', 'Next.js'],
     },
     {
       name: "つっきー",
       // role: 'Frontend Engineer',
-      bio: "白鷺祭副委員長/企画部部長",
+      bio: "元白鷺祭副委員長/企画部部長",
       // skills: ['TypeScript', 'Next.js', 'React', 'CSS/SCSS'],
     },
     {
       name: "テナジー",
       // role: 'Project Manager & UI/UX Designer',
-      bio: "白鷺祭技術部副部長",
+      bio: "元白鷺祭技術部副部長",
       // skills: ['Firebase', 'Node.js', 'GCP', 'NoSQL'],
     },
     {
       name: "なづき",
       // role: 'Backend & Infrastructure Engineer',
-      bio: "白鷺祭企画部ステージ担当",
+      bio: "元白鷺祭企画部ステージ担当",
       // skills: ['Firebase', 'Node.js', 'GCP', 'NoSQL'],
     },
     {
       name: "JIN",
       // role: 'Backend & Infrastructure Engineer',
-      bio: "白鷺祭企画部部長",
+      bio: "元白鷺祭企画部部長",
       // skills: ['Firebase', 'Node.js', 'GCP', 'NoSQL'],
     },
   ];
