@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { pageMetadata } from '../lib/site';
+import { pageMetadata, SHOW_RECRUIT } from '../lib/site';
 
 export const metadata = pageMetadata({
   title: '私たちについて',
@@ -88,19 +88,21 @@ export default function About() {
           </div>
         </section>
 
-        {/* メンバー募集への誘導 */}
-        <section className="aboutSection pageSectionDivided">
-          <p className="label reveal">Join us</p>
-          <h2 className="pageHeading reveal">一緒に活動しませんか</h2>
-          <p className="sectionText pageText aboutJoinText reveal">
-            {'Albus. では、大学祭の運営をもっと良くしたいと考える仲間を募集しています。'}
-          </p>
-          <div className="reveal">
-            <Link href="/recruit" className="secondaryButton">
-              メンバー募集を見る
-            </Link>
-          </div>
-        </section>
+        {/* メンバー募集への誘導（非表示中(メンバー募集)：SHOW_RECRUIT が false の間は出さない） */}
+        {SHOW_RECRUIT && (
+          <section className="aboutSection pageSectionDivided">
+            <p className="label reveal">Join us</p>
+            <h2 className="pageHeading reveal">一緒に活動しませんか</h2>
+            <p className="sectionText pageText aboutJoinText reveal">
+              {'Albus. では、大学祭の運営をもっと良くしたいと考える仲間を募集しています。'}
+            </p>
+            <div className="reveal">
+              <Link href="/recruit" className="secondaryButton">
+                メンバー募集を見る
+              </Link>
+            </div>
+          </section>
+        )}
       </div>
     </div>
   );

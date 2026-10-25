@@ -1,4 +1,5 @@
-import { pageMetadata } from '../lib/site';
+import { notFound } from 'next/navigation';
+import { pageMetadata, SHOW_RECRUIT } from '../lib/site';
 // 臨時対応(yuiki.dev誘導)：お問い合わせフォームが直ったら、連絡先を /contact に戻す
 import { TEMPORARY_CONTACT_URL } from '../components/TemporaryContactNotice';
 
@@ -32,6 +33,9 @@ const wanted = [
 ];
 
 export default function Recruit() {
+  // 非表示中(メンバー募集)：SHOW_RECRUIT が false の間は、URL を直接開いても 404 にする
+  if (!SHOW_RECRUIT) notFound();
+
   return (
     <div className="site">
       <div className="pageContainer">
