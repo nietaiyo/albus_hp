@@ -292,6 +292,12 @@ h3 {
   white-space: nowrap;
 }
 
+/* 文の途中で改行させたくないかたまりを囲む。1 行に入りきらないときは、かたまりごと次の行に送る
+   （かたまり自体が画面幅より長いときは、その中で折り返す） */
+.phrase {
+  display: inline-block;
+}
+
 .description,
 .sectionText {
   color: var(--color-text-muted);

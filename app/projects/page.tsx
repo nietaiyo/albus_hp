@@ -60,7 +60,8 @@ export default function Projects() {
         <p className="label">Projects</p>
         <h1 className="pageTitle">プロジェクト</h1>
         <p className="sectionText pageText projectLead">
-          現場で感じてきた不便や手間を出発点に、実行委員と来場者の双方が使いやすいサービスをつくっています。
+          <span className="phrase">現場で感じてきた不便や手間を出発点に、</span>
+          <span className="phrase">実行委員と来場者の双方が使いやすいサービスをつくっています。</span>
         </p>
 
         <div className="projectGrid">
