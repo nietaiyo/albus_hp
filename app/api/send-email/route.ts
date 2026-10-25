@@ -15,6 +15,42 @@ function escapeHtml(value: string) {
     .replace(/'/g, '&#39;');
 }
 
+// 問い合わせが届いたことを Discord に流す（DISCORD_WEBHOOK_URL 未設定なら何もしない）。
+// メールは送信済みなので、ここで失敗してもログに残すだけにする
+async function notifyDiscord(name: string, email: string, message: string) {
+  const webhookUrl = process.env.DISCORD_WEBHOOK_URL;
+  if (!webhookUrl) return;
+
+  try {
+    const response = await fetch(webhookUrl, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        // 本文に @everyone などが含まれていてもメンションを飛ばさない
+        allowed_mentions: { parse: [] },
+        embeds: [
+          {
+            title: 'HPにお問い合わせが届きました',
+            // embed の説明文は 4096 文字まで
+            description: message.length > 4000 ? `${message.slice(0, 4000)}…` : message,
+            color: 0x2563eb,
+            fields: [
+              { name: '名前', value: name, inline: true },
+              { name: 'メール', value: email, inline: true },
+            ],
+            timestamp: new Date().toISOString(),
+          },
+        ],
+      }),
+    });
+    if (!response.ok) {
+      console.error('Discord への通知に失敗しました', response.status, await response.text());
+    }
+  } catch (error) {
+    console.error('Discord への通知に失敗しました', error);
+  }
+}
+
 function readField(body: Record<string, unknown>, key: keyof typeof LIMITS) {
   const value = body[key];
   if (typeof value !== 'string') return null;
@@ -61,6 +97,8 @@ export async function POST(request: Request) {
     console.error('お問い合わせメールの送信に失敗しました', error);
     return Response.json({ error: '送信に失敗しました' }, { status: 502 });
   }
+
+  await notifyDiscord(name, email, message);
 
   return Response.json({ success: true });
 }
