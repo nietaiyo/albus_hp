@@ -1162,6 +1162,8 @@ html[data-theme='dark'] .themeIconMoon {
 
 /* Projects */
 .projectLead {
+  /* 本文の最大幅（720px）を外し、入りきる幅では 1 行で表示する */
+  max-width: none;
   margin: 0 0 48px;
   /* 最後の行に数文字だけ残るような改行を避け、対応ブラウザでは文節単位で折り返す */
   text-wrap: pretty;
