@@ -22,10 +22,15 @@ export default function Footer() {
           </div>
 
           <div className="footerLinkCol">
-            <h4>リンク</h4>
-            <a href="https://github.com" target="_blank" rel="noopener noreferrer">GitHub</a>
-            <a href="https://x.com" target="_blank" rel="noopener noreferrer">X (Twitter)</a>
-            <a href="https://www.shirasagifes.com" target="_blank" rel="noopener noreferrer">白鷺祭実行委員会 公式</a>
+            {/* <h4>リンク</h4> */}
+            {/* GitHubは整理後に公開 */}
+            {/* <a href="https://github.com/albus-sys" target="_blank" rel="noopener noreferrer">GitHub</a> */}
+            {/* Twitterはアカウント作成後に公開 */}
+            {/* <a href="https://x.com" target="_blank" rel="noopener noreferrer">X (Twitter)</a> */}
+            <h4>提供先実行委員会</h4>
+            <a href="https://sagisai.net/" target="_blank" rel="noopener noreferrer">
+              白鷺祭実行委員会
+            </a>
           </div>
         </div>
       </div>
