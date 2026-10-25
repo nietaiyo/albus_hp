@@ -13,7 +13,7 @@ export const DEFAULT_TITLE = `Albus.（アルバス）| ${SITE_SLOGAN}`;
 // SNS・検索結果で共有されるときの画像（public/Albus-OGP.png）
 export const OG_IMAGE = {
   url: '/Albus-OGP.png',
-  width: 1672,
+  width: 1671,
   height: 941,
   alt: `Albus. ${SITE_SLOGAN}`,
 };
