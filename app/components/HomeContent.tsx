@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect, useLayoutEffect } from 'react';
+import { useState, useLayoutEffect, useRef } from 'react';
 import Link from 'next/link';
 import TextScramble from './TextScramble';
 import CodeConsole from './CodeConsole';
@@ -13,6 +13,8 @@ export default function HomeContent() {
   const [showIntro, setShowIntro] = useState(true);
   // ヒーローのアニメーションを開始してよいか（イントロ終了後）
   const [heroStart, setHeroStart] = useState(false);
+  // スキップボタン・キー操作からイントロを終わらせる（中身は下の effect で設定する）
+  const skipIntro = useRef<() => void>(() => {});
 
   // 描画前に判定し、表示済みのときにイントロが一瞬出るのを防ぐ
   useLayoutEffect(() => {
@@ -45,27 +47,20 @@ export default function HomeContent() {
     }
 
     const timer = setTimeout(finish, remaining);
-    return () => clearTimeout(timer);
-  }, []);
 
-  // スクロール時のホログラムフェードイン監視
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('active');
-          }
-        });
-      },
-      { threshold: 0.1 }
-    );
-
-    const elements = document.querySelectorAll('.holoFadeIn');
-    elements.forEach((el) => observer.observe(el));
+    // スキップ：待たずにすぐ終わらせる（表示済みの記録は上で保存済みなので、再読み込みしても出ない）
+    skipIntro.current = () => {
+      clearTimeout(timer);
+      finish();
+    };
+    const onKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape' || e.key === 'Enter' || e.key === ' ') skipIntro.current();
+    };
+    window.addEventListener('keydown', onKeyDown);
 
     return () => {
-      elements.forEach((el) => observer.unobserve(el));
+      clearTimeout(timer);
+      window.removeEventListener('keydown', onKeyDown);
     };
   }, []);
 
@@ -76,6 +71,9 @@ export default function HomeContent() {
           <div className="introLogo">
             Albus<span className="logoDot">.</span>
           </div>
+          <button type="button" className="introSkip" onClick={() => skipIntro.current()}>
+            スキップ
+          </button>
         </div>
       )}
       <div className="homeContent">
@@ -86,8 +84,8 @@ export default function HomeContent() {
               <div className="heroText">
                 <p className="label">For University Festivals</p>
                 <h1>
-                  <TextScramble text="大学祭の運営に、" start={heroStart} delay={100} />
-                  <TextScramble text="新しいあたりまえを。" start={heroStart} delay={700} />
+                  <TextScramble text="大学祭の運営に、" start={heroStart} delay={100} speed={25} />
+                  <TextScramble text="新しいあたりまえを。" start={heroStart} delay={350} speed={25} />
                 </h1>
                 <p className="heroSubcopy">テクノロジーで、もっと便利に、もっと自由に。</p>
                 <p className="description">
@@ -108,17 +106,21 @@ export default function HomeContent() {
           </section>
 
           {/* 私たちの想い / 挨拶 */}
-          <section id="about" className="section greeting holoFadeIn">
-            <p className="label">Our Approach</p>
-            <h2>各大学祭に寄り添ったサービスを</h2>
-            <p className="sectionText">
+          <section id="about" className="section greeting">
+            <p className="label reveal">Our Approach</p>
+            <h2 className="reveal">
+              <span className="phrase">各大学祭に</span>
+              <span className="phrase">寄り添った</span>
+              <span className="phrase">サービスを</span>
+            </h2>
+            <p className="sectionText reveal">
               大学祭は、規模も来場者層も、実行委員会の体制もそれぞれ違います。だから私たちは、どこでも同じように使う汎用的な仕組みではなく、その大学祭の事情に合ったサービスをつくります。<br/>
               メンバーは全員、大学祭実行委員会の出身です。人の手で回してきた準備や当日の対応の大変さを知っているからこそ、大学祭当日だけでなく、一年を通した運営を支えます。
             </p>
           </section>
 
           {/* コンタクトへの誘い */}
-          <section className="contact holoFadeIn">
+          <section className="contact reveal">
             <div>
               <p className="label">Talk to us</p>
               <h2>運営の困りごと、<wbr />お聞かせください。</h2>

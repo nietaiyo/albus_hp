@@ -73,7 +73,7 @@
 # アニメーション
 
 - ページ遷移は `app/template.tsx` の `<ViewTransition>`（`next.config.ts` の `experimental.viewTransition`）で行う。スタイルは `app/globals.css` の「Page Transition」。
-- 下層ページに見出し・本文・カードなどのブロックを追加したら、`reveal` クラスを付けてフェードインさせる（`app/components/ScrollReveal.tsx` が画面に入ったときに `isVisible` を付ける）。
+- 見出し・本文・カードなどのブロックを追加したら（トップ・下層ページとも）、`reveal` クラスを付けてフェードインさせる。演出の種類はこれに統一し、ページごとに別の動きを作らない（`app/components/ScrollReveal.tsx` が画面に入ったときに `isVisible` を付ける）。
 - `reveal` はボタン（`.primaryButton` / `.secondaryButton`）に直接付けない。ホバーの `transition` が上書きされるため、外側の要素を `reveal` で包む。カードの中の要素など、`reveal` の中に `reveal` を重ねない。
 - 新しい動きを加えるときは、`prefers-reduced-motion: reduce` のときに動きを止める指定も必ず書く。
 

@@ -81,6 +81,8 @@ export default function RootLayout({
     <html
       lang="ja"
       className={`${geistSans.variable} ${geistMono.variable}`}
+      // ページ移動のときだけ smooth スクロールを止め、移動先を一番上から即座に表示する（Next.js 16 の仕様）
+      data-scroll-behavior="smooth"
       suppressHydrationWarning
     >
       <head>
