@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect, useLayoutEffect, useRef } from 'react';
+import { useState, useLayoutEffect, useRef } from 'react';
 import Link from 'next/link';
 import TextScramble from './TextScramble';
 import CodeConsole from './CodeConsole';
@@ -64,27 +64,6 @@ export default function HomeContent() {
     };
   }, []);
 
-  // スクロール時のホログラムフェードイン監視
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('active');
-          }
-        });
-      },
-      { threshold: 0.1 }
-    );
-
-    const elements = document.querySelectorAll('.holoFadeIn');
-    elements.forEach((el) => observer.observe(el));
-
-    return () => {
-      elements.forEach((el) => observer.unobserve(el));
-    };
-  }, []);
-
   return (
     <>
       {showIntro && (
@@ -127,17 +106,21 @@ export default function HomeContent() {
           </section>
 
           {/* 私たちの想い / 挨拶 */}
-          <section id="about" className="section greeting holoFadeIn">
-            <p className="label">Our Approach</p>
-            <h2>各大学祭に寄り添ったサービスを</h2>
-            <p className="sectionText">
+          <section id="about" className="section greeting">
+            <p className="label reveal">Our Approach</p>
+            <h2 className="reveal">
+              <span className="phrase">各大学祭に</span>
+              <span className="phrase">寄り添った</span>
+              <span className="phrase">サービスを</span>
+            </h2>
+            <p className="sectionText reveal">
               大学祭は、規模も来場者層も、実行委員会の体制もそれぞれ違います。だから私たちは、どこでも同じように使う汎用的な仕組みではなく、その大学祭の事情に合ったサービスをつくります。<br/>
               メンバーは全員、大学祭実行委員会の出身です。人の手で回してきた準備や当日の対応の大変さを知っているからこそ、大学祭当日だけでなく、一年を通した運営を支えます。
             </p>
           </section>
 
           {/* コンタクトへの誘い */}
-          <section className="contact holoFadeIn">
+          <section className="contact reveal">
             <div>
               <p className="label">Talk to us</p>
               <h2>運営の困りごと、<wbr />お聞かせください。</h2>
