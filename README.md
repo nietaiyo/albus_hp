@@ -1,47 +1,99 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Albus. 公式サイト
 
-## Getting Started
+**大学祭の運営に、新しいあたりまえを。**
 
-First, run the development server:
+大学祭実行委員会の出身者によるチーム Albus.（アルバス）の公式サイトです。
+
+- 本番: https://albus-tech.org
+- ホスティング: Vercel
+
+## 技術構成
+
+- Next.js 16（App Router）/ React 19 / TypeScript
+- スタイル: `app/globals.css`（CSS 変数によるライト／ダークのテーマ管理）
+- フォント: `next/font` の Geist（和文は OS 標準のゴシック）
+- お問い合わせ: Resend（メール送信）＋ Discord Webhook（通知）
+
+> このリポジトリの Next.js は、学習データにある以前のバージョンと API が異なる場合があります。コードを書く前に `node_modules/next/dist/docs/` の該当ガイドを確認してください（[AGENTS.md](AGENTS.md)）。
+
+## 開発
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install
+npm run dev     # http://localhost:3000
+npm run build   # 本番ビルド
+npm run start   # ビルド結果を起動
+npm run lint
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 環境変数
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+ローカルでは `.env.local`、本番・プレビューでは Vercel の環境変数に設定します。
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+| 変数 | 必須 | 用途 |
+| --- | --- | --- |
+| `RESEND_API_KEY` | お問い合わせを使う場合 | Resend の API キー |
+| `CONTACT_TO_EMAIL` | お問い合わせを使う場合 | 問い合わせの受信先アドレス |
+| `CONTACT_FROM_EMAIL` | 任意 | 送信元（例: `Albus. <contact@albus-tech.org>`）。未設定時は `onboarding@resend.dev` から送るため、Resend アカウントのアドレス宛てにしか届かない |
+| `DISCORD_WEBHOOK_URL` | 任意 | 問い合わせ受信時に Discord へ通知する Webhook |
+| `NEXT_PUBLIC_SITE_URL` | 任意 | サイトの URL（既定: `https://albus-tech.org`）。canonical・sitemap・OGP の基準 |
+| `NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION` | 任意 | Search Console の HTML タグ認証用。現在は DNS（TXT レコード）で認証済みのため不要 |
 
-## Learn More
+## ディレクトリ構成
 
-To learn more about Next.js, take a look at the following resources:
+```
+app/
+  layout.tsx            共通レイアウト・サイト全体のメタ情報・構造化データ（JSON-LD）
+  page.tsx              トップ（中身は components/HomeContent.tsx）
+  about/                私たちについて（チームの想い・メンバー）
+  projects/             プロジェクト一覧（タイル形式）
+  news/                 活動報告
+  contact/              お問い合わせ（page はクライアントコンポーネントのため、メタ情報は layout.tsx）
+  not-found.tsx         存在しない URL のときの 404 ページ（検索結果には載らない）
+  api/send-email/       お問い合わせの送信 API（Resend → Discord 通知）
+  sitemap.ts, robots.ts sitemap.xml / robots.txt の生成
+  lib/site.ts           サイト名・URL・タイトル・説明文・OGP 画像・ページ一覧と、ページごとのメタ情報を作る pageMetadata()
+  lib/theme.ts          テーマ（ライト／ダーク）の型と保存キー
+  components/           ヘッダー・フッター・テーマ切り替え・トップの演出など
+  globals.css           全スタイル。冒頭の Theme Tokens でライト／ダークの色を定義
+public/
+  favicon.png           ファビコン（タブ・ホーム画面のアイコン）
+  Albus-OGP.png         SNS・検索結果で共有されるときの画像
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 文章を更新するとき
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- **キャッチコピー**: メインは「大学祭の運営に、新しいあたりまえを。」、サブは「テクノロジーで、もっと便利に、もっと自由に。」。表現の方針は [CLAUDE.md](CLAUDE.md) の「文章・ブランド表現」を参照してください。
+- **お知らせの追加**: `app/news/page.tsx` の `newsList` の先頭に追加します。カテゴリは `Update` / `Activity` / `Release`（バッジ色は `categoryClass`）。
+- **プロジェクトの追加**: `app/projects/page.tsx` の `projects` の先頭に追加します。状態は `live`（運用中）/ `building`（開発中）。
+- **検索結果・SNS に出る文章**: サイト全体のタイトル・説明文は `app/lib/site.ts`、ページごとの説明文は各ページの `pageMetadata()` で設定します。
+- **ページを増やしたとき**: `app/lib/site.ts` の `PAGES` に追加すると sitemap.xml に載ります。
 
-## Deploy on Vercel
+## ダークモード
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+ヘッダー右上のトグルでライト／ダークを切り替えます（未選択時は OS の設定に従う）。UI を追加・変更するときは、必ず両方のテーマに対応させてください。ルールは [CLAUDE.md](CLAUDE.md) の「ダークモード対応」にまとめています。
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## SEO
 
-## デザインカスタマイズ
-- **フローティングヘッダー**: 画面上部から少し離し、角を丸くして浮遊感を持たせたモダンなデザイン（kohaku-toyama.comを参考）に変更しています。グラスモーフィズム（ガラス質感）を適用し、背後のコンテンツが美しく透けるようになっています。最大幅を `1600px`（幅92%基準）に拡張してワイド画面に最適化しました。
-- **全画面ファーストビュー（ヒーローセクション）**: 最初にページを開いた状態（スクロール前）で、ヒーローセクション（「大学祭はテクノロジーで進化する」の部分）が画面全体（100vh基準）に広がり、最大幅 `1600px` にてダイナミックに表示されるようにレイアウトを最適化しました。スクロールするまで次の「Greeting」セクションは見えません。
-- **デコード（テキストスクランブル）エフェクト**: ヒーローセクションの見出し「大学祭はテクノロジーで進化する」にデコード演出を実装しました。最初は何も表示されず、ランダムな記号が高速に入れ替わりながら徐々に正しい文字へ確定していく近未来的なエフェクトです。初回訪問時はスプラッシュ画面の終了後に順次（時間差で）再生され、2回目以降は即座に再生されます。
-- **イントロ・スプラッシュアニメーション**: サイト初回アクセス時（セッション単位）に、画面全体が白背景になり、中央に「Albus.」のロゴがNetflix風にジワッとフェードイン＆緩やかにズームインしながら現れる演出を実装しています。
-- **サイバー・グリッド背景**: ページ全体の背景に、うっすらとしたデジタルの格子模様（グリッド線）を適用し、デジタルな雰囲気を強めました。
-- **インタラクティブ・スポットライト＆グリッドハイライト**: 全ページにグローバル適用。マウスカーソルの動きに同期して、背景にふわっとした青い光が追従し、浮遊感のあるヘッダーやカードを背面から美しく透過させます。さらに、マウスが重なったグリッドのマス（40px四方）が淡い青色に光り、最大5マスが同時点灯（直近ほど濃く、古いものほど消えかけになり、6マス目で最古のマスが消去される履歴型アニメーション）する演出を追加しました。
-- **プログラム自動タイピングコンソール**: ヒーローセクションの右側に、チームAlbusの擬似コードがコンソール上にカタカタとタイピングされて最終メッセージを表示する、エンジニアリングチームらしいアニメーションパネルを実装しました。
-- **Glow Hover Effects**: 主要なボタンやコンテンツカードにマウスをホバーした際、境界線が青くネオンのように美しく発光（Glow）しつつ立体的に浮き上がるエフェクトを追加しました。また、ヒーローセクションの「制作物を見る」と「チームについて」ボタンは初期状態で同じ色（白背景に青枠）になり、マウスホバー時にどちらも鮮やかなプライマリカラー（青背景に白文字）に変化するよう統一デザインに調整しました。
-- **ホログラムノイズフェードイン**: 各セクション（Greeting、How to use、Contact）がスクロールによって画面に入ってくる際、一瞬だけデジタルホログラムが起動するようなノイズと揺らぎを伴いながら浮かび上がるフェードインを実装しました。
+- 各ページに title / description / canonical / OGP を設定（`app/lib/site.ts` の `pageMetadata()`）
+- `sitemap.xml` と `robots.txt` を自動生成
+- 構造化データ（WebSite / Organization）を `app/layout.tsx` で出力
+- Google Search Console はドメインプロパティ（`albus-tech.org`、DNS 認証）で登録済み。DNS は Cloudflare で管理
+
+## 臨時対応中のもの
+
+- **お問い合わせフォーム**: メールの受信先設定が整うまで、フォームを隠して yuiki.dev の「Contact」へ案内しています。元に戻すときは `臨時対応(yuiki.dev誘導)` で検索し、該当箇所（`app/components/TemporaryContactNotice.tsx`、`app/contact/page.tsx` の定数と分岐、`app/globals.css` のブロック）を削除してください。
+
+## デザインと演出
+
+- **フローティングヘッダー**: 画面上部から少し離した角丸のヘッダー。半透明のガラス風で、背後のコンテンツが透けます。最大幅 1600px。
+- **ファーストビュー**: トップのヒーローセクションが画面の高さいっぱいに広がります。
+- **テキストスクランブル**: トップの見出し「大学祭の運営に、新しいあたりまえを。」が、ランダムな文字から順に確定していく演出で表示されます。初回はイントロの後に、2回目以降は即座に再生されます。
+- **イントロ**: セッションの初回アクセス時に、中央に「Albus.」のロゴがフェードイン・ズームします（背景はテーマに合わせて白／濃紺）。
+- **グリッド背景**: ページ全体にうっすらとした格子模様を敷いています。
+- **スポットライトとグリッドハイライト**: マウスに合わせて背景に淡い光が追従し、通過したマス（40px 四方）が最大 5 マスまで、新しいものほど濃く光ります。
+- **コードコンソール**: ヒーローの右側で、Albus. を表す擬似コードがタイピングされ、最後にキャッチコピーを出力します。1 カラム表示（幅 820px 以下）では本文の邪魔にならないよう表示しません。
+- **ホバー効果**: ボタンにマウスを乗せると、浮き上がりながら青く光ります。
+- **スクロール時のフェードイン**: トップの「Our Approach」とお問い合わせの帯が、画面に入ったときにノイズを伴って浮かび上がります。
+- **動きを減らす設定**: OS で「視差効果を減らす」を有効にしている場合、イントロ・スクランブル・タイピング・フェードインの動きを抑えます。
+- **レスポンシブ**: 幅 820px 以下で 1 カラムに切り替わり、ボタンは画面幅に合わせて広がります。幅 768px 以下ではヘッダーがハンバーガーメニューになり、フッターのリンクは 2 列に並びます。見出しの文字サイズは画面幅に合わせて伸縮します。
