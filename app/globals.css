@@ -48,7 +48,14 @@
   --header-highlight: rgba(255, 255, 255, 0.6);
   --color-nav: #4b5563;
   --color-nav-strong: #1f2937;
-  --mobile-menu-bg: rgba(248, 251, 255, 0.98);
+  /* モバイルメニュー（ヘッダーが伸びたガラスのパネル） */
+  --header-open-bg: rgba(255, 255, 255, 0.55);
+  --header-open-shadow: rgba(15, 23, 42, 0.18);
+  --header-open-edge: rgba(255, 255, 255, 0.5);
+  --header-sheen: rgba(255, 255, 255, 0.5);
+  --menu-item-hover-bg: rgba(255, 255, 255, 0.5);
+  --menu-item-active-bg: rgba(255, 255, 255, 0.75);
+  --menu-scrim: rgba(15, 23, 42, 0.16);
 
   /* テーマ切り替えトグル */
   --toggle-bg: #eff6ff;
@@ -128,7 +135,13 @@ html[data-theme='dark'] {
   --header-highlight: rgba(255, 255, 255, 0.05);
   --color-nav: #cbd5e1;
   --color-nav-strong: #e2e8f0;
-  --mobile-menu-bg: rgba(11, 17, 32, 0.98);
+  --header-open-bg: rgba(15, 23, 42, 0.62);
+  --header-open-shadow: rgba(0, 0, 0, 0.5);
+  --header-open-edge: rgba(255, 255, 255, 0.06);
+  --header-sheen: rgba(255, 255, 255, 0.1);
+  --menu-item-hover-bg: rgba(255, 255, 255, 0.05);
+  --menu-item-active-bg: rgba(96, 165, 250, 0.14);
+  --menu-scrim: rgba(0, 0, 0, 0.4);
 
   --toggle-bg: #1e293b;
   --toggle-border: #334155;
@@ -1000,48 +1013,158 @@ html[data-theme='dark'] .themeIconMoon {
   transform: translateY(-8px) rotate(-45deg);
 }
 
-/* --- Mobile Menu --- */
-.mobileMenu {
-  position: fixed;
-  top: 0;
-  right: -100%;
-  width: 100%;
-  height: 100vh;
-  background-color: var(--mobile-menu-bg);
-  -webkit-backdrop-filter: blur(16px);
-  backdrop-filter: blur(16px);
-  /* ヘッダー (z-index: 50) の下に敷き、閉じるボタンを押せるようにする */
-  z-index: 45;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: right 0.4s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.4s ease;
-  visibility: hidden;
+/* --- Mobile Menu ---
+   ハンバーガーを押すと、ヘッダーのバー（Liquid Glass）が角丸を保ったまま下に伸び、その中に項目が順番に現れる。
+   高さは grid-template-rows を 0fr → 1fr に変えて、中身の高さまで滑らかに伸ばす */
+.mobileMenu,
+.menuScrim {
+  display: none;
 }
 
-.mobileMenu.open {
-  right: 0;
-  visibility: visible;
+@media (max-width: 768px) {
+  .header {
+    /* 高さ 72px のバーでは 999px と同じ丸みになり、伸びたときも角丸のまま広がる */
+    border-radius: 36px;
+    transition:
+      border-radius 0.5s cubic-bezier(0.32, 0.72, 0, 1),
+      background-color 0.4s ease,
+      box-shadow 0.4s ease,
+      -webkit-backdrop-filter 0.4s ease,
+      backdrop-filter 0.4s ease;
+  }
+
+  /* 開いたとき：ぼかしと彩度を強め、ふちのハイライトと深い影でガラスの厚みを出す */
+  .header.menuOpen {
+    border-radius: 28px;
+    background: var(--header-open-bg);
+    -webkit-backdrop-filter: blur(24px) saturate(200%);
+    backdrop-filter: blur(24px) saturate(200%);
+    box-shadow:
+      0 24px 60px var(--header-open-shadow),
+      inset 0 1px 0 var(--header-highlight),
+      inset 0 -1px 0 var(--header-open-edge);
+  }
+
+  /* 上辺から差し込む光の反射 */
+  .header::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background: linear-gradient(160deg, var(--header-sheen), transparent 45%);
+    /* ヘッダーの文字より下に敷く（header が重なりの基準になっているため背景より上には残る） */
+    z-index: -1;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.4s ease;
+  }
+
+  .header.menuOpen::before {
+    opacity: 1;
+  }
+
+  .mobileMenu {
+    display: grid;
+    grid-template-rows: 0fr;
+    transition: grid-template-rows 0.5s cubic-bezier(0.32, 0.72, 0, 1);
+  }
+
+  .header.menuOpen .mobileMenu {
+    grid-template-rows: 1fr;
+  }
+
+  .mobileMenuClip {
+    min-height: 0;
+    overflow: hidden;
+  }
+
+  /* 項目が多くて画面に入りきらないとき（横向きなど）はメニュー内でスクロールする */
+  .header.menuOpen .mobileMenuClip {
+    max-height: calc(100dvh - 120px);
+    overflow-y: auto;
+  }
+
+  .mobileNav {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    margin: 0 12px;
+    padding: 12px 0 16px;
+    border-top: 1px solid var(--header-border);
+  }
+
+  .mobileNavLink {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 14px 16px;
+    border-radius: 16px;
+    color: var(--color-nav-strong);
+    font-size: 20px;
+    font-weight: 600;
+    opacity: 0;
+    transform: translateY(-8px);
+    transition:
+      opacity 0.3s ease,
+      transform 0.45s cubic-bezier(0.32, 0.72, 0, 1),
+      background-color 0.2s ease,
+      color 0.2s ease;
+  }
+
+  /* 開くときだけ、上から順番に少しずつ遅らせて表示する（閉じるときは一斉に消す） */
+  .header.menuOpen .mobileNavLink {
+    opacity: 1;
+    transform: none;
+    transition-delay: calc(80ms + var(--i, 0) * 40ms);
+  }
+
+  .mobileNavLink:hover {
+    background: var(--menu-item-hover-bg);
+  }
+
+  /* 今いるページ：ガラスの小さなパネルと点で示す */
+  .mobileNavLink.active {
+    color: var(--color-accent);
+    background: var(--menu-item-active-bg);
+    box-shadow: inset 0 1px 0 var(--header-highlight);
+  }
+
+  .mobileNavLink.active::after {
+    content: '';
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--color-accent);
+  }
+
+  /* 背景のページをうっすら暗くぼかす */
+  .menuScrim {
+    display: block;
+    position: fixed;
+    inset: 0;
+    z-index: 45;
+    background: var(--menu-scrim);
+    -webkit-backdrop-filter: blur(4px);
+    backdrop-filter: blur(4px);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.4s ease, visibility 0.4s ease;
+  }
+
+  .menuScrim.open {
+    opacity: 1;
+    visibility: visible;
+  }
 }
 
-.mobileNav {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 32px;
-}
-
-.mobileNavLink {
-  font-size: 24px;
-  font-weight: 600;
-  color: var(--color-nav-strong);
-  text-decoration: none;
-  transition: color 0.25s ease;
-}
-
-.mobileNavLink:hover,
-.mobileNavLink.active {
-  color: var(--color-accent);
+@media (prefers-reduced-motion: reduce) {
+  .header,
+  .header::before,
+  .mobileMenu,
+  .mobileNavLink,
+  .menuScrim {
+    transition: none !important;
+  }
 }
 
 /* --- Footer Styles --- */
