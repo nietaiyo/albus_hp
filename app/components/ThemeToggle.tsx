@@ -1,13 +1,9 @@
 'use client';
 
 import { useSyncExternalStore } from 'react';
+import { THEME_KEY, type Theme } from '../lib/theme';
 
-// layout のインラインスクリプトと同じキー
-const THEME_KEY = 'theme';
-
-type Theme = 'light' | 'dark';
-
-// テーマは html[data-theme] を正とする（初期値は layout のインラインスクリプトが描画前に設定）
+// テーマは html[data-theme] を正とする（初期値は ThemeScript が描画前に設定）
 function subscribe(onChange: () => void) {
   const observer = new MutationObserver(onChange);
   observer.observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
