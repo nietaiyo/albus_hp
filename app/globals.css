@@ -619,10 +619,23 @@ h3 {
     padding: 20px;
   }
 
+  /* 左右の余白は .site の 20px にそろえる（下層ページと同じ位置から始める） */
+  .hero,
+  .section,
+  .contact {
+    width: 100%;
+  }
+
+  /* コードの演出を出さないので、画面の高さに合わせず中身の高さにする */
   .hero {
     flex-direction: column;
-    margin: 40px auto;
-    min-height: calc(100vh - 140px);
+    margin: 32px auto 64px;
+    min-height: auto;
+  }
+
+  /* 1カラムではコードの演出が本文を押し下げて邪魔になるため表示しない */
+  .codeConsole {
+    display: none;
   }
 
   .heroContainerWide {
@@ -647,6 +660,13 @@ h3 {
 
   .actions {
     flex-wrap: wrap;
+    /* タブレット幅でボタンが横長になりすぎないようにする */
+    max-width: 560px;
+  }
+
+  /* 1行に並ぶときは均等に広げ、折り返したときは画面幅いっぱいにする */
+  .actions > * {
+    flex: 1 1 auto;
   }
 }
 
@@ -974,7 +994,8 @@ html[data-theme='dark'] .themeIconMoon {
 }
 
 .footerContainer {
-  max-width: 1600px;
+  /* 横に広がりすぎないよう、本文（プロジェクトページ）と同じ幅にまとめる */
+  max-width: 1080px;
   width: 100%;
   margin: 0 auto;
   display: grid;
@@ -1002,7 +1023,8 @@ html[data-theme='dark'] .themeIconMoon {
 
 .footerLinksGroup {
   display: grid;
-  grid-template-columns: repeat(3, minmax(120px, max-content));
+  grid-auto-flow: column;
+  grid-auto-columns: minmax(120px, max-content);
   gap: 48px;
   justify-content: end;
   justify-self: end;
@@ -1032,7 +1054,7 @@ html[data-theme='dark'] .themeIconMoon {
 }
 
 .footerBottom {
-  max-width: 1600px;
+  max-width: 1080px;
   width: 100%;
   margin: 0 auto;
   padding-top: 32px;
@@ -1060,11 +1082,11 @@ html[data-theme='dark'] .themeIconMoon {
 }
 
 .pageTitle {
-  font-size: 36px;
+  font-size: clamp(28px, 8vw, 36px);
 }
 
 .pageHeading {
-  font-size: 28px;
+  font-size: clamp(22px, 6vw, 28px);
   margin-bottom: 16px;
 }
 
@@ -1481,13 +1503,34 @@ textarea.formControl {
     display: flex;
   }
 
-  .footerContainer {
-    grid-template-columns: 1fr;
-    gap: 40px;
+  .footer {
+    padding: 48px 20px 24px;
   }
 
-  .footerLinksGroup {
+  .footerContainer {
     grid-template-columns: 1fr;
-    gap: 24px;
+    gap: 32px;
+    margin-bottom: 32px;
+  }
+
+  /* リンクのグループは左右 2 列に並べ、左端をロゴとそろえる */
+  .footerLinksGroup {
+    grid-auto-flow: row;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 24px 16px;
+    justify-self: stretch;
+  }
+
+  .footerLinkCol {
+    gap: 4px;
+  }
+
+  /* 指で押しやすいよう、リンクのタップ範囲を広げる */
+  .footerLinkCol a {
+    padding-block: 6px;
+  }
+
+  .footerBottom {
+    padding-top: 24px;
   }
 }
