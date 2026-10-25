@@ -22,7 +22,8 @@
   --secondary-text: #1e40af;
   --secondary-border: #bfdbfe;
   --secondary-bg: #ffffff;
-  --secondary-hover-bg: rgba(37, 99, 235, 0.02);
+  /* 背景のマウス追従エフェクトが透けないよう、ホバー時も不透明な色にする */
+  --secondary-hover-bg: #eff6ff;
 
   /* コードコンソール */
   --console-border: rgba(37, 99, 235, 0.15);
@@ -104,7 +105,7 @@ html[data-theme='dark'] {
   --secondary-text: #bfdbfe;
   --secondary-border: #1e3a8a;
   --secondary-bg: #0f172a;
-  --secondary-hover-bg: rgba(96, 165, 250, 0.08);
+  --secondary-hover-bg: #13213d;
 
   --console-border: rgba(96, 165, 250, 0.2);
   --console-bg: rgba(15, 23, 42, 0.75);
