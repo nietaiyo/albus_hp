@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect, useLayoutEffect } from 'react';
+import { useState, useEffect, useLayoutEffect, useRef } from 'react';
 import Link from 'next/link';
 import TextScramble from './TextScramble';
 import CodeConsole from './CodeConsole';
@@ -13,6 +13,8 @@ export default function HomeContent() {
   const [showIntro, setShowIntro] = useState(true);
   // ヒーローのアニメーションを開始してよいか（イントロ終了後）
   const [heroStart, setHeroStart] = useState(false);
+  // スキップボタン・キー操作からイントロを終わらせる（中身は下の effect で設定する）
+  const skipIntro = useRef<() => void>(() => {});
 
   // 描画前に判定し、表示済みのときにイントロが一瞬出るのを防ぐ
   useLayoutEffect(() => {
@@ -45,7 +47,21 @@ export default function HomeContent() {
     }
 
     const timer = setTimeout(finish, remaining);
-    return () => clearTimeout(timer);
+
+    // スキップ：待たずにすぐ終わらせる（表示済みの記録は上で保存済みなので、再読み込みしても出ない）
+    skipIntro.current = () => {
+      clearTimeout(timer);
+      finish();
+    };
+    const onKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape' || e.key === 'Enter' || e.key === ' ') skipIntro.current();
+    };
+    window.addEventListener('keydown', onKeyDown);
+
+    return () => {
+      clearTimeout(timer);
+      window.removeEventListener('keydown', onKeyDown);
+    };
   }, []);
 
   // スクロール時のホログラムフェードイン監視
@@ -76,6 +92,9 @@ export default function HomeContent() {
           <div className="introLogo">
             Albus<span className="logoDot">.</span>
           </div>
+          <button type="button" className="introSkip" onClick={() => skipIntro.current()}>
+            スキップ
+          </button>
         </div>
       )}
       <div className="homeContent">
@@ -86,8 +105,8 @@ export default function HomeContent() {
               <div className="heroText">
                 <p className="label">For University Festivals</p>
                 <h1>
-                  <TextScramble text="大学祭の運営に、" start={heroStart} delay={100} />
-                  <TextScramble text="新しいあたりまえを。" start={heroStart} delay={700} />
+                  <TextScramble text="大学祭の運営に、" start={heroStart} delay={100} speed={25} />
+                  <TextScramble text="新しいあたりまえを。" start={heroStart} delay={350} speed={25} />
                 </h1>
                 <p className="heroSubcopy">テクノロジーで、もっと便利に、もっと自由に。</p>
                 <p className="description">
