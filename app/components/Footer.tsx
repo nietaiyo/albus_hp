@@ -8,14 +8,14 @@ export default function Footer() {
         <div className="footerBrand">
           <Logo />
           <p className="footerSlogan">
-            大学祭はテクノロジーで進化する
+            大学祭の運営に、新しいあたりまえを。
           </p>
         </div>
 
         <div className="footerLinksGroup">
           <div className="footerLinkCol">
             <h4>Albusについて</h4>
-            <Link href="/about">チーム・メンバー</Link>
+            <Link href="/about">チームについて</Link>
             <Link href="/projects">プロジェクト</Link>
             <Link href="/news">活動報告</Link>
             <Link href="/contact">お問い合わせ</Link>

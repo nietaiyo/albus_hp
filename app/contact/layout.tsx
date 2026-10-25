@@ -4,7 +4,7 @@ import { pageMetadata } from '../lib/site';
 export const metadata = pageMetadata({
   title: 'お問い合わせ',
   description:
-    'Albus. へのお問い合わせ・ご相談はこちら。大学祭向けサービスの導入相談や、メンバーへの参加希望などお気軽にご連絡ください。',
+    '大学祭の運営に関するご相談はこちらから。サービスの導入だけでなく、「こんなことで困っている」という段階のお話も歓迎します。',
   path: '/contact',
 });
 

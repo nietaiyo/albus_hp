@@ -250,14 +250,16 @@ a {
 
 h1 {
   margin: 0 0 24px;
-  /* 最長行「テクノロジーで」(7文字) が2カラムの左列に収まる大きさ */
-  font-size: clamp(36px, 6.2vw, 96px);
+  /* 最長行「新しいあたりまえを。」(10文字) が2カラムの左列に収まる大きさ */
+  font-size: clamp(32px, 4.4vw, 84px);
   line-height: 1.15;
   letter-spacing: -0.02em;
   color: var(--color-heading);
   display: flex;
   flex-direction: column;
   gap: 8px;
+  /* 対応ブラウザでは文節単位で折り返す（スマホで語の途中が改行されるのを防ぐ） */
+  word-break: auto-phrase;
 }
 
 h2 {
@@ -265,6 +267,7 @@ h2 {
   font-size: clamp(32px, 5vw, 52px);
   line-height: 1.05;
   letter-spacing: 0;
+  word-break: auto-phrase;
 }
 
 h3 {
@@ -293,12 +296,24 @@ h3 {
 .sectionText {
   color: var(--color-text-muted);
   line-height: 1.8;
+  /* 対応ブラウザでは文節単位で折り返す */
+  word-break: auto-phrase;
+}
+
+/* メインコピーの下に添えるサブキャッチコピー */
+.heroSubcopy {
+  margin: 0;
+  color: var(--color-heading);
+  font-size: clamp(17px, 1.6vw, 22px);
+  font-weight: 700;
+  word-break: auto-phrase;
 }
 
 .description {
   max-width: 560px;
-  margin: 28px 0 0;
+  margin: 20px 0 0;
   font-size: 17px;
+  word-break: auto-phrase;
 }
 
 .actions {
@@ -583,6 +598,9 @@ h3 {
 
 .contact h2 {
   color: white;
+  /* 語の途中では折り返さず、<wbr> の位置で改行する */
+  word-break: keep-all;
+  overflow-wrap: anywhere;
 }
 
 .contact .label {
@@ -601,10 +619,23 @@ h3 {
     padding: 20px;
   }
 
+  /* 左右の余白は .site の 20px にそろえる（下層ページと同じ位置から始める） */
+  .hero,
+  .section,
+  .contact {
+    width: 100%;
+  }
+
+  /* コードの演出を出さないので、画面の高さに合わせず中身の高さにする */
   .hero {
     flex-direction: column;
-    margin: 40px auto;
-    min-height: calc(100vh - 140px);
+    margin: 32px auto 64px;
+    min-height: auto;
+  }
+
+  /* 1カラムではコードの演出が本文を押し下げて邪魔になるため表示しない */
+  .codeConsole {
+    display: none;
   }
 
   .heroContainerWide {
@@ -614,16 +645,28 @@ h3 {
 
   /* 1カラム時：最長行がスマホ幅 (320px〜) でも改行されない大きさ */
   h1 {
-    font-size: clamp(32px, 9vw, 64px);
+    font-size: clamp(26px, 8.2vw, 64px);
   }
 
   .contact {
     align-items: flex-start;
     flex-direction: column;
+    padding: 32px 24px;
+  }
+
+  .contact h2 {
+    font-size: clamp(22px, 7vw, 40px);
   }
 
   .actions {
     flex-wrap: wrap;
+    /* タブレット幅でボタンが横長になりすぎないようにする */
+    max-width: 560px;
+  }
+
+  /* 1行に並ぶときは均等に広げ、折り返したときは画面幅いっぱいにする */
+  .actions > * {
+    flex: 1 1 auto;
   }
 }
 
@@ -946,12 +989,14 @@ html[data-theme='dark'] .themeIconMoon {
 .footer {
   background-color: var(--footer-bg);
   color: #94a3b8;
-  padding: 64px 20px 32px;
+  /* 左右の余白は本文（.site）とそろえる */
+  padding: 64px 28px 32px;
   border-top: 1px solid #1e293b;
 }
 
 .footerContainer {
-  max-width: 1600px;
+  /* 横に広がりすぎないよう、本文（プロジェクトページ）と同じ幅にまとめる */
+  max-width: 1080px;
   width: 100%;
   margin: 0 auto;
   display: grid;
@@ -979,7 +1024,8 @@ html[data-theme='dark'] .themeIconMoon {
 
 .footerLinksGroup {
   display: grid;
-  grid-template-columns: repeat(3, minmax(120px, max-content));
+  grid-auto-flow: column;
+  grid-auto-columns: minmax(120px, max-content);
   gap: 48px;
   justify-content: end;
   justify-self: end;
@@ -1009,7 +1055,7 @@ html[data-theme='dark'] .themeIconMoon {
 }
 
 .footerBottom {
-  max-width: 1600px;
+  max-width: 1080px;
   width: 100%;
   margin: 0 auto;
   padding-top: 32px;
@@ -1037,11 +1083,11 @@ html[data-theme='dark'] .themeIconMoon {
 }
 
 .pageTitle {
-  font-size: 36px;
+  font-size: clamp(28px, 8vw, 36px);
 }
 
 .pageHeading {
-  font-size: 28px;
+  font-size: clamp(22px, 6vw, 28px);
   margin-bottom: 16px;
 }
 
@@ -1304,6 +1350,21 @@ html[data-theme='dark'] .themeIconMoon {
   line-height: 1.6;
 }
 
+/* 404 */
+.notFound {
+  padding-block: 32px;
+}
+
+.notFoundCode {
+  margin: 0 0 8px;
+  color: var(--color-accent);
+  font-family: var(--font-geist-mono), "SFMono-Regular", Consolas, Menlo, monospace;
+  font-size: clamp(72px, 16vw, 128px);
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -0.04em;
+}
+
 /* Contact */
 .contactLead {
   margin-bottom: 32px;
@@ -1410,6 +1471,7 @@ textarea.formControl {
 
 .temporaryContactNoticeTitle {
   margin: 0 0 8px;
+  word-break: auto-phrase;
   color: var(--notice-title);
   font-size: 18px;
   font-weight: 700;
@@ -1417,6 +1479,7 @@ textarea.formControl {
 
 .temporaryContactNoticeText {
   margin: 0 0 24px;
+  word-break: auto-phrase;
   color: var(--color-text-body);
   font-size: 14px;
   line-height: 1.7;
@@ -1441,13 +1504,34 @@ textarea.formControl {
     display: flex;
   }
 
-  .footerContainer {
-    grid-template-columns: 1fr;
-    gap: 40px;
+  .footer {
+    padding: 48px 20px 24px;
   }
 
-  .footerLinksGroup {
+  .footerContainer {
     grid-template-columns: 1fr;
-    gap: 24px;
+    gap: 32px;
+    margin-bottom: 32px;
+  }
+
+  /* リンクのグループは左右 2 列に並べ、左端をロゴとそろえる */
+  .footerLinksGroup {
+    grid-auto-flow: row;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 24px 16px;
+    justify-self: stretch;
+  }
+
+  .footerLinkCol {
+    gap: 4px;
+  }
+
+  /* 指で押しやすいよう、リンクのタップ範囲を広げる */
+  .footerLinkCol a {
+    padding-block: 6px;
+  }
+
+  .footerBottom {
+    padding-top: 24px;
   }
 }

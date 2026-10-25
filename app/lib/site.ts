@@ -5,18 +5,21 @@ export const SITE_URL = (process.env.NEXT_PUBLIC_SITE_URL ?? 'https://albus-tech
 
 export const SITE_NAME = 'Albus.';
 
-export const DEFAULT_TITLE = 'Albus.（アルバス）公式サイト | 大学祭をテクノロジーで支える学生チーム';
+// メインキャッチコピー（構造化データの slogan にも使う）
+export const SITE_SLOGAN = '大学祭の運営に、新しいあたりまえを。';
+
+export const DEFAULT_TITLE = `Albus.（アルバス）| ${SITE_SLOGAN}`;
 
 // SNS・検索結果で共有されるときの画像（public/Albus-OGP.png）
 export const OG_IMAGE = {
   url: '/Albus-OGP.png',
   width: 1672,
   height: 941,
-  alt: 'Albus.',
+  alt: `Albus. ${SITE_SLOGAN}`,
 };
 
 export const SITE_DESCRIPTION =
-  'Albus（アルバス）は、大学祭をより発展させるサービスを開発している、大学祭実行委員会OBによる有志の学生チームです。大学祭用語集や迷子・落とし物サイトなどのWebサービスを開発しています。';
+  'Albus.（アルバス）は、大学祭実行委員会の出身者によるチームです。現場で感じてきた不便や手間を、それぞれの大学祭に合ったWebサービスで解消し、大学祭の運営を支えます。';
 
 // sitemap.xml に載せるページ（ヘッダーのナビと揃える）
 export const PAGES = [

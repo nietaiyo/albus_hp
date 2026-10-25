@@ -54,8 +54,7 @@ export default function Contact() {
         <p className="label">Contact us</p>
         <h1 className="pageTitle">お問い合わせ</h1>
         <p className="sectionText pageText contactLead">
-          Albusへのご意見やご感想、コラボレーションのご提案などは以下のフォームよりお送りください。
-          提供済みのサービスに関するお問い合わせや修正依頼は各サービスのお問い合わせフォームをご利用ください。
+          {'大学祭の運営で困っていることや気になっていることがあれば、お気軽にご相談ください。「まだ具体的に決まっていない」という段階でも大丈夫です。提供中のサービスの不具合や修正のご依頼は、各サービスのお問い合わせ窓口をご利用ください。'}
         </p>
 
         {/* 臨時対応(yuiki.dev誘導)：フォームが直ったら、この分岐ごと削除して下の表示だけ残す */}
@@ -64,10 +63,10 @@ export default function Contact() {
         ) : submitted ? (
           <div className="contactDone">
             <div className="contactDoneIcon">🎉</div>
-            <h3 className="contactDoneTitle">送信が完了しました！</h3>
+            <h3 className="contactDoneTitle">送信が完了しました</h3>
             <p className="contactDoneText">
-              メッセージをお送りいただきありがとうございます。<br />
-              内容を確認のうえ、必要に応じてメンバーよりご連絡いたします。
+              ご連絡いただきありがとうございます。<br />
+              内容を確認のうえ、メンバーからご連絡いたします。
             </p>
             <button onClick={() => setSubmitted(false)} className="secondaryButton contactResetButton">
               もう一度送る
@@ -108,7 +107,7 @@ export default function Contact() {
                 required
                 maxLength={5000}
                 rows={6}
-                placeholder="お問い合わせ内容をご記入ください。"
+                placeholder="ご相談内容をご自由にお書きください。"
                 className="formControl"
               />
             </FormField>

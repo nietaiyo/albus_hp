@@ -5,7 +5,7 @@ import Header from "./components/Header";
 import Footer from "./components/Footer";
 import MouseSpotlight from "./components/MouseSpotlight";
 import ThemeScript from "./components/ThemeScript";
-import { DEFAULT_TITLE, OG_IMAGE, SITE_DESCRIPTION, SITE_NAME, SITE_URL } from "./lib/site";
+import { DEFAULT_TITLE, OG_IMAGE, SITE_DESCRIPTION, SITE_NAME, SITE_SLOGAN, SITE_URL } from "./lib/site";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -64,6 +64,7 @@ const jsonLd = {
       name: SITE_NAME,
       alternateName: ["Albus", "アルバス"],
       description: SITE_DESCRIPTION,
+      slogan: SITE_SLOGAN,
     },
   ],
 };

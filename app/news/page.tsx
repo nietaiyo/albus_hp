@@ -3,7 +3,7 @@ import { pageMetadata } from '../lib/site';
 export const metadata = pageMetadata({
   title: '活動報告',
   description:
-    'Albus. の活動報告・お知らせ。サービスのリリース情報や活動の様子をお届けします。',
+    'Albus. の活動報告。サービスの公開や開発の進み具合など、日々の活動をお知らせします。',
   path: '/news',
 });
 
@@ -30,7 +30,7 @@ export default function News() {
     },
     {
       date: '2025.12.31',
-      category: 'Start',
+      category: 'Release',
       title: '大学祭用語集リリース',
       desc: 'エクセルベースだった用語集をWebアプリ化し、大学祭実行委員会のメンバーに公開しました。',
     },
