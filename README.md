@@ -49,6 +49,7 @@ app/
   projects/             プロジェクト一覧（タイル形式）
   news/                 活動報告
   contact/              お問い合わせ（page はクライアントコンポーネントのため、メタ情報は layout.tsx）
+  not-found.tsx         存在しない URL のときの 404 ページ（検索結果には載らない）
   api/send-email/       お問い合わせの送信 API（Resend → Discord 通知）
   sitemap.ts, robots.ts sitemap.xml / robots.txt の生成
   lib/site.ts           サイト名・URL・タイトル・説明文・OGP 画像・ページ一覧と、ページごとのメタ情報を作る pageMetadata()

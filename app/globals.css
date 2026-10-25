@@ -1327,6 +1327,21 @@ html[data-theme='dark'] .themeIconMoon {
   line-height: 1.6;
 }
 
+/* 404 */
+.notFound {
+  padding-block: 32px;
+}
+
+.notFoundCode {
+  margin: 0 0 8px;
+  color: var(--color-accent);
+  font-family: var(--font-geist-mono), "SFMono-Regular", Consolas, Menlo, monospace;
+  font-size: clamp(72px, 16vw, 128px);
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -0.04em;
+}
+
 /* Contact */
 .contactLead {
   margin-bottom: 32px;
