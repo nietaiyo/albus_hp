@@ -5,8 +5,9 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import Logo from './Logo';
 import ThemeToggle from './ThemeToggle';
+import { SHOW_RECRUIT } from '../lib/site';
 
-const navItems = [
+const allNavItems = [
   { name: 'Home', path: '/' },
   { name: 'About', path: '/about' },
   { name: 'Projects', path: '/projects' },
@@ -14,6 +15,9 @@ const navItems = [
   { name: 'Recruit', path: '/recruit' },
   { name: 'Contact', path: '/contact' },
 ];
+
+// 非表示中(メンバー募集)：SHOW_RECRUIT が false の間は Recruit をナビに出さない
+const navItems = allNavItems.filter((item) => SHOW_RECRUIT || item.path !== '/recruit');
 
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
