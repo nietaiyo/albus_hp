@@ -78,6 +78,9 @@
   --tag-text: #334155;
   --tag-bg: #f1f5f9;
 
+  /* プロジェクトの画面画像の台紙 */
+  --project-image-bg: #eef2f7;
+
   /* フォーム・送信完了表示 */
   --form-label: #374151;
   --form-text: #111827;
@@ -159,6 +162,8 @@ html[data-theme='dark'] {
 
   --tag-text: #cbd5e1;
   --tag-bg: #1e293b;
+
+  --project-image-bg: #0b1324;
 
   --form-label: #cbd5e1;
   --form-text: #e2e8f0;
@@ -1364,12 +1369,25 @@ html[data-theme='dark'] .themeIconMoon {
   padding: 32px;
 }
 
+.projectImageFrame {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  aspect-ratio: 16 / 10;
+  margin: 0 0 20px;
+  padding: 16px;
+  border-radius: 12px;
+  background: var(--project-image-bg);
+  overflow: hidden;
+}
+
+/* 台紙の中に縦横比を保ったまま収める */
 .projectImage {
   display: block;
   width: 100%;
-  height: auto;
-  /* 画像の周りの透明な余白（影の部分）が大きいので、少しはみ出させてカードの幅に合わせる */
-  margin: -12px 0 12px;
+  height: 100%;
+  object-fit: contain;
+  border-radius: 6px;
 }
 
 .projectMeta {

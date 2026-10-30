@@ -63,14 +63,14 @@ types/
 public/
   favicon.png           ファビコン（タブ・ホーム画面のアイコン）
   Albus-OGP.png         SNS・検索結果で共有されるときの画像
-  projects/             プロジェクトのカードに載せるサービスの画面（例: glossary.png）
+  projects/             プロジェクトのカードに載せるサービスの画面（glossary.png・lost-and-found.png）
 ```
 
 ## 文章を更新するとき
 
 - **キャッチコピー**: メインは「大学祭の運営に、新しいあたりまえを。」、サブは「テクノロジーで、もっと便利に、もっと自由に。」。表現の方針は [CLAUDE.md](CLAUDE.md) の「文章・ブランド表現」を参照してください。
 - **お知らせの追加**: `app/news/page.tsx` の `newsList` の先頭に追加します。カテゴリは `Update` / `Activity` / `Release`（バッジ色は `categoryClass`）。
-- **プロジェクトの追加**: `app/projects/page.tsx` の `projects` の先頭に追加します。状態は `live`（運用中）/ `building`（開発中）。サービスの画面を載せるときは、画像を `public/projects/` に英数字のファイル名で置き、`image` に `src`・元画像の `width` / `height`・`alt`（画面の内容の説明）を書きます。表示は `next/image` が画面幅に合わせて縮小・変換します。
+- **プロジェクトの追加**: `app/projects/page.tsx` の `projects` の先頭に追加します。状態は `live`（運用中）/ `building`（開発中）。サービスの画面を載せるときは、画像を `public/projects/` に英数字のファイル名で置き、`image` に `src`・元画像の `width` / `height`・`alt`（画面の内容の説明）を書きます。表示は `next/image` が画面幅に合わせて縮小・変換し、縦横比の違う画像でもそろって見えるよう 16:10 の台紙に収めます。
 - **検索結果・SNS に出る文章**: サイト全体のタイトル・説明文は `app/lib/site.ts`、ページごとの説明文は各ページの `pageMetadata()` で設定します。
 - **ページを増やしたとき**: `app/lib/site.ts` の `PAGES` に追加すると sitemap.xml に載ります。
 

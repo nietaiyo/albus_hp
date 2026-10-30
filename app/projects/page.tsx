@@ -40,6 +40,12 @@ const projects: Project[] = [
       '1万人以上のアクセスに耐える設計',
     ],
     tags: ['Next.js', 'Cloudflare Workers', 'Cloudflare D1', 'Cloudflare R2'],
+    image: {
+      src: '/projects/lost-and-found.png',
+      width: 2508,
+      height: 1462,
+      alt: '迷子・落とし物サイトのトップページ。品名・色・場所で検索する欄と、迷子の情報・落とし物を探すボタン、保護中の迷子のお知らせが並んでいる',
+    },
   },
   {
     title: '大学祭用語集',
@@ -77,15 +83,18 @@ export default function Projects() {
           {projects.map((project) => (
             <article key={project.title} className="panel projectCard reveal">
               {project.image && (
-                <Image
-                  src={project.image.src}
-                  width={project.image.width}
-                  height={project.image.height}
-                  alt={project.image.alt}
-                  // カードの幅（PC は 2 列、スマホは 1 列）に合わせた大きさの画像を配信する
-                  sizes="(max-width: 820px) 100vw, 540px"
-                  className="projectImage"
-                />
+                // 画像ごとに縦横比や余白が違うため、同じ大きさの台紙に収めてカードどうしの見た目をそろえる
+                <div className="projectImageFrame">
+                  <Image
+                    src={project.image.src}
+                    width={project.image.width}
+                    height={project.image.height}
+                    alt={project.image.alt}
+                    // カードの幅（PC は 2 列、スマホは 1 列）に合わせた大きさの画像を配信する
+                    sizes="(max-width: 820px) 100vw, 540px"
+                    className="projectImage"
+                  />
+                </div>
               )}
               <div className="projectMeta">
                 <span className={`projectStatus projectStatus-${project.status}`}>
