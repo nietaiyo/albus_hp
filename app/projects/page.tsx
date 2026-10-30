@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import Link from 'next/link';
 import { pageMetadata } from '../lib/site';
 
@@ -15,6 +16,8 @@ type Project = {
   summary: string;
   features: string[];
   tags: string[];
+  // サービスの画面（public/projects/ に置く。width / height は元画像のピクセル数）
+  image?: { src: string; width: number; height: number; alt: string };
 };
 
 const statusLabel: Record<Project['status'], string> = {
@@ -50,6 +53,12 @@ const projects: Project[] = [
       '新メンバーの用語理解や、既存メンバーの知識の補完に',
     ],
     tags: ['Next.js', 'Vercel'],
+    image: {
+      src: '/projects/glossary.png',
+      width: 3164,
+      height: 1942,
+      alt: '大学祭用語集のトップページ。検索欄と、部署ごとに用語を探せるカテゴリのボタンが並んでいる',
+    },
   },
 ];
 
@@ -67,6 +76,17 @@ export default function Projects() {
         <div className="projectGrid">
           {projects.map((project) => (
             <article key={project.title} className="panel projectCard reveal">
+              {project.image && (
+                <Image
+                  src={project.image.src}
+                  width={project.image.width}
+                  height={project.image.height}
+                  alt={project.image.alt}
+                  // カードの幅（PC は 2 列、スマホは 1 列）に合わせた大きさの画像を配信する
+                  sizes="(max-width: 820px) 100vw, 540px"
+                  className="projectImage"
+                />
+              )}
               <div className="projectMeta">
                 <span className={`projectStatus projectStatus-${project.status}`}>
                   {statusLabel[project.status]}

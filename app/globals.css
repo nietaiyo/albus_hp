@@ -1364,6 +1364,14 @@ html[data-theme='dark'] .themeIconMoon {
   padding: 32px;
 }
 
+.projectImage {
+  display: block;
+  width: 100%;
+  height: auto;
+  /* 画像の周りの透明な余白（影の部分）が大きいので、少しはみ出させてカードの幅に合わせる */
+  margin: -12px 0 12px;
+}
+
 .projectMeta {
   display: flex;
   flex-wrap: wrap;
