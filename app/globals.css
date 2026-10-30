@@ -1488,6 +1488,26 @@ html[data-theme='dark'] .themeIconMoon {
   font-size: 12px;
 }
 
+/* サービスのサイトへの遷移ボタン（カードの一番下） */
+.projectLink {
+  align-self: flex-start;
+  gap: 6px;
+  margin-top: 20px;
+}
+
+/* 画面には出さず、読み上げにだけ伝える文字 */
+.visuallyHidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
 /* 次のプロジェクト：点線枠で「準備中」を表す。2列ぶんの幅を使う */
 .projectCardNext {
   grid-column: 1 / -1;

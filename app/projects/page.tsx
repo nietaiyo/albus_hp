@@ -18,6 +18,8 @@ type Project = {
   tags: string[];
   // サービスの画面（public/projects/ に置く。width / height は元画像のピクセル数）
   image?: { src: string; width: number; height: number; alt: string };
+  // サービスのサイトへの遷移ボタン（新しいタブで開く）
+  link?: { href: string; label: string };
 };
 
 const statusLabel: Record<Project['status'], string> = {
@@ -29,10 +31,10 @@ const statusLabel: Record<Project['status'], string> = {
 const projects: Project[] = [
   {
     title: '迷子・落とし物サイト',
-    status: 'building',
+    status: 'live',
     audience: '来場者・実行委員向け',
     summary:
-      '立て看板などの掲示で案内してきた迷子・落とし物の情報を、Webで確認できるようにするサービスです。来場者は自分で情報を探せるようになり、実行委員は専用画面から情報をまとめて管理できます。今年の大学祭で運用する予定です。',
+      '立て看板などの掲示で案内してきた迷子・落とし物の情報を、Webで確認できるようにするサービスです。来場者は自分で情報を探せるようになり、実行委員は専用画面から情報をまとめて管理できます。大学祭で実際に運用しています。',
     features: [
       '来場者は品名・色・場所から自分で探せる',
       '実行委員は専用画面から情報を登録・管理できる',
@@ -46,6 +48,7 @@ const projects: Project[] = [
       height: 1462,
       alt: '迷子・落とし物サイトのトップページ。品名・色・場所で検索する欄と、迷子の情報・落とし物を探すボタン、保護中の迷子のお知らせが並んでいる',
     },
+    // 実サイトへのリンクは、先方の公開の許可が出てから link に追加する（portfolio リポジトリでも同じ理由で外している）
   },
   {
     title: '大学祭用語集',
@@ -65,6 +68,8 @@ const projects: Project[] = [
       height: 1942,
       alt: '大学祭用語集のトップページ。検索欄と、部署ごとに用語を探せるカテゴリのボタンが並んでいる',
     },
+    // サンプルデータで動くデモ版
+    link: { href: 'https://glossary.albus-tech.org', label: 'デモ版を見る' },
   },
 ];
 
@@ -116,6 +121,18 @@ export default function Projects() {
                   </li>
                 ))}
               </ul>
+              {project.link && (
+                <a
+                  href={project.link.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="secondaryButton projectLink"
+                >
+                  {project.link.label}
+                  <span aria-hidden="true">↗</span>
+                  <span className="visuallyHidden">（新しいタブで開きます）</span>
+                </a>
+              )}
             </article>
           ))}
 
